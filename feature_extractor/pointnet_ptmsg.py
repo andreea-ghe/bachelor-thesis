@@ -4,12 +4,12 @@ from feature_extractor.utils import PointNetEncoder, PointNetDecoder
 
 
 class PointNetPTMSG(nn.Module):
-    def __init__(self, input_channels, output_channels):
+    def __init__(self, in_channels, out_channels):
         super().__init__()
-        self.input_channels = input_channels
-        self.output_channels = output_channels
+        self.in_channels = in_channels
+        self.out_channels = out_channels
 
-        self.en1 = PointNetEncoder(0.15, [0.05, 0.1], [16, 32], self.input_channels,
+        self.en1 = PointNetEncoder(0.15, [0.05, 0.1], [16, 32], self.in_channels,
                                                     [[16, 16, 32], [32, 32, 64]])
         self.en2 = PointNetEncoder(0.25, [0.1, 0.2], [16, 32], 32 + 64, 
                                                     [[64, 64, 128], [64, 96, 128]])
@@ -21,7 +21,7 @@ class PointNetPTMSG(nn.Module):
         self.de3 = PointNetDecoder(128 + 128 + 256, [256, 256])
         self.de2 = PointNetDecoder(32 + 64 + 256, [256, 128])
         self.de1 = PointNetDecoder(128 + 3, [128, 128, 128])
-        self.conv1 = nn.Conv1d(128, self.output_channels, 1)
+        self.conv1 = nn.Conv1d(128, self.out_channels, 1)
 
     def forward(self, x, batch_length):
         """

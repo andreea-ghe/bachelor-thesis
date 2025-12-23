@@ -3,51 +3,58 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch_geometric.nn.pool import fps, knn
 from torch_geometric.utils import to_dense_batch
+from torch import Tensor
 
 
-def square_distance_same_piece_only(src, dst, src_piece_id=None, dst_piece_id=None):
+def group_knn_features(all_features: Tensor, all_coords: Tensor, k: int, query_coords: Tensor, batch_idx: Tensor, include_relative_pos: bool) -> Tensor:
     """
-    Calculate Euclid distance between each two points. We use the piece ids to mask out distances between points from the same piece.
-    Formula:
-    dist = (xn - xm)^2 + (yn - ym)^2 + (zn - zm)^2
-         = sum(src**2, dim=-1) + sum(dst**2, dim=-1) - 2*src*dst^T
+    Finds k nearest neighbors for each point and groups their features together.
+    This is used for local feature aggregation in the Point Transformer layer.
     Input:
-        src: source points, [B, N, C]
-        dst: target points, [B, M, C]
-        src_piece_id: piece id of source points, [B, N, 1]
-        dst_piece_id: piece id of target points, [B, M, 1]
-    Output:
-        dist: per-point square distance, [B, N, M]
+        all_features: features of all points [N, D]
+        all_coords: coordinates of all points [N, 3]
+        k: number of nearest neighbors to find
+        query_coords: coordinates of points we want to find neighbors for [N, 3]
+        batch_idx: batch assignment per point [N]
+        include_relative_pos: whether to append (p_j - p_i)
     """
+    device = all_features.device
+    N, feat_dim = all_features.shape
+
+    if batch_idx is None:
+        batch_idx = torch.zeros(N, dtype=torch.long).to(device) # all points belong to the same batch
     
-    # B is the number of objects in the batch
-    B, N, _ = src.shape # N is the number of points in src
-    B, M, _ = dst.shape # M is the number of points in dst
+    if query_coords is None:
+        query_coords = all_coords
 
-    # compute all pairwise dot products between src points and dst points: src * dstᵀ
-    # [B, N, C] @ [B, C, M] -> [B, N, M]
-    distances = -2 * torch.matmul(src, dst.permute(0, 2, 1))
+    # Find k nearest neighbors
+    idx = knn(all_features, all_features, k=k, batch_x=batch_idx, batch_y=batch_idx) # [N, k]
+    idx, mask = to_dense_batch(idx[1], idx[0], fill_value=N, max_num_nodes=k) # [N, k]
+    all_features = torch.cat([all_features, torch.zeros(1, feat_dim).to(device)], dim=0) # add zero padding for invalid indices
 
-    # compute squared norms of each point in src and dst: we sum over the last dimension (C) - the coordinate dimension
+    neighbor_idx = idx.view(-1).long() # [N * k]
+    neighbor_features = all_features[neighbor_idx, :] # [N * k, D]
+    neighbor_features = neighbor_features.view(N, k, feat_dim) # [N, k, D]
     
-    # [B, N, 1]:
-    src_squared = torch.sum(src ** 2, -1).view(B, N, 1)
-    distances += src_squared
-    
-    # [B, 1, M]:
-    dst_squared = torch.sum(dst ** 2, -1).view(B, 1, M)
-    distances += dst_squared
+    if include_relative_pos:
+        assert query_coords.is_contiguous() # needs to be contiguous for view()
+        
+        # all_coords[N] = (0, 0, 0): only invalid indices have position N so we add 0 padding for invalid indices
+        all_coords = torch.cat([all_coords, torch.zeros(1, 3).to(device)], dim=0) 
+        
+        # compute the relative positions of the neighbors regarding the query point
+        relative_coords = all_coords[neighbor_idx, :].view(N, k, 3) - query_coords.unsqueeze(1) # [N, k, 3]
+        # converts boolean mask to float
+        mask = mask.to(torch.float32)
+        # zero out invalid positions
+        # "n s c" is the shape of relative_coords and "n s" is the shape of mask => we multiply each coordinate by the mask and define the output shape accordingly
+        relative_coords = torch.einsum("n s c, n s -> n s c", relative_coords, mask) 
+        neighbor_features = torch.cat([relative_coords, neighbor_features], dim=-1) # [N, k, D + 3]
 
-    device = src.device
-    piece_dist = torch.ones(B, N, M).to(device)
-    # src_piece_id: [B, N, 1] -> [B, N, M]
-    # dst_piece_id: [B, M, 1] -> [B, N, M]
-    indices = torch.where(src_piece_id.repeat(1, 1, M) == dst_piece_id.view(B, 1, M).repeat(1, N, 1))
-    piece_dist[indices] *= 0
-    # Forbids cross-piece distances
-    distances += piece_dist * 1e6 # add large penalty to distances between points from different pieces
+        return neighbor_features, idx
 
-    return distances
+    return neighbor_features, idx
+
 
 def select_points(points, idx):
     """
