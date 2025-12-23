@@ -1,4 +1,4 @@
-from .pointnet_ptmsg import PointNetPTMSG
+from .pointnet import PointNetPTMSG
 
 
 def build_encoder(arch, features_dimension, **kwargs):
