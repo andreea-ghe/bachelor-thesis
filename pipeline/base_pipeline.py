@@ -6,10 +6,10 @@ import torch.optim as optim
 import numpy as np
 
 from utilities.global_alignment import estimate_global_transform
-from utilities.optimization import filter_weight_decay_params
 
 from utilities.rotation import Rotation3D
 from .utils_evaluation import trans_metric, rot_metric, part_acc_and_cd
+from .utils_optimizer import filter_weight_decay_params
 from .utils_lr_scheduler import CosineAnnealingWarmupRestarts
 from .utils import dict_to_numpy
 
