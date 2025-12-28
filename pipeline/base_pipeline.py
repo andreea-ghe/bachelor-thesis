@@ -5,7 +5,7 @@ import pytorch_lightning
 import torch.optim as optim
 import numpy as np
 
-from utilities.global_alignment import estimate_global_transform
+from global_alignment.estimate_global_poses import global_transform
 
 from utilities.rotation import Rotation3D
 from .utils_evaluation import trans_metric, rot_metric, part_acc_and_cd
