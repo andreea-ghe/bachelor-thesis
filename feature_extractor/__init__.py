@@ -1,7 +1,7 @@
-from .pointnet import PointNetPTMSG
+from .pointnet_architecture import PointNetPTMSG
 
 
-def build_encoder(arch, features_dimension, **kwargs):
+def build_feature_extractor(arch, features_dimension, **kwargs):
     archs = arch.lower().split('.')
     if 'in_feat_dim' in kwargs:
         input_features_dim = kwargs['in_feat_dim']

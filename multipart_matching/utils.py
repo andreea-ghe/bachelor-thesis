@@ -1,3 +1,6 @@
+import torch
+
+
 def get_features_of_fracture_points(features, nr_critical_points, critical_label, B, N, F, device=None):
     """
     Extract features of fracture points based on segmentation labels.

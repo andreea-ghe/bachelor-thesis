@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-from feature_extractor.utils import PointNetEncoder, PointNetDecoder
+from .utils_encoder_decoder import PointNetEncoder, PointNetDecoder
 
 
 class PointNetPTMSG(nn.Module):
