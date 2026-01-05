@@ -52,7 +52,7 @@ class FractureAssemblyDataset(Dataset):
             # if we need to contract the dataset, we are doing random sampling
             self.length = length
             if self.shuffle_parts:
-                print("Shuffling parts order for each object.")
+                print("Shuffling dataset indices.")
                 pos = list(range(len(self.data_list)))
                 random.shuffle(pos)
                 self.data_list = [self.data_list[i] for i in pos]
@@ -157,7 +157,7 @@ class FractureAssemblyDataset(Dataset):
 
         # store inverse rotation as ground truth
         # it will help to recover original poses
-        quat_gt = R.from_matrix(rot_mat).as_quat()
+        quat_gt = R.from_matrix(rot_mat.T).as_quat()
 
         # convert to scalar-first quat format (w, x, y, z)
         # because this is the format used throughout the codebase
@@ -187,22 +187,22 @@ class FractureAssemblyDataset(Dataset):
 
         return point_cloud, point_cloud_gt
 
-    def _pad_data(self, data, pad_size=None):
+    def _pad_data(self, data, padded_size=None):
         """
-        Pad data to shape [self.max_num_part, data.shape[1], ...].
+        Pad data to shape [self.max_parts, data.shape[1], ...].
         Since objects have varying numbers of pieces (2-20), we pad all data to 
-        a fixed size (max_num_part) for batching. The valid pieces are tracked
+        a fixed size (max_parts) for batching. The valid pieces are tracked
         using the valids mask.
 
         Input:
             data: data array to pad (quaternions, translations ...)
-            pad_size: target size (default: self.max_num_part)
+            pad_size: target size (default: self.max_parts)
 
         Output:
             padded_data: zero padded data array
         """
         if padded_size is None:
-            padded_size = self.max_num_part # default
+            padded_size = self.max_parts # default
 
         data = np.array(data)
         if len(data.shape) > 1: # check if data is multi-dimensional
@@ -305,8 +305,8 @@ class FractureAssemblyDataset(Dataset):
         
         mesh_files = os.listdir(data_folder) # list all mesh files from the folder
         mesh_files.sort()
-        if not self.min_num_part <= len(mesh_files) <= self.max_num_part:
-            raise ValueError(f"Number of parts {len(mesh_files)} not in range [{self.min_num_part}, {self.max_num_part}]")
+        if not self.min_parts <= len(mesh_files) <= self.max_parts:
+            raise ValueError(f"Number of parts {len(mesh_files)} not in range [{self.min_parts}, {self.max_parts}]")
 
         # load all mesh pieces
         meshes = [
@@ -381,12 +381,12 @@ class FractureAssemblyDataset(Dataset):
         assembled_pcs = np.concatenate(assembled_pcs).astype(np.float32) # [N_total, 3]
         gt_assembled_pcs = np.concatenate(gt_assembled_pcs).astype(np.float32) # [N_total, 3]
         
-        gt_translations = self._pad_data(np.stack(gt_translations, axis=0), self.max_num_part).astype(np.float32) # [max_num_part, 3]
-        gt_rotations = self._pad_data(np.stack(gt_rotations, axis=0), self.max_num_part).astype(np.float32) # [max_num_part, 4]
-        points_per_part = self._pad_data(np.array(nr_points_per_piece), self.max_num_part).astype(np.int64) # [max_num_part]
+        gt_translations = self._pad_data(np.stack(gt_translations, axis=0), self.max_parts).astype(np.float32) # [max_parts, 3]
+        gt_rotations = self._pad_data(np.stack(gt_rotations, axis=0), self.max_parts).astype(np.float32) # [max_parts, 4]
+        points_per_part = self._pad_data(np.array(nr_points_per_piece), self.max_parts).astype(np.int64) # [max_parts]
 
         # validity mask: 1 for valid pieces, 0 for padded pieces
-        valids_mask = np.zeros(self.max_num_part, dtype=np.float32)
+        valids_mask = np.zeros(self.max_parts, dtype=np.float32)
         valids_mask[:num_parts] = 1.0
 
         # distance threshold for fracture surface labeling: every sampled point gets the same distance threshold
@@ -400,7 +400,7 @@ class FractureAssemblyDataset(Dataset):
             "part_trans": gt_translations,
             "n_pcs": points_per_part,
             "data_id": index,
-            "critical_label_threshold": label_thresholds,
+            "critical_label_thresholds": label_thresholds,
         }
 
         return data_dict
