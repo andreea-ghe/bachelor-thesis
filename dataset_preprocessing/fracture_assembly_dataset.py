@@ -1,6 +1,7 @@
 import os
 import random
 import trimesh
+import pickle
 import numpy as np
 from torch.utils.data import Dataset, DataLoader
 from scipy.spatial.transform import Rotation as R
@@ -48,7 +49,7 @@ class FractureAssemblyDataset(Dataset):
             # restrict dataset size for overfitting
             self.data_list = self.data_list[:self.overfit]
 
-        if len(self.data_list) > self.length and self.length > 0:
+        if 0 < length < len(self.data_list):
             # if we need to contract the dataset, we are doing random sampling
             self.length = length
             if self.shuffle_parts:
@@ -243,10 +244,10 @@ class FractureAssemblyDataset(Dataset):
 
     def sample_reweighted_points_by_areas(self, areas):
         """
-        Sample points by areas, ensuring each part has at least min_part_point points.
+        Sample points by areas, ensuring each part has at least min_num_points points.
         Steps:
         1. First distribute points proportionally by area.
-        2. Ensure every piece has at least min_part_point points.
+        2. Ensure every piece has at least min_num_points points.
         3. Take extra points from the largest pieces to maintain total count.
 
         This prevents tiny fracture pieces from having too few points for  reliable feature
@@ -259,26 +260,26 @@ class FractureAssemblyDataset(Dataset):
             nr_points_per_piece: list of number of points assigned to each piece
         """
         nr_points_per_piece = self.sample_points_by_area(areas, self.num_points)
-        if self.min_part_point <= 1:
+        if self.min_num_points <= 1:
             return nr_points_per_piece
 
         # count how many extra points we need to add to small pieces
         delta = 0
         for i in range(len(nr_points_per_piece)):
-            if nr_points_per_piece[i] < self.min_part_point:
-                delta += self.min_part_point - nr_points_per_piece[i]
-                nr_points_per_piece[i] = self.min_part_point
+            if nr_points_per_piece[i] < self.min_num_points:
+                delta += self.min_num_points - nr_points_per_piece[i]
+                nr_points_per_piece[i] = self.min_num_points
 
         # take points from the largest piece to maintain total point count
         while delta > 0:
             k = np.argmax(nr_points_per_piece) # largest piece index
-            if nr_points_per_piece[k] - delta >= self.min_part_point:
+            if nr_points_per_piece[k] - delta >= self.min_num_points:
                 nr_points_per_piece[k] -= delta
                 delta = 0
             else:
-                # we reduce the largest piece to min_part_point and try again with the next largest piece
-                delta -= nr_points_per_piece[k] - self.min_part_point 
-                nr_points_per_piece[k] = self.min_part_point
+                # we reduce the largest piece to min_num_points and try again with the next largest piece
+                delta -= nr_points_per_piece[k] - self.min_num_points 
+                nr_points_per_piece[k] = self.min_num_points
 
 
         return np.array(nr_points_per_piece, dtype=np.int64)
