@@ -1,4 +1,5 @@
 import torch
+import torchmetrics
 import torch.nn as nn
 import torch.nn.functional as fun
 from base_pipeline.base_model import MatchingBaseModel
@@ -9,7 +10,7 @@ from surface_segmentation.segmentation_classifier import SegmentationClassifier
 from multipart_matching.affinity import AffinityDual
 from multipart_matching.utils_sinkhorn import Sinkhorn
 from multipart_matching.utils_hungarian import hungarian
-from multipart_matching.utils import get_features_of_fracture_points
+from surface_segmentation.segmentation_classifier import get_critical_pcs_from_label
 from .utils import get_batch_length_from_part_points
 from surface_segmentation.segmentation_classifier import compute_label
 from surface_segmentation.utils import square_distance, diagonal_square_matrix
@@ -34,7 +35,6 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
         super().__init__(config)
 
         # Segmentation parameters
-        self.num_classes = 2  # binary segmentation: fracture vs non-fracture
         self.pc_cls_method = self.config.MODEL.PC_CLS_METHOD.lower() # "binary" or "multi-class"
         self.num_classes = self.config.MODEL.PC_NUM_CLS
 
@@ -51,15 +51,15 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
         # Attention layers
         # Self-attention layer: aggregate local features within each piece
         self.self_attention = PointTransformer(
-            in_features=self.pc_feat_dim,
-            out_features=self.pc_feat_dim,
+            in_features=self.part_comp_feat_dim,
+            out_features=self.part_comp_feat_dim,
             n_heads=self.config.MODEL.TF_NUM_HEADS,
             k_neighbors=self.config.MODEL.TF_NUM_SAMPLE
         )
         # Cross-attention layer: exchange features across pieces
         self.cross_attention = CrossAttention(
             n_head=self.config.MODEL.TF_NUM_HEADS,
-            d_input=self.pc_feat_dim,
+            d_input=self.part_comp_feat_dim,
         )
         self.attention_layers = [("self", self.self_attention), ("cross", self.cross_attention)]
 
@@ -80,7 +80,7 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
         """
         feature_extractor = build_feature_extractor(
             self.config.MODEL.ENCODER,
-            features_dimension=self.pc_feat_dim,
+            features_dimension=self.part_comp_feat_dim,
             global_feat=False,
             in_feat_dim=3 # input 3D coordinates (x, y, z)
         )
@@ -95,7 +95,7 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
         """
         segmentation_classifier = SegmentationClassifier(
             model_point=self.pc_cls_method,
-            pc_feat_dim=self.pc_feat_dim,
+            pc_feat_dim=self.part_comp_feat_dim,
             num_classes=self.num_classes
         )
         return segmentation_classifier
@@ -108,9 +108,9 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
             affinity_extractor (nn.Module): affinity feature projection head
         """
         affinity_extractor = nn.Sequential(
-            nn.BatchNorm1d(self.pc_feat_dim),
+            nn.BatchNorm1d(self.part_comp_feat_dim),
             nn.ReLU(inplace=True),
-            nn.Conv1d(self.pc_feat_dim, self.aff_feat_dim, kernel_size=1) # 1x1 convolution = MLP
+            nn.Conv1d(self.part_comp_feat_dim, self.aff_feat_dim, kernel_size=1) # 1x1 convolution = MLP
         )
         return affinity_extractor
 
@@ -156,7 +156,7 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
         part_features = part_features.reshape(B, N_SUM, -1)  # [B, N_SUM, F]
         return part_features
 
-    def _get_critical_features_from_label(self, B, N, F, features, n_critical_pcs, critical_labels):
+    def _extract_critical_features(self, B, N, F, features, n_critical_pcs, critical_labels):
         """
         Extract features of critical fracture points based on ground truth/predicted labels.
         Input:
@@ -227,7 +227,7 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
                     # self attention: aggregate local features within each piece
                     part_features = layer(
                             part_pcs.reshape(-1, 3).contiguous(), # point transformer expects a (flat) point cloud input
-                            part_features.view(-1, self.pc_feat_dim), # we flatten this too because coordinates and features must be aligned
+                            part_features.view(-1, self.part_comp_feat_dim), # we flatten this too because coordinates and features must be aligned
                             batch_length
                         ).view(B, N_SUM, -1).contiguous() # reshape back to (B, N_SUM, F)
                 elif name == "cross":
@@ -241,17 +241,23 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
         segmentation_features = part_features.transpose(1, 2) # [B, F, N_SUM] for point-wise classification
 
         # compute segmentation logits and predictions
-        cls_logits = self.segmentation_classifier(segmentation_features)  # [B, C, N_SUM]
-        cls_logits = cls_logits.permute(0, 2, 1).contiguous()  # [B, N_SUM, C]
+        cls_logits = self.segmentation_classifier(segmentation_features)  # [B, 1, N_SUM]
 
-        with torch.no_grad(): # no gradient for predictions -> no learning signal
-            if self.pc_cls_method == "binary":
-                # we apply sigmoid for binary classification
-                probs = torch.sigmoid(cls_logits)  # [B, N_SUM, 1]
-                cls_preds = (probs > 0.5).long()
-            else:  # multi-class
-                # we do not apply softmax here since argmax is invariant to monotonic transformations
-                cls_preds = torch.argmax(cls_logits, dim=-1)  # [B, N_SUM]
+        # no gradient for predictions -> no learning signal
+        if self.pc_cls_method == "binary":
+            # we apply sigmoid for binary classification
+            cls_logits = cls_logits.permute(0, 2, 1).contiguous() 
+
+            with torch.no_grad():
+                probs = torch.sigmoid(cls_logits) # [B, N_SUM, 1]
+                cls_preds = (probs.squeeze(-1) > 0.5).long() # [B, N_SUM]
+        else:  # multi-class
+            # we do not apply softmax here since argmax is invariant to monotonic transformations
+            cls_logits = fun.log_softmax(cls_logits, dim=1) # [B, C, N_SUM]
+            cls_logits = cls_logits.permute(0, 2, 1).contiguous() # [B, N_SUM, C]
+
+            with torch.no_grad():
+                cls_preds = torch.argmax(cls_logits, dim=-1) # [B, N_SUM]
 
         out_dict.update({
             'cls_logits': cls_logits,
@@ -264,7 +270,7 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
             # because we do not have ground truth geometry available
             with torch.no_grad():
                 fracture_preds = cls_preds
-                n_critical_pcs, critical_pcs_idx = get_features_of_fracture_points(n_pcs, fracture_preds)
+                n_critical_pcs, critical_pcs_idx = get_critical_pcs_from_label(n_pcs, fracture_preds)
                 data_dict.update({
                     'n_critical_pcs': n_critical_pcs,
                     'critical_pcs_idx': critical_pcs_idx,
@@ -277,10 +283,10 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
             if 'n_critical_pcs' not in data_dict:
                 with torch.no_grad():
                     gt_pcs = data_dict['gt_pcs'] # [B, N_SUM, 3]
-                    critical_threshold = data_dict['critical_label_threshold'] 
+                    critical_threshold = data_dict['critical_label_thresholds'] 
 
                     fracture_preds = compute_label(points=gt_pcs, nr_points_piece=n_pcs, nr_valid_pieces=n_valid, dist_thresholds=critical_threshold)
-                    n_critical_pcs, critical_pcs_idx = get_features_of_fracture_points(n_pcs, fracture_preds)
+                    n_critical_pcs, critical_pcs_idx = get_critical_pcs_from_label(n_pcs, fracture_preds)
                     data_dict.update({
                         'n_critical_pcs': n_critical_pcs,
                         'critical_pcs_idx': critical_pcs_idx,
@@ -301,7 +307,7 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
         n_critical_max = torch.max(n_critical_pcs_object) # max number of critical points in the batch
 
         # extract features of critical fracture points
-        critical_features = self._get_critical_features_from_label(B, n_critical_max, feature_dim, part_features, n_critical_pcs, fracture_preds)  # [B, N_CRIT_MAX, F]
+        critical_features = self._extract_critical_features(B, n_critical_max, feature_dim, part_features, n_critical_pcs_object, fracture_preds)  # [B, N_CRIT_MAX, F]
        
         # project to affinity feature space
         matching_descriptors = self.affinity_extractor(critical_features.permute(0, 2, 1)).permute(0, 2, 1)  # [B, N_CRIT_MAX, AFF_F]
@@ -377,7 +383,7 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
         
         n_critical_pcs = data_dict['n_critical_pcs']  # [B, P] number of critical fracture points per piece
         n_critical_pcs_object = torch.sum(n_critical_pcs, dim=-1)  # [B] number of critical fracture points in each object
-        n_critical_max = torch.max(n_critical_pcs_object, dim=-1)  # maximum number of critical fracture points in the batch
+        n_critical_max = torch.max(n_critical_pcs_object)  # maximum number of critical fracture points in the batch
         critical_pcs_idx = data_dict['critical_pcs_idx']  # [B, N_SUM] indices of critical fracture points
         critical_labels = data_dict['critical_label']  # [B, N_SUM] binary labels for each point (1: critical fracture point, 0: non-critical)
 
@@ -393,21 +399,30 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
         # SEGMENTATION LOSS
         seg_gt = critical_labels.reshape(-1) # critical_labels is a binary fracture mask for all points, after reshaping we get [B * N_SUM]
         
-        if self.pc_cls_method == "binary":
-            # binary cross-entropy for fracture vs non-fracture
-            cls_logits = cls_logits.reshape(-1)
-            cls_loss = fun.binary_cross_entropy_with_logits(cls_logits, seg_gt.to(torch.float32))
-        else:
-            # multi-class cross-entropy for multiple fracture classes
-            cls_logits = cls_logits.reshape(-1, self.num_classes) 
-            cls_loss = fun.nll_loss(cls_logits, seg_gt) # negative log-likelihood loss
-
+        seg_gt = critical_labels.reshape(-1).long()
         cls_preds = cls_preds.reshape(-1)
 
-        cls_accuracy = torchmetrics.functional.accuracy(cls_preds, seg_gt, task="binary")
-        cls_precision = torchmetrics.functional.precision(cls_preds, seg_gt, task="binary")
-        cls_recall = torchmetrics.functional.recall(cls_preds, seg_gt, task="binary")
-        cls_f1_score = torchmetrics.functional.f1_score(cls_preds, seg_gt, task="binary")
+        if self.pc_cls_method == "binary":
+            # Binary cross-entropy
+            cls_logits_flat = cls_logits.reshape(-1)
+            cls_loss = fun.binary_cross_entropy_with_logits(cls_logits_flat, seg_gt.float())
+
+            cls_accuracy = torchmetrics.functional.accuracy(cls_preds, seg_gt, task="binary")
+            cls_precision = torchmetrics.functional.precision(cls_preds, seg_gt, task="binary")
+            cls_recall = torchmetrics.functional.recall(cls_preds, seg_gt, task="binary")
+            cls_f1_score = torchmetrics.functional.f1_score(cls_preds, seg_gt, task="binary")
+
+        else:
+            # Multi-class NLL loss (log_softmax already applied in forward)
+            cls_logits_flat = cls_logits.reshape(-1, self.num_classes)
+            cls_loss = fun.nll_loss(cls_logits_flat, seg_gt)
+
+            cls_accuracy = torchmetrics.functional.accuracy(cls_preds, seg_gt, task="multiclass", num_classes=self.num_classes)
+            cls_precision = torchmetrics.functional.precision(cls_preds, seg_gt, task="multiclass", num_classes=self.num_classes, average="macro")
+            
+            cls_recall = torchmetrics.functional.recall(cls_preds, seg_gt, task="multiclass", num_classes=self.num_classes, average="macro")
+            cls_f1_score = torchmetrics.functional.f1_score(cls_preds, seg_gt, task="multiclass", num_classes=self.num_classes, average="macro")
+            
 
         loss_dict.update({
             'cls_loss': cls_loss,
@@ -427,7 +442,7 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
         # compute ground truth matching matrix based on nearest neighbors
         with torch.no_grad():
             # extract ground truth positions for fracture points
-            gt_fracture_xyz = self._get_critical_features_from_label(B, n_critical_max, 3, gt_pcs, n_critical_pcs_object, critical_labels)
+            gt_fracture_xyz = self._extract_critical_features(B, n_critical_max, 3, gt_pcs, n_critical_pcs_object, critical_labels)
             # compute pairwise distances between ground truth fracture points
             gt_pairwise_distances = square_distance(gt_fracture_xyz, gt_fracture_xyz)  # [B, N_CRIT_MAX, N_CRIT_MAX]
 
@@ -445,6 +460,8 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
             # create binary matching matrix
             gt_matching_matrix = torch.zeros(B, n_critical_max, n_critical_max, device=self.device).scatter_(2, gt_nn_indices, 1)  # [B, N_CRIT_MAX, N_CRIT_MAX]
             gt_matching_matrix *= mask # apply mask to remove self-matching
+
+        out_dict["gt_perm"] = gt_matching_matrix
 
         ds_mat = out_dict['ds_mat'] # predicted doubly stochastic matching matrix
         mat_loss = permutation_loss(ds_mat, gt_matching_matrix, n_critical_pcs_object, n_critical_pcs_object)
@@ -484,6 +501,7 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
             for b in range(B):
                 num_valid_points = n_critical_pcs_object[b]
                 pred_matching_matrix = perm_mat[b, :num_valid_points, :num_valid_points]
+                gt_matching_matrix = out_dict["gt_perm"]
                 gt_matching_matrix_b = gt_matching_matrix[b, :num_valid_points, :num_valid_points]
 
                 # true positive: predicted match AND GT match

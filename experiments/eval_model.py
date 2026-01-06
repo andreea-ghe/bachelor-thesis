@@ -126,7 +126,7 @@ if __name__ == "__main__":
     5. Log results to WandB and file
     """
     # Parse command line arguments
-    args = parse_args()
+    args = parse_args("Jigsaw")
 
     # Set random seed for reproducibility
     torch.manual_seed(CONFIG.RANDOM_SEED)

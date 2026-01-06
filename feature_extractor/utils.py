@@ -26,7 +26,7 @@ def group_knn_features(all_features: Tensor, all_coords: Tensor, k: int, query_c
         query_coords = all_coords
 
     # Find k nearest neighbors
-    idx = knn(all_features, all_features, k=k, batch_x=batch_idx, batch_y=batch_idx) # [N, k]
+    idx = knn(all_coords, all_coords, k=k, batch_x=batch_idx, batch_y=batch_idx)
     idx, mask = to_dense_batch(idx[1], idx[0], fill_value=N, max_num_nodes=k) # [N, k]
     all_features = torch.cat([all_features, torch.zeros(1, feat_dim).to(device)], dim=0) # add zero padding for invalid indices
 

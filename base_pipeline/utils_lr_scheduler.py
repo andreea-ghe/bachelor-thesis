@@ -28,6 +28,8 @@ class CosineAnnealingWarmupRestarts(_LRScheduler):
     def __init__(self, optimizer: torch.optim.Optimizer, first_cycle_steps: int, cycle_mult: float = 1.0,
                  max_lr: float = 0.1, min_lr: float = 0.001, warmup_steps: int = 0,
                  gamma: float = 1.0, last_epoch: int = -1):
+        assert warmup_steps < first_cycle_steps
+
         self.first_cycle_steps = first_cycle_steps
         self.cycle_mult = cycle_mult
         self.base_max_lr = max_lr

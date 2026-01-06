@@ -43,6 +43,8 @@ def diagonal_square_matrix(shape, nr_points_piece, nr_valid_pieces, pos_msk=0.0,
         pos_msk: float - value for off-diagonal blocks (inter-piece)
         neg_msk: float - value for diagonal blocks (intra-piece)
     """
+    device = nr_points_piece.device if device is None else device
+    
     B = nr_points_piece.shape[0]
 
     # cumulative sum that will help us identify piece boundaries

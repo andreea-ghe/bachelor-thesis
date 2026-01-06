@@ -25,9 +25,9 @@ def parse_args(description):
     # generate output paths if model name is specified
     if len(CONFIG.MODEL_NAME) != 0:
         model_save_path = os.path.join('results', CONFIG.MODEL_NAME, 'model_save')
-        results_save_path = results_save_path = os.path.join('results', CONFIG.MODEL_NAME)
+        results_save_path = os.path.join('results', CONFIG.MODEL_NAME)
         
-        config_from_list(['MODEL_SAVE_PATH', model_save_path, 'OUTPUT_PATH', results_save_path])
+        config_from_list(['OUTPUT_PATH', results_save_path, 'MODEL_SAVE_PATH', model_save_path])
 
         if not os.path.exists(CONFIG.MODEL_SAVE_PATH):
             os.makedirs(CONFIG.MODEL_SAVE_PATH, exist_ok=True)

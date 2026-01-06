@@ -88,7 +88,7 @@ def global_transform(pred_match_matrix, part_pcs, n_valid, n_pcs, critical_point
                 critical_source_points = pc_piece1[critical_points_idx[b, points_start1:points_start1 + n1]] # [n1, 3]
                 critical_target_points = pc_piece2[critical_points_idx[b, points_start2:points_start2 + n2]] # [n2, 3]
 
-                edges.append(np.array([idx1, idx2]))
+                edges.append(np.array([idx2, idx1]))
                 rigid_transform = estimate_rigid_transform_from_matching(critical_source_points, critical_target_points, match_submatrix)
                 transformations.append(rigid_transform)
                 uncertainties.append(1 / n_matches)  # uncertainty inversely proportional to number
@@ -123,7 +123,7 @@ def global_transform(pred_match_matrix, part_pcs, n_valid, n_pcs, critical_point
                 pc_piece1 = part_pcs[b, points_start1:points_end1]  # [N1, 3]
                 pc_piece2 = part_pcs[b, points_start2:points_end2]  # [N2, 3]
 
-                edges.append(np.array([idx1, idx2]))
+                edges.append(np.array([idx2, idx1]))
                 rigid_transform = np.eye(4)  # identity transform
                 if n2 > 0: # only piece 2 has critical points
                     rigid_transform[:3, 3] = pc_piece2[critical_points_idx[b, points_start2]] - np.sum(pc_piece1, axis=0)
@@ -155,7 +155,7 @@ def global_transform(pred_match_matrix, part_pcs, n_valid, n_pcs, critical_point
                 critical_source_points = pc_piece1[critical_points_idx[b, points_start1:points_start1 + n1]] # [n1, 3]
                 critical_target_points = pc_piece2[critical_points_idx[b, points_start2:points_start2 + n2]] # [n2, 3]
 
-                edges.append(np.array([idx1, idx2]))
+                edges.append(np.array([idx2, idx1]))
                 rigid_transform = np.eye(4)
                 matchin1, matching2 = np.nonzero(match_submatrix)
                 rigid_transform[:3, 3] = np.sum(critical_target_points[matching2], axis=0) - np.sum(critical_source_points[matchin1], axis=0)

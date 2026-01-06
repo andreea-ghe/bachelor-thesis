@@ -13,8 +13,8 @@ class Rotation3D:
     ROT_TYPE = ["quat", "rmat", "axis"]
     ROT_NAME = {
         "quat": "quaternion",
-        "rmat": "rotation matrix",
-        "axis": "axis-angle"
+        "rmat": "matrix",
+        "axis": "axis_angle"
     }
 
     def __init__(self, rot, rot_type="quat"):

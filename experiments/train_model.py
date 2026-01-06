@@ -129,7 +129,7 @@ if __name__ == "__main__":
     4. Initialize logging
     5. Train model with scheduled losses
     """
-    args = parse_args()
+    args = parse_args("Jigsaw")
 
     # set random seeds for reproducibility
     pl.seed_everything(CONFIG.RANDOM_SEED)

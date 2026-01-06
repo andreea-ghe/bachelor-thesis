@@ -60,7 +60,7 @@ def compute_label(points, nr_points_piece, nr_valid_pieces, dist_thresholds):
     
     return labels
 
-def get_fracture_points_from_label(n_pcs, critical_labels):
+def get_critical_pcs_from_label(n_pcs, critical_labels):
     """
     Given critical point labels for all points in the concatenated point clouds,
     compute the number of fracture points per piece and their indices.

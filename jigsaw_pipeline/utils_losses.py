@@ -125,7 +125,7 @@ def rigidity_loss(n_pcs, n_valid, gt_pcs, part_pcs, n_critical_pcs, critical_pcs
             match_submatrix_d = ds_mat_d[b, critical_start1:critical_end1, critical_start2:critical_end2] + ds_mat_d[b, critical_start2:critical_end2, critical_start1:critical_end1].transpose(1, 0)
 
             # skip pairs with no matching if there are other matches in the object
-            if n_valid[2] > 2 and n_matches == 9 and sum_full_matched > 0:
+            if n_valid[b] > 2 and n_matches == 0 and sum_full_matched > 0:
                 continue
 
             # get point coulds for both pieces
@@ -156,6 +156,6 @@ def rigidity_loss(n_pcs, n_valid, gt_pcs, part_pcs, n_critical_pcs, critical_pcs
                 n_sum += critical_pcs_source.shape[0]
 
                 # weight by total matching probability: stronger matches should contribute more to the loss
-                loss += pair_loss * match_submatrix
+                loss += pair_loss * n_matches
 
     return loss / n_sum # average over total number of matched critical points  

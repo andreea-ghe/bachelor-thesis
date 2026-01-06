@@ -47,7 +47,7 @@ def sinkhorn(m: Tensor, nrows: Tensor = None, ncols: Tensor = None, max_iter: in
     batch_size = m.size(0)
 
     # ensure nrow <= ncol for efficient processing because the most expensive processing is done over the smaller dimension
-    if m.shape[2] >= m.shpe[1]:
+    if m.shape[2] >= m.shape[1]:
         transpose = False
     else:
         m = m.transpose(1, 2)
@@ -91,11 +91,9 @@ def sinkhorn(m: Tensor, nrows: Tensor = None, ncols: Tensor = None, max_iter: in
         for i in range(max_iter):
             # we alternate because normalizing rows breaks column sum and vice versa
             if i % 2 == 0: # normalize rows
-                log_sum = torch.logsumexp(log_m_b, dim=1, keepdim=True) # log of sum over columns
-                log_m_b = log_m_b - torch.where(row_mask_b, log_sum, torch.zeros_like(log_sum))
+                log_m_b -= torch.logsumexp(log_m_b, dim=1, keepdim=True)
             else: # normalize columns
-                log_sum = torch.logsumexp(log_m_b, dim=0, keepdim=True) # log of sum over rows
-                log_m_b = log_m_b - torch.where(col_mask_b, log_sum, torch.zeros_like(log_sum))
+                log_m_b -= torch.logsumexp(log_m_b, dim=0, keepdim=True)
 
         # write back the regularized log-matrix
         reg_log_m[b, row_slice, col_slice] = log_m_b

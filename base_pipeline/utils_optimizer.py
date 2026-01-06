@@ -28,7 +28,7 @@ def filter_weight_decay_params(model):
 
         if hasattr(module, 'bias') and module.bias is not None:
             # exclude bias parameters
-            bias_module_names.append(f"{name}.bias")
+            bias_module_names.append(f"{name}")
     norm_module_names.sort()
     bias_module_names.sort()
 

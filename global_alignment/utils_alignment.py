@@ -34,5 +34,7 @@ def global_alignment(edges, transformations, uncertainties, n_valid):
 
     global_pose_results = shonan_averaging(all_edges, all_transformations, all_uncertainties, n_valid + 1) # we add the virtual node as well
     # canonicalization: express all poses in the coordinate frame of piece 0
-    for idx in range(n_valid):
+    for i in range(n_valid):
         global_pose_results[n_valid - i - 1, :, :] = np.linalg.inv(global_pose_results[0, :, :]) @ global_pose_results[n_valid - i - 1, :, :]
+
+    return global_pose_results[:n_valid, :, :]

@@ -8,7 +8,7 @@ import numpy as np
 from global_alignment.estimate_global_poses import global_transform
 
 from utilities.rotation import Rotation3D
-from .utils_evaluation import trans_metric, rot_metric, part_acc_and_cd
+from .utils_evaluation import part_acc_and_cd
 from .utils_optimizer import filter_weight_decay_params
 from .utils_lr_scheduler import CosineAnnealingWarmupRestarts
 from .utils import dict_to_numpy
@@ -29,7 +29,7 @@ class MatchingBaseModel(pytorch_lightning.LightningModule):
 
         self.test_results = None
         if len(self.config.STATS):
-            os.makedirs(self.config.STATS, exists_ok=True)
+            os.makedirs(self.config.STATS, exist_ok=True)
             self.stats = dict()
             self.stats['datas'] = [] # ground truth data
             self.stats['preds'] = [] # predicted transformations
@@ -284,7 +284,7 @@ class MatchingBaseModel(pytorch_lightning.LightningModule):
         pred_pairwise_matches = predictions['perm_mat'].cpu().numpy()
         gt_object_pcs = data_dict['gt_pcs'].cpu().numpy()  # [B, M, 3]
         input_part_pcs = data_dict['part_pcs'].cpu().numpy()  # [B, N, 3]
-        gt_part_rot = data_dict['part_quat'].cpu().numpy()  # [B, P, 3, 3]
+        gt_part_rot = data_dict['part_quat'].cpu().numpy() # [B, P, 4]
         gt_part_trans = data_dict['part_trans'].cpu().numpy()  # [B, P, 3]
         
         n_pcs = data_dict.get('n_pcs', None)
@@ -403,8 +403,8 @@ class MatchingBaseModel(pytorch_lightning.LightningModule):
             optimizer: Adam/AdamW optimizer
             scheduler: cosine annealing scheduler
         """
-        learning_rate = self.cfg.TRAIN.LR # 1e-4
-        weight_decay = self.cfg.TRAIN.WEIGHT_DECAY # 1e-4
+        learning_rate = self.config.TRAIN.LR # 1e-4
+        weight_decay = self.config.TRAIN.WEIGHT_DECAY # 1e-4
 
         # separate parameters for weight decay: apply weight decay only to weights, not biases or batch norm params
         if weight_decay > 0:
@@ -424,18 +424,17 @@ class MatchingBaseModel(pytorch_lightning.LightningModule):
             optimizer = optim.Adam(self.parameters(), lr=learning_rate, weight_decay=0.0)
 
         # learning rate scheduler: cosine annealing with warm-up
-        if self.cfg.TRAIN.LR_SCHEDULER:
-            assert self.cfg.TRAIN.LR_SCHEDULER.lower() in ['cosine']
+        if self.config.TRAIN.LR_SCHEDULER:
+            assert self.config.TRAIN.LR_SCHEDULER.lower() in ['cosine']
 
-            total_epochs = self.cfg.TRAIN.NUM_EPOCHS # defaut 250
-            warmup_epochs = int(total_epochs * self.cfg.TRAIN.WARMUP_RATIO) # 5% warm-up
-
+            total_epochs = self.config.TRAIN.NUM_EPOCHS # defaut 250
+            warmup_epochs = int(total_epochs * self.config.TRAIN.WARMUP_RATIO) # 5% warm-up
             # cosine annealing with warm-up restarts
             scheduler = CosineAnnealingWarmupRestarts(
                 optimizer,
                 total_epochs,
                 max_lr=learning_rate,
-                min_lr=learning_rate / self.cfg.TRAIN.LR_DECAY_RATE,
+                min_lr=learning_rate / self.config.TRAIN.LR_DECAY_RATE,
                 warmup_steps=warmup_epochs,
             )
 
