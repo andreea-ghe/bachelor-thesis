@@ -308,7 +308,7 @@ class MatchingBaseModel(pytorch_lightning.LightningModule):
         critical_points_idx = data_dict.get('critical_pcs_idx', None).cpu().numpy()
         n_critical_points = data_dict.get('n_critical_pcs', None).cpu().numpy()
 
-        predicted = estimate_global_transform(
+        predicted = global_transform(
             pred_pairwise_matches,
             input_part_pcs,
             n_valid,

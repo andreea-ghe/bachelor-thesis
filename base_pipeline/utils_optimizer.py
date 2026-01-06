@@ -32,8 +32,7 @@ def filter_weight_decay_params(model):
     norm_module_names.sort()
     bias_module_names.sort()
 
-    no_decay = [model.get_submodule(module).weight for module in norm_module_names] +
-                [model.get_submodule(module).bias for module in bias_module_names]
+    no_decay = [model.get_submodule(module).weight for module in norm_module_names] + [model.get_submodule(module).bias for module in bias_module_names]
 
     decay_name = []
     for name, param in model.named_parameters():

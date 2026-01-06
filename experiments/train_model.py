@@ -1,6 +1,5 @@
 import os 
 import torch
-import numpy as np
 import pytorch_lightning as pl
 from pytorch_lightning.callbacks import ModelCheckpoint, LearningRateMonitor
 from pytorch_lightning.loggers import WandbLogger
@@ -9,8 +8,8 @@ from dataset_preprocessing import build_data_loaders
 from datetime import datetime
 from utilities.utils_stdout import DuplicateStdoutFileManager
 from utilities.utils_parse_args import parse_args
-from utilities.utils_edict import edict
 from utilities.utils_config import CONFIG
+from utilities.utils_edict import print_edict
 
 
 NOW_TIME = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
@@ -109,7 +108,7 @@ def train_model(config):
             key=lambda x: os.path.getmtime(os.path.join(model_save_path, x))
         )
         last_ckp = ckp_files[-1]
-        ckp_path = os.path.join(model_save_path, last_ckp)\
+        ckp_path = os.path.join(model_save_path, last_ckp)
     else:
         ckp_path = None # start training from scratch
 
@@ -143,6 +142,6 @@ if __name__ == "__main__":
 
     with DuplicateStdoutFileManager(os.path.join(CONFIG.OUTPUT_PATH, f"{log_file}.log")) as _:
         # print configuration
-        print_easydict(CONFIG)
+        print_edict(CONFIG)
 
         train_model(CONFIG)

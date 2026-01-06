@@ -24,4 +24,4 @@ def print_edict(input_dict: edict):
             print_edict(value)
             print_edict.indent_cnt -= 1
         else:
-            print("{}{}: {}".format(" " * 2 * print_easydict.indent_cnt, key, value))
+            print("{}{}: {}".format(" " * 2 * print_edict.indent_cnt, key, value))

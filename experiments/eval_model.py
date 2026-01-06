@@ -5,8 +5,10 @@ from datetime import datetime
 from dataset_preprocessing import build_data_loaders
 from utilities.utils_stdout import DuplicateStdoutFileManager
 from utilities.utils_parse_args import parse_args
-from utilities.utils_edict import edict
 from utilities.utils_config import CONFIG
+from utilities.utils_edict import print_edict
+from jigsaw_pipeline import build_jigsaw_model
+from pytorch_lightning.loggers import WandbLogger
 
 
 NOW_TIME = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
@@ -93,7 +95,7 @@ def test_model(config):
         ckp_path = None
 
     # load model with trained weights
-    model = model.load_from_checkpoint(checkpoint_path=ckp_path, strict=False, cfg=cfg)
+    model = model.load_from_checkpoint(checkpoint_path=ckp_path, strict=False, cfg=config)
     
     # STEP 5: Run evaluation
     # This will:
@@ -138,6 +140,6 @@ if __name__ == "__main__":
     # Duplicate stdout to log file
     with DuplicateStdoutFileManager(os.path.join(CONFIG.OUTPUT_PATH, f"{full_log_name}.log")) as _:
         # Print configuration
-        print_easydict(CONFIG)  
+        print_edict(CONFIG)  
         # Run evaluation
         test_model(CONFIG)

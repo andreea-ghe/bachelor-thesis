@@ -1,4 +1,4 @@
-import YAML
+import yaml
 import importlib
 from easydict import EasyDict as edict
 from ast import literal_eval

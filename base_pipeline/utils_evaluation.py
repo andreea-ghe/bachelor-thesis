@@ -33,7 +33,7 @@ def part_acc_and_cd(point_cloud, predicted_trans, gt_trans, predicted_rot, gt_ro
 
     # part accuracy threshold: CD < 0.01
     threshold = 0.01
-    accuracy = = (cd_per_piece < threshold) & (valid_pieces == 1)
+    accuracy = (cd_per_piece < threshold) & (valid_pieces == 1)
 
     # compute per object accuracy (not per part)
     accuracy = accuracy.sum(-1) / valid_pieces.sum(-1)  # [B]

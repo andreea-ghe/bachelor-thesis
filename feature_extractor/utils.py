@@ -1,7 +1,5 @@
 import torch
-import torch.nn as nn
-import torch.nn.functional as F
-from torch_geometric.nn.pool import fps, knn
+from torch_geometric.nn.pool import knn
 from torch_geometric.utils import to_dense_batch
 from torch import Tensor
 

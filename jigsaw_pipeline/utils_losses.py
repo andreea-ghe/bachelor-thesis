@@ -116,15 +116,13 @@ def rigidity_loss(n_pcs, n_valid, gt_pcs, part_pcs, n_critical_pcs, critical_pcs
             #   - i -> j  (piece i matching to piece j)
             #   - j -> i  (piece j matching to piece i)
             # and symmetrize them to enforce mutual agreement.
-            match_submatrix = ds_mat[b, critical_start1:critical_end1, critical_start2:critical_end2] +
-                            ds_mat[b, critical_start2:critical_end2, critical_start1:critical_end1].transpose(1, 0)
+            match_submatrix = ds_mat[b, critical_start1:critical_end1, critical_start2:critical_end2] + ds_mat[b, critical_start2:critical_end2, critical_start1:critical_end1].transpose(1, 0)
             # measures how confident the model is that piece i and piece j belong together
             n_matches = torch.sum(match_submatrix)
 
             # Convert the matching matrix to NumPy for geometric alignment.
             ds_mat_d = ds_mat.detach().cpu().numpy()
-            match_submatrix_d = ds_mat_d[b, critical_start1:critical_end1, critical_start2:critical_end2] + 
-                                ds_mat_d[b, critical_start2:critical_end2, critical_start1:critical_end1].transpose(1, 0)
+            match_submatrix_d = ds_mat_d[b, critical_start1:critical_end1, critical_start2:critical_end2] + ds_mat_d[b, critical_start2:critical_end2, critical_start1:critical_end1].transpose(1, 0)
 
             # skip pairs with no matching if there are other matches in the object
             if n_valid[2] > 2 and n_matches == 9 and sum_full_matched > 0:

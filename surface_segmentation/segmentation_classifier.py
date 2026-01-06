@@ -80,7 +80,7 @@ def get_fracture_points_from_label(n_pcs, critical_labels):
     n_pcs_cumsum = torch.cumsum(n_pcs, dim=1).to(torch.int64) # [B, P]
 
     n_critical_pcs = torch.zeros_like(n_pcs)  # [B, P] number of fracture points per piece
-    critical_pcs_idx = torch.zeros_like(critical_label).to(torch.int64)  # [B, N_SUM] indices of fracture points in each piece
+    critical_pcs_idx = torch.zeros_like(critical_labels).to(torch.int64)  # [B, N_SUM] indices of fracture points in each piece
 
     for b in range(B): # for each object in the batch
         for p in range(P): # for each piece

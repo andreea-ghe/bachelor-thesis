@@ -1,5 +1,3 @@
-
-import torch
 from utilities.rotation import Rotation3D
 from pytorch3d.transforms import quaternion_apply
 

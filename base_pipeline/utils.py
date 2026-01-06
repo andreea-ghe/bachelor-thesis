@@ -1,5 +1,5 @@
-import numpy as np
 import torch
+import numpy as np
 
 
 def dict_to_numpy(data_dict):

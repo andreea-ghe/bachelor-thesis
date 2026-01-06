@@ -4,18 +4,18 @@ import numpy as np
 from pytorch3d.transforms import quaternion_multiply
 from pytorch3d.transforms import rotation_6d_to_matrix as rot6d_to_matrix
 
-
+epsilon = 1e-6
 
 class Rotation3D:
     """
     Class for different 3D rotation representations.
     """
     ROT_TYPE = ["quat", "rmat", "axis"]
-    ROT_NAME = [
+    ROT_NAME = {
         "quat": "quaternion",
         "rmat": "rotation matrix",
         "axis": "axis-angle"
-    ]
+    }
 
     def __init__(self, rot, rot_type="quat"):
         self._rot = rot

@@ -1,18 +1,19 @@
 import torch
-from .base_pipeline.base_model import MatchingBaseModel
-from .attention_layers.cross_attention import CrossAttentionLayer
-from .attention_layers.point_transformer import PointTransformer
-from .feature_extractor import build_feature_extractor
-from .surface_segmentation.segmentation_classifier import SegmentationClassifier
-from .multipart_matching.affinity import AffinityDual
-from .multipart_matching.utils_sinkhorn import Sinkhorn
-from .multipart_matching.utils_hungarian import hungarian
 import torch.nn as nn
 import torch.nn.functional as fun
-from multipart_matching.utils_matching import get_fracture_points_from_label
+from base_pipeline.base_model import MatchingBaseModel
+from feature_extractor.attention_mechanisms import CrossAttention
+from feature_extractor.attention_mechanisms import PointTransformer
+from feature_extractor import build_feature_extractor
+from surface_segmentation.segmentation_classifier import SegmentationClassifier
+from multipart_matching.affinity import AffinityDual
+from multipart_matching.utils_sinkhorn import Sinkhorn
+from multipart_matching.utils_hungarian import hungarian
+from multipart_matching.utils import get_features_of_fracture_points
 from .utils import get_batch_length_from_part_points
 from surface_segmentation.segmentation_classifier import compute_label
-from surface_segmentation.utils import diagonal_square_matrix
+from surface_segmentation.utils import square_distance, diagonal_square_matrix
+from jigsaw_pipeline.utils_losses import permutation_loss, rigidity_loss
 
 
 class JointSegmentationAlignmentModel(MatchingBaseModel):
@@ -56,7 +57,7 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
             k_neighbors=self.config.MODEL.TF_NUM_SAMPLE
         )
         # Cross-attention layer: exchange features across pieces
-        self.cross_attention = CrossAttentionLayer(
+        self.cross_attention = CrossAttention(
             n_head=self.config.MODEL.TF_NUM_HEADS,
             d_input=self.pc_feat_dim,
         )
@@ -228,9 +229,7 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
                             part_pcs.reshape(-1, 3).contiguous(), # point transformer expects a (flat) point cloud input
                             part_features.view(-1, self.pc_feat_dim), # we flatten this too because coordinates and features must be aligned
                             batch_length
-                        )
-                        .view(B, N_SUM, -1) # reshape back to (B, N_SUM, F)
-                        .contiguous()
+                        ).view(B, N_SUM, -1).contiguous() # reshape back to (B, N_SUM, F)
                 elif name == "cross":
                     # cross attention: propagate info between pieces
                     part_features = layer(part_features)  # [B, N_SUM, F]
@@ -265,7 +264,7 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
             # because we do not have ground truth geometry available
             with torch.no_grad():
                 fracture_preds = cls_preds
-                n_critical_pcs, critical_pcs_idx = get_fracture_points_from_label(n_pcs, fracture_preds)
+                n_critical_pcs, critical_pcs_idx = get_features_of_fracture_points(n_pcs, fracture_preds)
                 data_dict.update({
                     'n_critical_pcs': n_critical_pcs,
                     'critical_pcs_idx': critical_pcs_idx,
@@ -281,7 +280,7 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
                     critical_threshold = data_dict['critical_label_threshold'] 
 
                     fracture_preds = compute_label(points=gt_pcs, nr_points_piece=n_pcs, nr_valid_pieces=n_valid, dist_thresholds=critical_threshold)
-                    n_critical_pcs, critical_pcs_idx = get_fracture_points_from_label(n_pcs, fracture_preds)
+                    n_critical_pcs, critical_pcs_idx = get_features_of_fracture_points(n_pcs, fracture_preds)
                     data_dict.update({
                         'n_critical_pcs': n_critical_pcs,
                         'critical_pcs_idx': critical_pcs_idx,
@@ -455,57 +454,57 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
         })
 
 
-    # RIGIDITY LOSS
-    if self.w_rig_loss > 0:
-        rig_loss = rigidity_loss(n_pcs, n_valid, gt_pcs, part_pcs, n_critical_pcs, critical_pcs_idx, ds_mat)
-        loss_dict.update({
-            'rig_loss': rig_loss
-        })
-    else:
-        rig_loss = 0
+        # RIGIDITY LOSS
+        if self.w_rig_loss > 0:
+            rig_loss = rigidity_loss(n_pcs, n_valid, gt_pcs, part_pcs, n_critical_pcs, critical_pcs_idx, ds_mat)
+            loss_dict.update({
+                'rig_loss': rig_loss
+            })
+        else:
+            rig_loss = 0
 
 
-    # TOTAL WEIGHTED LOSS
-    if self.training:
-        # loss = α * L_seg + β * L_mat + γ * L_rig
-        loss = self.w_cls_loss * cls_loss + self.w_mat_loss * mat_loss + self.w_rig_loss * rig_loss
-    else:
-        # during validation we use unweighted sum
-        loss = cls_loss + mat_loss
-
-    loss_dict.update({
-        'loss': loss
-    })
-
-    # compute matching metrics to monitor training progress
-    perm_mat = out_dict.get('perm_mat', None) # discrete matching matrix (only during testing)
-    if perm_mat is not None:
-        # compute precision, recall, F1-score for matching
-        tp, fp, fn = 0, 0, 0
-        for b in range(B):
-            num_valid_points = n_critical_pcs_object[b]
-            pred_matching_matrix = perm_mat[b, :num_valid_points, :num_valid_points]
-            gt_matching_matrix_b = gt_matching_matrix[b, :num_valid_points, :num_valid_points]
-
-            # true positive: predicted match AND GT match
-            tp += torch.sum(pred_matching_matrix * gt_matching_matrix_b).float()
-            # false positive: predicted match BUT NOT GT match
-            fp += torch.sum(pred_matching_matrix * (1 - gt_matching_matrix_b)).float()
-            # false negative: NOT predicted match BUT GT match
-            fn += torch.sum((1 - pred_matching_matrix) * gt_matching_matrix_b).float()
-
-        const = torch.tensor(1e-7, device=self.device)
-        precision = tp / (tp + fp + const)
-        recall = tp / (tp + fn + const)
-        f1_score = 2 * precision * recall / (precision + recall + const)
+        # TOTAL WEIGHTED LOSS
+        if self.training:
+            # loss = α * L_seg + β * L_mat + γ * L_rig
+            loss = self.w_cls_loss * cls_loss + self.w_mat_loss * mat_loss + self.w_rig_loss * rig_loss
+        else:
+            # during validation we use unweighted sum
+            loss = cls_loss + mat_loss
 
         loss_dict.update({
-            'mat_precision': precision,
-            'mat_recall': recall,
-            'mat_f1': f1_score
+            'loss': loss
         })
 
-    return loss_dict
+        # compute matching metrics to monitor training progress
+        perm_mat = out_dict.get('perm_mat', None) # discrete matching matrix (only during testing)
+        if perm_mat is not None:
+            # compute precision, recall, F1-score for matching
+            tp, fp, fn = 0, 0, 0
+            for b in range(B):
+                num_valid_points = n_critical_pcs_object[b]
+                pred_matching_matrix = perm_mat[b, :num_valid_points, :num_valid_points]
+                gt_matching_matrix_b = gt_matching_matrix[b, :num_valid_points, :num_valid_points]
+
+                # true positive: predicted match AND GT match
+                tp += torch.sum(pred_matching_matrix * gt_matching_matrix_b).float()
+                # false positive: predicted match BUT NOT GT match
+                fp += torch.sum(pred_matching_matrix * (1 - gt_matching_matrix_b)).float()
+                # false negative: NOT predicted match BUT GT match
+                fn += torch.sum((1 - pred_matching_matrix) * gt_matching_matrix_b).float()
+
+            const = torch.tensor(1e-7, device=self.device)
+            precision = tp / (tp + fp + const)
+            recall = tp / (tp + fn + const)
+            f1_score = 2 * precision * recall / (precision + recall + const)
+
+            loss_dict.update({
+                'mat_precision': precision,
+                'mat_recall': recall,
+                'mat_f1': f1_score
+            })
+
+        return loss_dict
 
     def training_epoch_end(self, outputs):
         """
