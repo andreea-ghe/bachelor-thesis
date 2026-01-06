@@ -7,7 +7,10 @@ from pytorch_lightning.loggers import WandbLogger
 from jigsaw_pipeline import build_jigsaw_model
 from dataset_preprocessing import build_data_loaders
 from datetime import datetime
-from utilities import parse_args, print_edict, DuplicateStdoutFileManager
+from utilities.utils_stdout import DuplicateStdoutFileManager
+from utilities.utils_parse_args import parse_args
+from utilities.utils_edict import edict
+from utilities.utils_config import CONFIG
 
 
 NOW_TIME = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
@@ -130,16 +133,16 @@ if __name__ == "__main__":
     args = parse_args()
 
     # set random seeds for reproducibility
-    pl.seed_everything(config.RANDOM_SEED)
+    pl.seed_everything(CONFIG.RANDOM_SEED)
 
     # setup logging file
     file_end = NOW_TIME
-    if config.LOG_FILE_NAME is not None and len(config.LOG_FILE_NAME) > 0:
-        file_end += "_{}".format(config.LOG_FILE_NAME)
+    if CONFIG.LOG_FILE_NAME is not None and len(CONFIG.LOG_FILE_NAME) > 0:
+        file_end += "_{}".format(CONFIG.LOG_FILE_NAME)
     log_file = f"train_log_{file_end}"
 
-    with DuplicateStdoutFileManager(os.path.join(config.OUTPUT_PATH, f"{log_file}.log")) as _:
+    with DuplicateStdoutFileManager(os.path.join(CONFIG.OUTPUT_PATH, f"{log_file}.log")) as _:
         # print configuration
-        print_easydict(config)
+        print_easydict(CONFIG)
 
-        train_model(config)
+        train_model(CONFIG)

@@ -406,7 +406,7 @@ class FractureAssemblyDataset(Dataset):
 
         return data_dict
 
-def build_dataloader(config):
+def build_data_loaders(config):
     """
     Build train and validation dataloader for FractureAssemblyDataset.
 
