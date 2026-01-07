@@ -5,9 +5,9 @@ PROJECT: jigsaw
 
 DATASET: breaking_bad.all_piece_matching
 
-GPUS: [0, 1, 2, 3]
-BATCH_SIZE: 4
-NUM_WORKERS: 4
+GPUS: [0]
+BATCH_SIZE: 1
+NUM_WORKERS: 0
 
 TRAIN:
   NUM_EPOCHS: 250
