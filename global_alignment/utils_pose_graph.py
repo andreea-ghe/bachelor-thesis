@@ -19,7 +19,7 @@ def connect_graph(n_valid, edges):
     # add auxiliary edges between the largest component and other components so we don't have a disconnected graph
     # later, these auxiliary edges will have high uncertainty to minimize their influence
     auxiliary_edges = [
-        [n_valid, component[0]] for component in components[1:] # n_valid is a virtual node so we don't really connect components
+        [n_valid, component[0]] for component in components # n_valid is a virtual node so we don't really connect components
     ]
 
     return np.stack(auxiliary_edges)

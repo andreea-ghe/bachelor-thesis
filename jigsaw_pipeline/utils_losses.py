@@ -35,7 +35,7 @@ def permutation_loss(pred_matching, gt_matching, n_source, n_target):
         print("Error in permutation_loss: gt_matching and pred_matching_fp32 must be in [0, 1]")
         raise e
 
-    loss = torch.tensor(0, 0).to(pred_matching_fp32.device) # accumulated loss over batch
+    loss = torch.tensor(0.0).to(pred_matching_fp32.device) # accumulated loss over batch
     total_num_points = torch.zeros_like(loss) # normalization term, because different batches may have different number of points
 
     # accumulate loss over batches
@@ -77,7 +77,7 @@ def rigidity_loss(n_pcs, n_valid, gt_pcs, part_pcs, n_critical_pcs, critical_pcs
         L_rig: rigidity loss
     """
     B, N, _ = gt_pcs.shape
-    loss = torch.tensor(0, 0).to(ds_mat.device)  # accumulated loss over batch
+    loss = torch.tensor(0.0).to(ds_mat.device)  # accumulated loss over batch
 
     # compute cumulative sums for indexing in concatenated point clouds
     n_pcs_cumsum = torch.cumsum(n_pcs, dim=-1)  # [B, P]

@@ -37,8 +37,9 @@ def part_acc_and_cd(point_cloud, predicted_trans, gt_trans, predicted_rot, gt_ro
 
     # compute per object accuracy (not per part)
     accuracy = accuracy.sum(-1) / valid_pieces.sum(-1)  # [B]
+    chamfer_distance = cd_per_piece.sum(-1) / (valid_pieces == 1).sum(-1)
 
-    return accuracy
+    return accuracy, chamfer_distance
 
 
 @torch.no_grad()

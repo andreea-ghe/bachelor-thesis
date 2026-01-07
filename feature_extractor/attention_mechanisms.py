@@ -258,8 +258,8 @@ class PointTransformer(nn.Module):
         ) # [N, k, mid_features]
 
         # Separate relative positions from W_k features
-        relative_pos = W_k[:, :, -3:]  # [N, k, 3]
-        W_k = W_k[:, :, :-3]  # [N, k, mid_features]
+        relative_pos = W_k[:, :, :3]  # [N, k, 3] 
+        W_k = W_k[:, :, 3:]  # [N, k, mid_features]
 
         # Compute positional encodings
         pos_enc = self.linear_pos(relative_pos)  # [N, k, out_features]

@@ -6,8 +6,8 @@ import torch.optim as optim
 import numpy as np
 
 from global_alignment.estimate_global_poses import global_transform
-
 from utilities.rotation import Rotation3D
+from .utils_evaluation import rot_metrics, trans_metrics
 from .utils_evaluation import part_acc_and_cd
 from .utils_optimizer import filter_weight_decay_params
 from .utils_lr_scheduler import CosineAnnealingWarmupRestarts
@@ -235,10 +235,10 @@ class MatchingBaseModel(pytorch_lightning.LightningModule):
 
         # rotation and translation errors: mse, rmse, mae
         for metric in ['mse', 'rmse', 'mae']:
-            trans_met = trans_metric(predicted_trans, gt_trans, part_valids, metric)
+            trans_met = trans_metrics(predicted_trans, gt_trans, part_valids, metric)
             metric_dict[f'trans_{metric}'] = trans_met.mean()
 
-            rot_met = rot_metric(predicted_rot, gt_rot, part_valids, metric)
+            rot_met = rot_metrics(predicted_rot, gt_rot, part_valids, metric)
             metric_dict[f'rot_{metric}'] = rot_met.mean()
 
         if self.stats is not None:
