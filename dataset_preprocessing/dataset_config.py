@@ -25,6 +25,34 @@ __C.BREAKING_BAD.DATA_KEYS = ("part_ids",)
 # Empty string means no specific subset filtering
 __C.BREAKING_BAD.SUBSET = ""  # must in ['artifact', 'everyday', 'other']
 
+# Category filtering - allows training/testing on specific object categories
+# Empty string means all categories will be used
+__C.BREAKING_BAD.CATEGORY = ""  # empty means all categories
+
+# All available object categories in the everyday subset (Paper Table 1, Section 4.1)
+# Breaking Bad dataset contains 20 everyday object categories
+__C.BREAKING_BAD.ALL_CATEGORY = [
+    "BeerBottle",
+    "Bowl",
+    "Cup",
+    "DrinkingUtensil",
+    "Mug",
+    "Plate",
+    "Spoon",
+    "Teacup",
+    "ToyFigure",
+    "WineBottle",
+    "Bottle",
+    "Cookie",
+    "DrinkBottle",
+    "Mirror",
+    "PillBottle",
+    "Ring",
+    "Statue",
+    "Teapot",
+    "Vase",
+    "WineGlass",
+]  # Only used for everyday
 
 # Rotation range for data augmentation during training
 # -1.0 means random full rotation (SO(3)), otherwise specifies degree range
@@ -48,6 +76,9 @@ __C.BREAKING_BAD.MAX_NUM_PART = 20
 # Useful for ensuring the model doesn't rely on part ordering
 __C.BREAKING_BAD.SHUFFLE_PARTS = False
 
+# Sampling strategy: "area" means points are sampled proportional to surface area
+# This is more realistic than uniform point sampling across all pieces
+__C.BREAKING_BAD.SAMPLE_BY = "area"
 
 # Dataset length controls (-1 means use full dataset)
 __C.BREAKING_BAD.LENGTH = -1

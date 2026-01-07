@@ -158,13 +158,17 @@ def config_from_file(filename):
 
     # dynamically import model and dataset config modules
     if 'MODULE' in config and 'MODEL' not in __C:
-        model_config_module = '.'.join(['model'] + [config.MODULE.split('.')[0]] + ['model_config'])
+        # model_config_module = '.'.join(['model'] + [config.MODULE.split('.')[0]] + ['model_config'])
+        # model_config_module = '.'.join([config.MODULE.split('.')[0]] + ['model_config'])
+        model_config_module = '.'.join([config.MODULE, 'model_config'])
         mod = importlib.import_module(model_config_module)
         __C['MODEL'] = mod.get_model_config()
 
     if 'DATASET' in config and config.DATASET is not None:
-        mod = importlib.import_module('dataset')
-        __C['DATA'] = mod.dataset_config[config.DATASET.split('.')[0].upper()]
+        mod = importlib.import_module('dataset_preprocessing')
+        # __C['DATA'] = mod.dataset_config[config.DATASET.split('.')[0].upper()]
+        __C['DATA'] = getattr(mod.dataset_config.dataset_cfg, config.DATASET.split('.')[0].upper())
+
 
     merge_configs(config, __C)
 

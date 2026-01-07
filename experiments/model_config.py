@@ -63,7 +63,7 @@ __C.JIGSAW.LOSS.mat_epoch = 9  # Epoch to start applying matching loss
 __C.JIGSAW.LOSS.w_rig_loss = 0.0  # Initial weight (increases after rig_epoch)
 __C.JIGSAW.LOSS.rig_epoch = 199  # Epoch to start applying rigidity loss
 
-def get_model_cfg():
+def get_model_config():
     """
     Get the Jigsaw model configuration.
     
