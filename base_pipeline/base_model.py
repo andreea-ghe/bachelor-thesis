@@ -434,7 +434,7 @@ class MatchingBaseModel(pytorch_lightning.LightningModule):
                 optimizer,
                 total_epochs,
                 max_lr=learning_rate,
-                min_lr=learning_rate / self.config.TRAIN.LR_DECAY_RATE,
+                min_lr=learning_rate / self.config.TRAIN.LR_DECAY,
                 warmup_steps=warmup_epochs,
             )
 

@@ -414,17 +414,17 @@ def build_data_loaders(config):
         config: EasyDict configuration containing dataset and training parameters
     """
     data_dict = {
-        'dataset_dir': config.DATASET_DIR,
-        'split': 'train',
-        'additional_data': config.ADDITIONAL_DATA,
-        'num_points': config.DATA.NUM_POINTS,
-        'min_num_points': config.DATA.MIN_NUM_POINTS_PART,
-        'min_parts': config.DATA.MIN_NUM_PARTS,
-        'max_parts': config.DATA.MAX_NUM_PARTS,
-        'rot_range': config.DATA.ROT_AUG_RANGE,
+        'dataset_dir': config.DATA.DATA_DIR,
+        'split': config.DATA.DATA_FN.format('train'),
+        'additional_data': config.DATA.DATA_KEYS,
+        'num_points': config.DATA.NUM_PC_POINTS,
+        'min_num_points': config.DATA.MIN_PART_POINT,
+        'min_parts': config.DATA.MIN_NUM_PART,
+        'max_parts': config.DATA.MAX_NUM_PART,
+        'rot_range': config.DATA.ROT_RANGE,
         'shuffle_parts': config.DATA.SHUFFLE_PARTS,
-        'overfit': config.OVERFIT,
-        'length': config.DATASET_LENGTH,
+        'overfit': config.DATA.OVERFIT,
+        'length': config.DATA.LENGTH,
         'fracture_label_threshold': config.DATA.FRACTURE_LABEL_THRESHOLD,
     }
 
@@ -432,26 +432,26 @@ def build_data_loaders(config):
     train_loader = DataLoader(
         dataset=train_dataset,
         batch_size=config.BATCH_SIZE,
-        shuffle=True, # shuffle for training
+        shuffle=True,  # shuffle for training
         num_workers=config.NUM_WORKERS,
-        pin_memory=True, # faster GPU transfer
-        drop_last=True, # drop last incomplete batch to ensure consistent batch size
-        persistent_workers=(config.NUM_WORKERS > 0), # keep workers alive between epochs
+        pin_memory=True,  # faster GPU transfer
+        drop_last=True,  # drop last incomplete batch to ensure consistent batch size
+        persistent_workers=(config.NUM_WORKERS > 0),  # keep workers alive between epochs
     )
 
     # create validation dataset and loader
-    data_dict['split'] = config.DATA_SPLIT.format('val')
-    data_dict['shuffle_parts'] = False # no shuffling during validation
-    data_dict['length'] = config.DATA_TEST_LENGTH
+    data_dict['split'] = config.DATA.DATA_FN.format('val')
+    data_dict['shuffle_parts'] = False  # no shuffling during validation
+    data_dict['length'] = config.DATA.TEST_LENGTH
 
     val_dataset = FractureAssemblyDataset(**data_dict)
     val_loader = DataLoader(
         dataset=val_dataset,
-        batch_size=config.BATCH_SIZE * 2, # can use larger batch for validation
-        shuffle=False, # no shuffling for validation, we need consistent validation order
+        batch_size=config.BATCH_SIZE * 2,  # can use larger batch for validation
+        shuffle=False,  # no shuffling for validation, we need consistent validation order
         num_workers=config.NUM_WORKERS,
         pin_memory=True,
-        drop_last=False, # do not drop last batch for validation, we need all validation samples
+        drop_last=False,  # do not drop last batch for validation, we need all validation samples
         persistent_workers=(config.NUM_WORKERS > 0),
     )
     return train_loader, val_loader
