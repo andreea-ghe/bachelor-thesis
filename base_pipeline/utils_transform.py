@@ -2,7 +2,7 @@ from utilities.rotation import Rotation3D
 from pytorch3d.transforms import quaternion_apply
 
 
-def transform_point_cloud(point_cloud, translation, rotation):
+def transform_point_clouds(point_cloud, translation, rotation):
     """
     Returns the transformed point cloud given translation and rotation.
     """

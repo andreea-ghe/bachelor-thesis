@@ -34,3 +34,4 @@ DATA:
 # STATS is for eval
 #STATS: "./results/jigsaw_4x4_128_512_250e_cosine_everyday/stats/eval"
 
+WEIGHT_FILE: checkpoint/jigsaw_4x4_128_512_250e_cosine_everyday.ckpt

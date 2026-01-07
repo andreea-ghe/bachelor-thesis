@@ -1,5 +1,8 @@
 import torch
-from torch.nn import LayerNorm, GroupNorm, _BatchNorm, _InstanceNorm
+from torch.nn import LayerNorm, GroupNorm
+from torch.nn.modules.batchnorm import _BatchNorm
+from torch.nn.modules.instancenorm import _InstanceNorm
+
 
 
 def tensor_in_list(tensor: torch.Tensor, lst: list):

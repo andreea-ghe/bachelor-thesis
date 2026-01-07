@@ -1,4 +1,7 @@
-from .pointnet_architecture import PointNetPTMSG
+from .attention_mechanisms import *
+from .pointnet_architecture import *
+from .utils_encoder_decoder import *
+from .utils import *
 
 
 def build_feature_extractor(arch, features_dimension, **kwargs):

@@ -1,5 +1,6 @@
 import torch
-import torch.nn as nn, Tensor
+import torch.nn as nn
+from torch import Tensor
 from torch.nn.parameter import Parameter
 
 
