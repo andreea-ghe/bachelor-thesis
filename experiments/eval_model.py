@@ -95,7 +95,7 @@ def test_model(config):
         ckp_path = None
 
     # load model with trained weights
-    model = model.load_from_checkpoint(checkpoint_path=ckp_path, strict=False, cfg=config)
+    model = model.load_from_checkpoint(checkpoint_path=ckp_path, strict=False, config=config)
     
     # STEP 5: Run evaluation
     # This will:
