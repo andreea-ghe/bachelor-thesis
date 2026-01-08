@@ -80,6 +80,21 @@ def test_model(config):
 
         if 'state_dict' in ckp: # full checkpoint provided
             ckp_path = config.WEIGHT_FILE
+            # Debug: compare model and checkpoint keys
+            ckp_keys = set(ckp['state_dict'].keys())
+            model_keys = set(model.state_dict().keys())
+            missing_in_ckp = model_keys - ckp_keys
+            missing_in_model = ckp_keys - model_keys
+            if missing_in_ckp:
+                print(f"Keys in model but NOT in checkpoint ({len(missing_in_ckp)}):")
+                for k in sorted(missing_in_ckp)[:10]:
+                    print(f"  {k}")
+            if missing_in_model:
+                print(f"Keys in checkpoint but NOT in model ({len(missing_in_model)}):")
+                for k in sorted(missing_in_model)[:10]:
+                    print(f"  {k}")
+            if not missing_in_ckp and not missing_in_model:
+                print("All checkpoint keys match model keys!")
         else:
             ckp_path = None # only weights provided, not full checkpoint
             model.load_state_dict(ckp, strict=False)
