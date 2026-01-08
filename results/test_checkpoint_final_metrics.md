@@ -1,0 +1,21 @@
+EVALUATION METRICS
+============================================================
+test/chamfer_distance: 0.378096
+test/cls_acc: 1.000000
+test/cls_f1: 0.997067
+test/cls_loss: 0.057007
+test/cls_precision: 0.997067
+test/cls_recall: 0.997067
+test/loss: 6.589563
+test/mat_f1: 0.038840
+test/mat_loss: 6.532557
+test/mat_precision: 0.038177
+test/mat_recall: 0.040204
+test/n_critical_max: 583.198425
+test/part_acc: 0.458272
+test/rot_mae: 44.773392
+test/rot_mse: 4963.980469
+test/rot_rmse: 51.965481
+test/trans_mae: 0.109840
+test/trans_mse: 0.040412
+test/trans_rmse: 0.136468
