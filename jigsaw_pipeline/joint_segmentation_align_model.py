@@ -48,24 +48,24 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
         self.w_mat_loss = self.config.MODEL.LOSS.w_mat_loss # matching loss weight:  β, starts at 0, becomes 1.0 at epoch 9
         self.w_rig_loss = self.config.MODEL.LOSS.w_rig_loss # rigid alignment loss weight: γ, starts at 0, becomes 1.0 at epoch 199
 
-        # Attention layers
+        # Attention layers (names must match checkpoint: tf_self1, tf_cross1)
         # Self-attention layer: aggregate local features within each piece
-        self.self_attention = PointTransformer(
+        self.tf_self1 = PointTransformer(
             in_features=self.part_comp_feat_dim,
             out_features=self.part_comp_feat_dim,
             n_heads=self.config.MODEL.TF_NUM_HEADS,
             k_neighbors=self.config.MODEL.TF_NUM_SAMPLE
         )
         # Cross-attention layer: exchange features across pieces
-        self.cross_attention = CrossAttention(
+        self.tf_cross1 = CrossAttention(
             n_head=self.config.MODEL.TF_NUM_HEADS,
             d_input=self.part_comp_feat_dim,
         )
-        self.attention_layers = [("self", self.self_attention), ("cross", self.cross_attention)]
+        self.tf_layers = [("self", self.tf_self1), ("cross", self.tf_cross1)]
 
-        # Initialize model components
-        self.feature_extractor = self._init_feature_extractor() # PointNet++ based feature extractor
-        self.segmentation_classifier = self._init_segmentation_classifier() # fracture surface segmentation head
+        # Initialize model components (names must match checkpoint: encoder, pc_classifier)
+        self.encoder = self._init_feature_extractor()  # PointNet++ based feature extractor
+        self.pc_classifier = self._init_segmentation_classifier()  # fracture surface segmentation head
         self.affinity_extractor = self._init_affinity_extractor() # affinity feature projection head
         self.affinity_layer = self._init_affinity_layer() # primal-dual affinity layer
         self.sinkhorn = self._init_sinkhorn() # differentiable optimal transport layer
@@ -151,7 +151,7 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
 
         # we flatten the batch dimension because we have shared-weight across all pieces
         valid_pcs = part_pcs.reshape(B * N_SUM, -1)
-        part_features = self.feature_extractor(valid_pcs, batch_length)  # [B * N_SUM, F]
+        part_features = self.encoder(valid_pcs, batch_length)  # [B * N_SUM, F]
 
         part_features = part_features.reshape(B, N_SUM, -1)  # [B, N_SUM, F]
         return part_features
@@ -222,7 +222,7 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
             part_features = self._extract_part_features(part_pcs, batch_length)  # [B, N_SUM, F]
             
             # apply self-attention and cross-attention layers
-            for name, layer in self.attention_layers:
+            for name, layer in self.tf_layers:
                 if name == "self":
                     # self attention: aggregate local features within each piece
                     part_features = layer(
@@ -241,7 +241,7 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
         segmentation_features = part_features.transpose(1, 2) # [B, F, N_SUM] for point-wise classification
 
         # compute segmentation logits and predictions
-        cls_logits = self.segmentation_classifier(segmentation_features)  # [B, 1, N_SUM]
+        cls_logits = self.pc_classifier(segmentation_features)  # [B, 1, N_SUM]
 
         # no gradient for predictions -> no learning signal
         if self.pc_cls_method == "binary":
