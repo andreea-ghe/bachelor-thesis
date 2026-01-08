@@ -123,6 +123,21 @@ class MatchingBaseModel(pytorch_lightning.LightningModule):
             loss_dict: dictionary with losses and metrics
         """
         loss_dict = self.forward_pass(data_dict, mode='test', optimizer_idx=optimizer_idx)
+        
+        # Periodic checkpoint: save intermediate results every 500 batches
+        if not hasattr(self, '_test_outputs'):
+            self._test_outputs = []
+        
+        # Convert tensors to CPU for saving
+        save_dict = {k: v.cpu() if torch.is_tensor(v) else v for k, v in loss_dict.items()}
+        self._test_outputs.append(save_dict)
+        
+        checkpoint_interval = 10
+        if (batch_idx + 1) % checkpoint_interval == 0:
+            checkpoint_path = os.path.join(self.config.OUTPUT_PATH, f'test_checkpoint_{batch_idx + 1}.pt')
+            torch.save(self._test_outputs, checkpoint_path)
+            print(f"\n[Checkpoint] Saved {len(self._test_outputs)} results to {checkpoint_path}")
+        
         return loss_dict
 
     def test_epoch_end(self, outputs):
@@ -133,6 +148,12 @@ class MatchingBaseModel(pytorch_lightning.LightningModule):
         Input:
             outputs: list of loss_dict from each test step
         """
+        # Save final checkpoint with all results
+        if hasattr(self, '_test_outputs') and len(self._test_outputs) > 0:
+            final_checkpoint_path = os.path.join(self.config.OUTPUT_PATH, 'test_checkpoint_final.pt')
+            torch.save(self._test_outputs, final_checkpoint_path)
+            print(f"\n[Checkpoint] Saved final {len(self._test_outputs)} results to {final_checkpoint_path}")
+        
         # handle both int and tensor batch sizes
         if isinstance(outputs[0]['batch_size'], int):
             func_bs = torch.tensor
