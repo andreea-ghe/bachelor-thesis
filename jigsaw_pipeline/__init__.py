@@ -5,5 +5,5 @@ from .utils import *
 
 
 def build_jigsaw_model(config):
-    model = JointSegmentationAlignModel(config)
+    model = JointSegmentationAlignmentModel(config)
     return model
