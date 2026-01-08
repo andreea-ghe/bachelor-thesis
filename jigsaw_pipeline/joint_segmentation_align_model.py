@@ -456,8 +456,13 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
         # Handle edge case: no critical points found (rare edge case not handled in original)
         # This can happen with unusual objects - skip matching loss for this batch
         if n_critical_max == 0:
+            zero_tensor = torch.tensor(0.0, device=self.device)
             loss_dict.update({
-                'mat_loss': torch.tensor(0.0, device=self.device),
+                'mat_loss': zero_tensor,
+                'mat_acc': zero_tensor,
+                'mat_precision': zero_tensor,
+                'mat_recall': zero_tensor,
+                'mat_f1': zero_tensor,
                 'n_critical_max': torch.tensor(0, device=self.device),
                 'loss': cls_loss  # Only segmentation loss for this batch
             })
