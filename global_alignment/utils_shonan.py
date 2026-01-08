@@ -5,8 +5,23 @@ from scipy.spatial.transform import Rotation as R
 
 def shonan_averaging(edges, transformations, uncertainties, n_valids):
     """
-    Given noisy relative rigid transformations between parts, recover the global poses using Shonan Averaging.
-    Shonan averaging
+    Recover global poses from noisy relative transformations using Shonan Averaging.
+    
+    Shonan Averaging is a certifiably optimal algorithm for rotation averaging.
+    It lifts rotations to higher-dimensional space and solves a semidefinite
+    relaxation, providing globally optimal solutions when the relaxation is tight.
+    
+    Reference: Dellaert et al., "Shonan Rotation Averaging" (ECCV 2020)
+    
+    Input:
+        edges: [E, 2] - edge list (i, j) pairs
+        transformations: [E, 4, 4] - relative transformation T_ij for each edge
+        uncertainties: [E] - uncertainty weights for each edge
+        n_valids: int - number of nodes (pieces + 1 virtual node)
+    
+    Output:
+        global_poses: [n_valids, 4, 4] - estimated global pose for each node
+        success: int - 1 if converged, 0 if failed (use spanning tree fallback)
     """
     n_edges = edges.shape[0]
     
@@ -46,8 +61,10 @@ def shonan_averaging(edges, transformations, uncertainties, n_valids):
             global_pose_result = poses.atPose3(idx).matrix()
             global_pose_results.append(global_pose_result)
 
-        return np.stack(global_pose_results)
+        return np.stack(global_pose_results), 1  # Success
     except:
+        # Shonan failed - return identity poses and signal failure
+        # The caller should use spanning tree alignment as fallback
         print("Shonan Averaging didn't converge.")
 
         global_pose_results = []
@@ -55,7 +72,7 @@ def shonan_averaging(edges, transformations, uncertainties, n_valids):
             global_pose_result = np.eye(4)
             global_pose_results.append(global_pose_result)
         
-        return np.stack(global_pose_results)
+        return np.stack(global_pose_results), 0  # Failure - use fallback
 
 
 def estimate_poses_from_rotations(factors, rotations, uncertainties, d=3):
@@ -160,7 +177,8 @@ if __name__ == "__main__":
         ]
     )
 
-    global_pose_results = shonan_averaging(edges, transformations, uncertainty, total_num)
+    global_pose_results, success = shonan_averaging(edges, transformations, uncertainty, total_num)
+    print(f"Shonan converged: {success == 1}")
     for i in range(n):
         global_pose_results[n - i - 1, :, :] = (np.linalg.inv(global_pose_results[0, :, :]) @ global_pose_results[n - i - 1, :, :])
 
