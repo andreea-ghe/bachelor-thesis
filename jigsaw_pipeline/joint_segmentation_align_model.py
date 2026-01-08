@@ -307,8 +307,20 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
 
         # STEP 3: multi-part matching
         feature_dim = part_features.shape[-1]
-        n_critical_pcs_object = torch.sum(n_critical_pcs, dim=-1) # [B] number of critical fracture points in each object
-        n_critical_max = torch.max(n_critical_pcs_object) # max number of critical points in the batch
+        n_critical_pcs_object = torch.sum(n_critical_pcs, dim=-1)  # [B] number of critical fracture points in each object
+        n_critical_max = torch.max(n_critical_pcs_object)  # max number of critical points in the batch
+
+        # Ensure at least 1 critical point to prevent empty tensor errors
+        if n_critical_max == 0:
+            print(f"WARNING: No critical points found in batch. Segmentation may not be working correctly.")
+            print(f"  - training mode: {self.training}")
+            print(f"  - cls_preds sum: {out_dict['cls_preds'].sum().item()}")
+            print(f"  - cls_preds shape: {out_dict['cls_preds'].shape}")
+            print(f"  - cls_logits range: [{out_dict['cls_logits'].min().item():.4f}, {out_dict['cls_logits'].max().item():.4f}]")
+            print(f"  - n_critical_pcs: {n_critical_pcs}")
+            print(f"  - fracture_preds sum: {fracture_preds.sum().item()}")
+            # Use at least 1 point to avoid empty tensor errors
+            n_critical_max = torch.tensor(1, device=self.device)
 
         # extract features of critical fracture points
         critical_features = self._extract_critical_features(B, n_critical_max, feature_dim, part_features, n_critical_pcs_object, fracture_preds)  # [B, N_CRIT_MAX, F]
