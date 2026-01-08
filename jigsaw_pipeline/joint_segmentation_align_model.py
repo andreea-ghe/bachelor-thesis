@@ -458,7 +458,7 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
         if n_critical_max == 0:
             loss_dict.update({
                 'mat_loss': torch.tensor(0.0, device=self.device),
-                'n_critical_max': 0,
+                'n_critical_max': torch.tensor(0, device=self.device),
                 'loss': cls_loss  # Only segmentation loss for this batch
             })
             return loss_dict
