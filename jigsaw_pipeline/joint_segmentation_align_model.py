@@ -403,6 +403,16 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
         critical_pcs_idx = data_dict['critical_pcs_idx']  # [B, N_SUM] indices of critical fracture points
         critical_labels = data_dict['critical_label']  # [B, N_SUM] binary labels for each point (1: critical fracture point, 0: non-critical)
 
+        # Handle edge case: no critical points found (rare edge case not handled in original)
+        # This can happen with unusual objects - skip matching loss for this batch
+        if n_critical_max == 0:
+            loss_dict.update({
+                'mat_loss': torch.tensor(0.0, device=self.device),
+                'n_critical_max': 0,
+                'loss': cls_loss  # Only segmentation loss
+            })
+            return loss_dict
+
         cls_logits = out_dict['cls_logits']  # [B, N_SUM, C] segmentation logits
         cls_preds = out_dict['cls_preds']  # [B, N_SUM] segmentation predictions
 
