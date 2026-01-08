@@ -132,7 +132,7 @@ class MatchingBaseModel(pytorch_lightning.LightningModule):
         save_dict = {k: v.cpu() if torch.is_tensor(v) else v for k, v in loss_dict.items()}
         self._test_outputs.append(save_dict)
         
-        checkpoint_interval = 10
+        checkpoint_interval = 500
         if (batch_idx + 1) % checkpoint_interval == 0:
             checkpoint_path = os.path.join(self.config.OUTPUT_PATH, f'test_checkpoint_{batch_idx + 1}.pt')
             torch.save(self._test_outputs, checkpoint_path)
