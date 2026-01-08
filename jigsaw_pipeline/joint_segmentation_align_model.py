@@ -89,16 +89,20 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
     def _init_segmentation_classifier(self):
         """
         Initialize point-wise segmentation classifier.
+        
+        Returns Sequential directly (not wrapped) to match checkpoint naming:
+        pc_classifier.0.weight, pc_classifier.2.weight, etc.
 
         Output:
-            segmentation_classifier (nn.Module): point cloud segmentation classifier
+            classifier (nn.Module): point cloud segmentation classifier
         """
-        segmentation_classifier = SegmentationClassifier(
-            model_point=self.pc_cls_method,
-            pc_feat_dim=self.part_comp_feat_dim,
-            num_classes=self.num_classes
+        output_dim = 1 if self.pc_cls_method == "binary" else self.num_classes
+        classifier = nn.Sequential(
+            nn.BatchNorm1d(self.part_comp_feat_dim),
+            nn.ReLU(inplace=True),
+            nn.Conv1d(self.part_comp_feat_dim, output_dim, 1)
         )
-        return segmentation_classifier
+        return classifier
 
     def _init_affinity_extractor(self):
         """
