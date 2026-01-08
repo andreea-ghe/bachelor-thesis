@@ -8,6 +8,10 @@ def group_knn_features(all_features: Tensor, all_coords: Tensor, k: int, query_c
     """
     Finds k nearest neighbors for each point and groups their features together.
     This is used for local feature aggregation in the Point Transformer layer.
+    
+    IMPORTANT: kNN is computed based on FEATURES, not coordinates!
+    This is different from typical spatial kNN - we find neighbors with similar features.
+    
     Input:
         all_features: features of all points [N, D]
         all_coords: coordinates of all points [N, 3]
@@ -20,13 +24,14 @@ def group_knn_features(all_features: Tensor, all_coords: Tensor, k: int, query_c
     N, feat_dim = all_features.shape
 
     if batch_idx is None:
-        batch_idx = torch.zeros(N, dtype=torch.long).to(device) # all points belong to the same batch
+        batch_idx = torch.zeros(N, dtype=torch.long).to(device)  # all points belong to the same batch
     
     if query_coords is None:
         query_coords = all_coords
 
-    # Find k nearest neighbors
-    idx = knn(all_coords, all_coords, k=k, batch_x=batch_idx, batch_y=batch_idx)
+    # Find k nearest neighbors based on FEATURES (not coordinates!)
+    # This is crucial - the original Point Transformer uses feature-based kNN
+    idx = knn(all_features, all_features, k=k, batch_x=batch_idx, batch_y=batch_idx)
     idx, mask = to_dense_batch(idx[1], idx[0], fill_value=N, max_num_nodes=k) # [N, k]
     all_features = torch.cat([all_features, torch.zeros(1, feat_dim).to(device)], dim=0) # add zero padding for invalid indices
 
