@@ -459,7 +459,6 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
             zero_tensor = torch.tensor(0.0, device=self.device)
             loss_dict.update({
                 'mat_loss': zero_tensor,
-                'mat_acc': zero_tensor,
                 'mat_precision': zero_tensor,
                 'mat_recall': zero_tensor,
                 'mat_f1': zero_tensor,
