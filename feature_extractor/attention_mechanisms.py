@@ -56,14 +56,15 @@ class MultiHeadAttention(nn.Module):
     def __init__(self, n_head=8, d_model=512, dropout=0.0):
         super().__init__()
 
-        self.n_head = n_head # number of attention heads
-        self.d_head = d_model // n_head # dimension per head
+        self.n_head = n_head  # number of attention heads
+        self.d_head = d_model // n_head  # dimension per head
 
         # Weights for queries, keys, values and output projection
-        self.q_proj = nn.Linear(d_model, n_head * self.d_head, bias=False)
-        self.k_proj = nn.Linear(d_model, n_head * self.d_head, bias=False)
-        self.v_proj = nn.Linear(d_model, n_head * self.d_head, bias=False)
-        self.out_proj = nn.Linear(n_head * self.d_head, d_model, bias=False)
+        # Names must match checkpoint: w_qs, w_ks, w_vs, fc
+        self.w_qs = nn.Linear(d_model, n_head * self.d_head, bias=False)
+        self.w_ks = nn.Linear(d_model, n_head * self.d_head, bias=False)
+        self.w_vs = nn.Linear(d_model, n_head * self.d_head, bias=False)
+        self.fc = nn.Linear(n_head * self.d_head, d_model, bias=False)
 
         # Scaled dot-product attention
         self.attention = DotProductAttention(temperature=self.d_head ** 0.5, attn_dropout=dropout)
@@ -87,19 +88,19 @@ class MultiHeadAttention(nn.Module):
         len_k = k.size(1)
         len_v = v.size(1)
 
-        residual = q # we will add this back after attention; it's a residual connection
+        residual = q  # we will add this back after attention; it's a residual connection
 
-        q = self.q_proj(q).view(sz_b, len_q, self.n_head, self.d_head).transpose(1, 2)  # [B, n_head, len_q, d_head]
-        k = self.k_proj(k).view(sz_b, len_k, self.n_head, self.d_head).transpose(1, 2)  # [B, n_head, len_k, d_head]
-        v = self.v_proj(v).view(sz_b, len_v, self.n_head, self.d_head).transpose(1, 2)  # [B, n_head, len_v, d_head]
+        q = self.w_qs(q).view(sz_b, len_q, self.n_head, self.d_head).transpose(1, 2)  # [B, n_head, len_q, d_head]
+        k = self.w_ks(k).view(sz_b, len_k, self.n_head, self.d_head).transpose(1, 2)  # [B, n_head, len_k, d_head]
+        v = self.w_vs(v).view(sz_b, len_v, self.n_head, self.d_head).transpose(1, 2)  # [B, n_head, len_v, d_head]
 
         if mask is not None:
             mask = mask.unsqueeze(1)  # [B, 1, len_q, len_k]
         
         # apply scaled dot-product attention
-        head_output, attn = self.attention(q, k, v, mask=mask) # head_output: [B, n_head, len_q, d_head]
+        head_output, attn = self.attention(q, k, v, mask=mask)  # head_output: [B, n_head, len_q, d_head]
         head_output = head_output.transpose(1, 2).contiguous().view(sz_b, len_q, -1)  # [B, len_q, n_head * d_head]
-        attended_features = self.out_proj(head_output) # [B, len_q, d_model]
+        attended_features = self.fc(head_output)  # [B, len_q, d_model]
         
         attended_features = self.dropout(attended_features)
         attended_features += residual  # add residual connection
@@ -120,8 +121,9 @@ class PositionalFeedForwardNetwork(nn.Module):
             dropout: dropout rate
         """
         super().__init__()
-        self.layer1 = nn.Linear(d_input, d_hidden)
-        self.layer2 = nn.Linear(d_hidden, d_input)
+        # Names must match checkpoint: w_1, w_2
+        self.w_1 = nn.Linear(d_input, d_hidden)
+        self.w_2 = nn.Linear(d_hidden, d_input)
         self.dropout = nn.Dropout(dropout)
         self.layer_norm = nn.LayerNorm(d_input, eps=1e-6)
 
@@ -135,8 +137,7 @@ class PositionalFeedForwardNetwork(nn.Module):
         """
         residual = x  # for residual connection
 
-        output = self.dropout(self.layer2(F.relu(self.layer1(x))))
-        # or output = self.dropout(self.layer2(self.dropout(F.relu(self.layer1(x))))))
+        output = self.dropout(self.w_2(F.relu(self.w_1(x))))
 
         output += residual  # add residual connection
         output = self.layer_norm(output)  # normalize
@@ -150,8 +151,9 @@ class CrossAttention(nn.Module):
     """
     def __init__(self, n_head, d_input):
         super(CrossAttention, self).__init__()
-        self.multi_head_attn = MultiHeadAttention(n_head=n_head, d_model=d_input, dropout=0.0)
-        self.ffn = PositionalFeedForwardNetwork(d_input=d_input, d_hidden=d_input * 2, dropout=0.0)
+        # Names must match checkpoint: attn, pos_ffn
+        self.attn = MultiHeadAttention(n_head=n_head, d_model=d_input, dropout=0.0)
+        self.pos_ffn = PositionalFeedForwardNetwork(d_input=d_input, d_hidden=d_input * 2, dropout=0.0)
 
     def forward(self, x: Tensor) -> Tensor:
         """
@@ -161,8 +163,8 @@ class CrossAttention(nn.Module):
         Output:
             cross_features: transformed tensor [B, len_seq, d_input]
         """
-        attn_output, attn_weights = self.multi_head_attn(x, x, x)  # self-attention
-        cross_features = self.ffn(attn_output)
+        attn_output, attn_weights = self.attn(x, x, x)  # self-attention
+        cross_features = self.pos_ffn(attn_output)
 
         return cross_features
 
@@ -202,15 +204,17 @@ class PointTransformer(nn.Module):
         self.linear_v = nn.Linear(self.in_features, self.mid_features)
 
         # Positional encoding MLP: encodes relative 3D positions into features
-        self.linear_pos = nn.Sequential(
+        # Name must match checkpoint: linear_p
+        self.linear_p = nn.Sequential(
             nn.Linear(3, 3),
             LayerNorm1d(3),
             nn.ReLU(inplace=True),
             nn.Linear(3, out_features)
         )
 
-        # MLP_s is a mapping function that produces the weight vector
-        self.MLP_s = nn.Sequential(
+        # MLP that produces the attention weight vector
+        # Name must match checkpoint: linear_w
+        self.linear_w = nn.Sequential(
             LayerNorm1d(self.mid_features),
             nn.ReLU(inplace=True),
             nn.Linear(self.mid_features, self.out_features // self.share_feat),
@@ -262,15 +266,15 @@ class PointTransformer(nn.Module):
         W_k = W_k[:, :, 3:]  # [N, k, mid_features]
 
         # Compute positional encodings
-        pos_enc = self.linear_pos(relative_pos)  # [N, k, out_features]
+        pos_enc = self.linear_p(relative_pos)  # [N, k, out_features]
 
         # Compute attention scores: (W_q - W_k + pos_enc)
         W_q_expanded = W_q.unsqueeze(1)  # [N, 1, mid_features]
         pos_enc = einops.reduce(pos_enc, "n ns (i j) -> n ns j", reduction="sum", j=self.mid_features)
-        attn_scores =  W_k - W_q_expanded + pos_enc  # [N, k, out_features]
+        attn_scores = W_k - W_q_expanded + pos_enc  # [N, k, out_features]
 
         # compute attention weights
-        weights = self.MLP_s(attn_scores)  # [N, k, out_features // share_feat]
+        weights = self.linear_w(attn_scores)  # [N, k, out_features // share_feat]
         weights = self.softmax(weights)  # [N, k, out_features // share_feat]
 
         # Aggregate features
