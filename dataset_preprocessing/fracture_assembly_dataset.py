@@ -310,9 +310,12 @@ class FractureAssemblyDataset(Dataset):
             raise ValueError(f"Number of parts {len(mesh_files)} not in range [{self.min_parts}, {self.max_parts}]")
 
         # load all mesh pieces
-        meshes = [
-            trimesh.load(os.path.join(data_folder, mesh_file), force='mesh') for mesh_file in mesh_files
-        ]
+        meshes = []
+        for mesh_file in mesh_files:
+            mesh = trimesh.load(os.path.join(data_folder, mesh_file), force='mesh')
+            if isinstance(mesh, trimesh.Scene): # handle case where trimesh returns a Scene instead of a Trimesh
+                mesh = trimesh.util.concatenate(list(mesh.geometry.values())) # concatenate all geometries in the scene into one mesh
+            meshes.append(mesh)
 
         point_clouds = [] 
         piece_id = [] 
