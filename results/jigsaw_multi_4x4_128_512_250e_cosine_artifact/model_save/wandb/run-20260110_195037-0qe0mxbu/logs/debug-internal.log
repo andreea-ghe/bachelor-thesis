@@ -1,0 +1,863 @@
+2026-01-10 19:50:37,661 INFO    StreamThr :10354 [internal.py:wandb_internal():87] W&B internal server running at pid: 10354, started at: 2026-01-10 19:50:37.660297
+2026-01-10 19:50:37,663 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status
+2026-01-10 19:50:37,667 INFO    WriterThread:10354 [datastore.py:open_for_write():85] open: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/run-0qe0mxbu.wandb
+2026-01-10 19:50:37,668 DEBUG   SenderThread:10354 [sender.py:send():336] send: header
+2026-01-10 19:50:37,699 DEBUG   SenderThread:10354 [sender.py:send():336] send: run
+2026-01-10 19:50:37,700 INFO    SenderThread:10354 [sender.py:_maybe_setup_resume():723] checking resume status for None/jigsaw/0qe0mxbu
+2026-01-10 19:50:38,793 INFO    SenderThread:10354 [dir_watcher.py:__init__():216] watching files in: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files
+2026-01-10 19:50:38,794 INFO    SenderThread:10354 [sender.py:_start_run_threads():1067] run started: 0qe0mxbu with start time 1768067437.659811
+2026-01-10 19:50:38,794 DEBUG   SenderThread:10354 [sender.py:send_request():363] send_request: summary_record
+2026-01-10 19:50:38,795 INFO    SenderThread:10354 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2026-01-10 19:50:38,797 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: check_version
+2026-01-10 19:50:38,798 DEBUG   SenderThread:10354 [sender.py:send_request():363] send_request: check_version
+2026-01-10 19:50:39,144 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: run_start
+2026-01-10 19:50:39,250 DEBUG   HandlerThread:10354 [system_info.py:__init__():31] System info init
+2026-01-10 19:50:39,251 DEBUG   HandlerThread:10354 [system_info.py:__init__():46] System info init done
+2026-01-10 19:50:39,251 INFO    HandlerThread:10354 [system_monitor.py:start():151] Starting system monitor
+2026-01-10 19:50:39,252 INFO    SystemMonitor:10354 [system_monitor.py:_start():116] Starting system asset monitoring threads
+2026-01-10 19:50:39,253 INFO    HandlerThread:10354 [system_monitor.py:probe():172] Collecting system info
+2026-01-10 19:50:39,254 INFO    SystemMonitor:10354 [interfaces.py:start():168] Started cpu
+2026-01-10 19:50:39,256 INFO    SystemMonitor:10354 [interfaces.py:start():168] Started disk
+2026-01-10 19:50:39,261 INFO    SystemMonitor:10354 [interfaces.py:start():168] Started gpu
+2026-01-10 19:50:39,265 INFO    SystemMonitor:10354 [interfaces.py:start():168] Started memory
+2026-01-10 19:50:39,267 INFO    SystemMonitor:10354 [interfaces.py:start():168] Started network
+2026-01-10 19:50:39,284 DEBUG   HandlerThread:10354 [system_info.py:probe():195] Probing system
+2026-01-10 19:50:39,518 DEBUG   HandlerThread:10354 [system_info.py:_probe_git():180] Probing git
+2026-01-10 19:50:39,552 DEBUG   HandlerThread:10354 [system_info.py:_probe_git():188] Probing git done
+2026-01-10 19:50:39,552 DEBUG   HandlerThread:10354 [system_info.py:probe():241] Probing system done
+2026-01-10 19:50:39,552 DEBUG   HandlerThread:10354 [system_monitor.py:probe():181] {'os': 'Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.17', 'python': '3.8.16', 'heartbeatAt': '2026-01-10T17:50:39.284627', 'startedAt': '2026-01-10T17:50:37.648323', 'docker': None, 'cuda': None, 'args': ('--cfg', 'experiments/jigsaw_multi_4x4_128_512_250e_cosine_artifact.yaml'), 'state': 'running', 'program': '-m experiments.eval_model', 'git': {'remote': 'https://github.com/andreea-ghe/bachelor-thesis.git', 'commit': '2db311b0e8ff2a70be669c666699ba3aa346967a'}, 'email': 'gheorghe.andreea.ioana26@gmail.com', 'root': '/home/jigsaw', 'host': 'ghe-desktop', 'username': 'ndreeaheorghe', 'executable': '/home/ndreeaheorghe/miniconda3/envs/assembly/bin/python', 'cpu_count': 8, 'cpu_count_logical': 16, 'cpu_freq': {'current': 2894.4689999999996, 'min': 0.0, 'max': 0.0}, 'cpu_freq_per_core': [{'current': 2894.469, 'min': 0.0, 'max': 0.0}, {'current': 2894.469, 'min': 0.0, 'max': 0.0}, {'current': 2894.469, 'min': 0.0, 'max': 0.0}, {'current': 2894.469, 'min': 0.0, 'max': 0.0}, {'current': 2894.469, 'min': 0.0, 'max': 0.0}, {'current': 2894.469, 'min': 0.0, 'max': 0.0}, {'current': 2894.469, 'min': 0.0, 'max': 0.0}, {'current': 2894.469, 'min': 0.0, 'max': 0.0}, {'current': 2894.469, 'min': 0.0, 'max': 0.0}, {'current': 2894.469, 'min': 0.0, 'max': 0.0}, {'current': 2894.469, 'min': 0.0, 'max': 0.0}, {'current': 2894.469, 'min': 0.0, 'max': 0.0}, {'current': 2894.469, 'min': 0.0, 'max': 0.0}, {'current': 2894.469, 'min': 0.0, 'max': 0.0}, {'current': 2894.469, 'min': 0.0, 'max': 0.0}, {'current': 2894.469, 'min': 0.0, 'max': 0.0}], 'disk': {'total': 1006.853931427002, 'used': 60.49143600463867}, 'gpu': 'NVIDIA GeForce GTX 1650 Ti', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce GTX 1650 Ti', 'memory_total': 4294967296}], 'memory': {'total': 7.443546295166016}}
+2026-01-10 19:50:39,552 INFO    HandlerThread:10354 [system_monitor.py:probe():182] Finished collecting system info
+2026-01-10 19:50:39,552 INFO    HandlerThread:10354 [system_monitor.py:probe():185] Publishing system info
+2026-01-10 19:50:39,552 DEBUG   HandlerThread:10354 [system_info.py:_save_pip():51] Saving list of pip packages installed into the current environment
+2026-01-10 19:50:39,553 DEBUG   HandlerThread:10354 [system_info.py:_save_pip():67] Saving pip packages done
+2026-01-10 19:50:39,553 DEBUG   HandlerThread:10354 [system_info.py:_save_conda():74] Saving list of conda packages installed into the current environment
+2026-01-10 19:50:39,798 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_created():275] file/dir created: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/conda-environment.yaml
+2026-01-10 19:50:39,799 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_created():275] file/dir created: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/wandb-summary.json
+2026-01-10 19:50:39,799 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_created():275] file/dir created: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/requirements.txt
+2026-01-10 19:50:41,565 DEBUG   HandlerThread:10354 [system_info.py:_save_conda():86] Saving conda packages done
+2026-01-10 19:50:41,566 INFO    HandlerThread:10354 [system_monitor.py:probe():187] Finished publishing system info
+2026-01-10 19:50:41,569 DEBUG   SenderThread:10354 [sender.py:send():336] send: files
+2026-01-10 19:50:41,569 INFO    SenderThread:10354 [sender.py:_save_file():1321] saving file wandb-metadata.json with policy now
+2026-01-10 19:50:41,576 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: stop_status
+2026-01-10 19:50:41,578 DEBUG   SenderThread:10354 [sender.py:send_request():363] send_request: stop_status
+2026-01-10 19:50:41,900 DEBUG   SenderThread:10354 [sender.py:send():336] send: telemetry
+2026-01-10 19:50:41,900 DEBUG   SenderThread:10354 [sender.py:send():336] send: metric
+2026-01-10 19:50:41,901 DEBUG   SenderThread:10354 [sender.py:send():336] send: telemetry
+2026-01-10 19:50:41,901 DEBUG   SenderThread:10354 [sender.py:send():336] send: metric
+2026-01-10 19:50:41,902 WARNING SenderThread:10354 [sender.py:send_metric():1272] Seen metric with glob (shouldn't happen)
+2026-01-10 19:50:42,270 INFO    wandb-upload_0:10354 [upload_job.py:push():138] Uploaded file /tmp/tmp6nlxh806wandb/ye4fkx1k-wandb-metadata.json
+2026-01-10 19:50:42,809 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/conda-environment.yaml
+2026-01-10 19:50:42,809 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_created():275] file/dir created: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:50:42,810 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_created():275] file/dir created: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/wandb-metadata.json
+2026-01-10 19:50:42,964 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:50:44,810 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:50:47,996 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:50:51,280 DEBUG   SenderThread:10354 [sender.py:send():336] send: config
+2026-01-10 19:50:52,853 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:50:53,465 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:50:54,858 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:50:56,575 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:50:58,489 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:51:00,880 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:51:01,584 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:51:02,908 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:51:04,251 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:51:06,797 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:51:06,934 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:51:08,936 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:51:09,325 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:51:09,952 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/config.yaml
+2026-01-10 19:51:10,957 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:51:11,576 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:51:11,968 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:51:14,982 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:51:15,064 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:51:16,834 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:51:16,986 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:51:20,994 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:51:21,062 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:51:21,893 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:51:23,005 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:51:25,013 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:51:26,921 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:51:27,020 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:51:27,220 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:51:29,022 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:51:32,353 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:51:32,660 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:51:33,029 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:51:35,032 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:51:37,033 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:51:37,378 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:51:38,003 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:51:39,035 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:51:39,268 DEBUG   SystemMonitor:10354 [system_monitor.py:_start():130] Starting system metrics aggregation loop
+2026-01-10 19:51:39,269 DEBUG   SenderThread:10354 [sender.py:send():336] send: stats
+2026-01-10 19:51:40,037 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:51:41,591 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:51:43,875 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:51:44,051 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:51:46,075 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:51:46,675 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:51:48,086 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:51:48,883 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:51:50,103 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:51:52,069 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:51:53,987 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:51:54,116 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:51:57,605 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:51:58,126 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:51:59,868 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:52:02,149 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:52:03,461 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:52:04,162 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:52:05,067 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:52:06,165 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:52:08,201 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:52:09,081 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:52:09,271 DEBUG   SenderThread:10354 [sender.py:send():336] send: stats
+2026-01-10 19:52:10,096 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:52:11,211 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:52:13,212 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:52:14,471 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:52:15,223 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:52:15,241 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:52:17,231 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:52:19,233 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:52:19,499 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:52:20,783 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:52:21,244 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:52:23,253 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:52:24,520 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:52:25,265 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:52:26,264 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:52:27,272 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:52:29,287 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:52:29,545 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:52:31,302 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:52:31,708 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:52:33,304 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:52:34,560 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:52:35,309 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:52:37,133 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:52:37,317 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:52:38,324 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:52:38,570 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:52:39,273 DEBUG   SenderThread:10354 [sender.py:send():336] send: stats
+2026-01-10 19:52:40,337 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:52:42,320 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:52:42,342 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:52:43,582 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:52:44,359 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:52:46,365 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:52:47,666 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:52:48,369 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:52:48,596 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:52:50,374 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:52:52,376 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:52:53,220 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:52:53,604 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:52:54,381 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:52:56,390 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:52:58,392 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:52:58,607 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:52:58,608 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:53:00,404 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:53:02,412 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:53:03,723 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:53:04,046 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:53:04,416 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:53:06,417 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:53:07,418 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:53:07,728 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:53:09,283 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:53:09,290 DEBUG   SenderThread:10354 [sender.py:send():336] send: stats
+2026-01-10 19:53:09,429 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:53:10,446 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:53:12,487 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:53:12,745 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:53:14,490 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:53:14,504 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:53:16,515 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:53:17,753 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:53:18,532 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:53:20,073 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:53:20,534 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:53:22,544 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:53:22,756 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:53:24,551 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:53:25,707 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:53:26,556 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:53:27,766 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:53:28,562 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:53:30,570 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:53:31,012 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:53:32,575 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:53:32,781 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:53:34,577 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:53:35,580 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:53:36,146 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:53:36,786 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:53:37,582 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:53:39,293 DEBUG   SenderThread:10354 [sender.py:send():336] send: stats
+2026-01-10 19:53:39,583 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:53:41,585 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:53:41,775 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:53:41,805 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:53:45,597 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:53:47,163 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:53:47,284 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:53:47,599 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:53:49,601 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:53:52,463 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:53:52,534 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:53:53,609 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:53:55,619 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:53:57,544 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:53:57,624 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:53:58,269 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:54:01,652 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:54:02,558 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:54:03,677 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:54:03,779 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:54:06,582 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:54:06,690 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:54:08,702 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:54:09,152 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:54:09,305 DEBUG   SenderThread:10354 [sender.py:send():336] send: stats
+2026-01-10 19:54:10,710 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:54:11,588 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:54:12,725 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:54:14,754 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:54:14,778 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:54:16,620 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:54:16,764 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:54:18,795 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:54:20,708 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:54:20,826 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:54:21,662 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:54:24,967 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:54:26,209 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:54:26,774 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:54:29,082 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:54:31,089 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:54:31,764 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:54:31,938 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:54:33,139 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:54:35,142 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:54:36,021 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:54:37,148 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:54:37,149 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:54:39,155 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:54:39,298 DEBUG   SenderThread:10354 [sender.py:send():336] send: stats
+2026-01-10 19:54:41,158 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:54:41,615 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:54:42,378 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:54:43,161 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:54:46,885 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:54:47,173 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:54:47,721 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:54:49,182 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:54:51,188 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:54:51,922 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:54:53,194 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:54:53,599 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:54:56,981 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:54:57,215 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:54:59,070 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:54:59,236 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:55:01,238 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:55:02,042 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:55:02,244 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:55:04,996 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:55:06,247 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:55:07,113 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:55:08,256 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:55:09,299 DEBUG   SenderThread:10354 [sender.py:send():336] send: stats
+2026-01-10 19:55:10,258 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:55:10,982 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:55:12,169 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:55:12,268 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:55:14,271 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:55:16,001 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:55:18,166 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:55:18,281 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:55:21,312 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:55:22,294 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:55:23,378 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:55:24,301 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:55:26,322 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:55:27,230 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:55:28,369 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:55:28,436 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:55:30,375 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:55:31,388 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:55:32,383 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:55:32,460 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:55:33,391 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:55:38,193 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:55:38,367 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:55:39,300 DEBUG   SenderThread:10354 [sender.py:send():336] send: stats
+2026-01-10 19:55:39,497 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:55:43,577 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:55:43,708 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:55:44,796 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:55:47,588 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:55:49,550 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:55:49,593 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:55:51,209 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:55:53,599 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:55:55,481 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:55:55,602 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:55:56,212 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:55:57,603 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:56:00,252 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:56:00,620 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:56:00,628 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:56:04,643 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:56:05,337 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:56:06,204 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:56:06,652 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:56:08,654 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:56:09,301 DEBUG   SenderThread:10354 [sender.py:send():336] send: stats
+2026-01-10 19:56:10,465 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:56:10,655 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:56:11,346 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:56:12,657 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:56:14,666 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:56:15,821 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:56:16,403 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:56:16,676 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:56:18,679 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:56:21,262 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:56:22,372 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:56:22,683 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:56:24,718 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:56:26,406 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:56:26,720 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:56:28,015 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:56:28,743 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:56:30,445 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:56:30,746 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:56:33,444 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:56:34,765 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:56:35,893 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:56:36,807 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:56:38,815 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:56:39,122 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:56:39,303 DEBUG   SenderThread:10354 [sender.py:send():336] send: stats
+2026-01-10 19:56:40,823 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:56:40,897 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:56:42,837 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:56:44,373 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:56:44,872 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:56:45,899 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:56:48,908 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:56:49,930 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:56:50,903 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:56:50,909 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:56:52,911 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:56:54,913 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:56:55,187 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:56:55,906 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:56:56,915 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:56:57,916 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:56:59,914 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:56:59,933 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:57:00,546 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:57:01,940 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:57:03,955 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:57:04,918 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:57:05,764 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:57:05,956 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:57:07,961 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:57:09,317 DEBUG   SenderThread:10354 [sender.py:send():336] send: stats
+2026-01-10 19:57:09,966 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:57:10,024 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:57:10,928 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:57:11,971 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:57:13,972 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:57:15,043 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:57:15,978 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:57:16,017 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:57:17,979 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:57:19,981 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:57:20,057 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:57:21,021 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:57:21,982 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:57:23,985 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:57:25,080 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:57:25,988 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:57:26,317 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:57:28,991 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:57:29,091 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:57:30,992 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:57:31,626 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:57:32,995 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:57:34,103 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:57:35,000 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:57:36,951 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:57:37,005 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:57:39,008 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:57:39,111 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:57:39,320 DEBUG   SenderThread:10354 [sender.py:send():336] send: stats
+2026-01-10 19:57:41,010 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:57:42,520 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:57:44,128 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:57:45,016 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:57:47,018 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:57:47,712 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:57:49,024 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:57:49,145 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:57:51,029 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:57:53,034 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:57:53,703 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:57:54,171 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:57:55,040 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:57:56,041 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:57:58,044 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:57:58,189 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:57:59,159 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:58:00,049 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:58:02,051 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:58:03,215 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:58:04,053 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:58:05,024 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:58:06,057 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:58:08,058 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:58:08,230 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:58:09,333 DEBUG   SenderThread:10354 [sender.py:send():336] send: stats
+2026-01-10 19:58:10,066 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:58:10,796 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:58:12,068 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:58:13,256 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:58:14,071 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:58:16,080 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:58:16,649 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:58:18,089 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:58:18,287 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:58:20,104 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:58:22,113 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:58:22,528 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:58:23,290 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:58:24,121 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:58:25,133 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:58:27,155 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:58:27,889 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:58:28,472 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:58:31,196 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:58:33,210 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:58:33,270 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:58:33,479 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:58:35,222 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:58:36,231 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:58:38,249 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:58:38,483 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:58:38,829 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:58:39,334 DEBUG   SenderThread:10354 [sender.py:send():336] send: stats
+2026-01-10 19:58:40,256 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:58:42,264 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:58:43,500 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:58:43,972 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:58:46,279 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:58:48,288 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:58:48,515 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:58:49,048 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:58:50,297 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:58:52,306 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:58:53,015 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:58:53,307 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:58:54,229 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:58:55,309 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:58:57,310 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:58:58,044 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:58:59,317 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:58:59,830 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:59:01,327 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:59:03,052 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:59:03,329 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:59:05,182 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:59:05,331 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:59:07,332 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:59:08,072 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:59:09,334 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:59:09,341 DEBUG   SenderThread:10354 [sender.py:send():336] send: stats
+2026-01-10 19:59:10,753 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:59:11,340 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:59:13,092 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:59:13,343 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:59:15,345 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:59:15,786 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:59:17,349 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:59:18,107 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:59:19,353 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:59:20,962 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:59:22,112 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:59:22,362 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:59:24,364 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:59:26,246 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:59:26,371 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:59:27,118 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:59:28,378 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:59:30,381 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:59:32,015 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:59:32,160 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:59:32,382 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:59:36,396 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:59:37,089 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:59:37,568 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:59:38,401 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:59:39,345 DEBUG   SenderThread:10354 [sender.py:send():336] send: stats
+2026-01-10 19:59:42,362 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:59:42,806 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:59:44,406 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:59:46,411 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:59:47,386 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:59:47,840 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:59:50,445 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:59:52,476 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:59:52,591 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 19:59:53,447 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:59:55,450 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:59:57,453 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 19:59:57,480 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 19:59:58,064 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:00:01,460 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:00:02,959 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:00:03,406 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:00:03,462 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:00:05,470 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:00:07,970 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:00:09,111 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:00:09,354 DEBUG   SenderThread:10354 [sender.py:send():336] send: stats
+2026-01-10 20:00:09,483 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:00:13,494 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:00:13,911 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:00:13,913 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:00:14,115 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:00:15,497 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:00:17,499 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:00:18,929 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:00:19,579 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:00:20,509 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:00:22,525 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:00:24,740 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:00:24,818 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:00:28,561 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:00:29,987 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:00:30,305 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:00:30,579 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:00:34,588 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:00:35,375 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:00:35,829 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:00:36,590 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:00:38,592 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:00:39,354 DEBUG   SenderThread:10354 [sender.py:send():336] send: stats
+2026-01-10 20:00:40,594 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:00:40,661 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:00:40,840 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:00:44,612 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:00:46,556 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:00:46,615 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:00:46,668 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:00:47,616 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:00:48,617 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:00:50,618 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:00:50,671 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:00:52,452 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:00:56,322 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:00:56,622 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:00:57,531 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:00:58,623 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:01:00,628 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:01:01,372 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:01:02,636 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:01:02,969 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:01:04,639 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:01:07,007 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:01:08,306 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:01:08,641 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:01:09,357 DEBUG   SenderThread:10354 [sender.py:send():336] send: stats
+2026-01-10 20:01:10,647 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:01:12,038 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:01:12,652 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:01:13,410 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:01:14,655 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:01:16,653 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:01:16,659 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:01:17,660 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:01:18,689 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:01:19,661 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:01:21,681 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:01:23,665 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:01:24,329 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:01:25,673 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:01:26,947 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:01:27,675 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:01:29,764 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:01:32,666 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:01:33,691 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:01:34,775 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:01:35,692 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:01:37,685 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:01:37,695 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:01:39,364 DEBUG   SenderThread:10354 [sender.py:send():336] send: stats
+2026-01-10 20:01:39,699 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:01:40,374 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:01:43,058 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:01:43,706 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:01:45,712 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:01:45,797 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:01:46,714 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:01:47,067 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:01:48,718 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:01:50,719 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:01:50,981 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:01:52,143 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:01:52,724 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:01:54,728 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:01:56,731 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:01:56,865 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:01:57,149 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:02:00,743 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:02:02,163 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:02:02,745 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:02:02,855 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:02:04,747 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:02:07,215 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:02:08,166 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:02:08,751 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:02:09,365 DEBUG   SenderThread:10354 [sender.py:send():336] send: stats
+2026-01-10 20:02:10,753 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:02:12,255 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:02:12,754 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:02:13,436 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:02:13,755 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:02:15,756 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:02:16,268 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:02:17,757 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:02:18,955 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:02:19,762 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:02:21,287 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:02:21,763 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:02:23,766 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:02:24,152 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:02:25,768 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:02:26,340 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:02:27,770 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:02:29,940 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:02:31,343 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:02:31,773 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:02:33,776 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:02:35,550 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:02:35,777 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:02:36,621 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:02:37,779 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:02:39,367 DEBUG   SenderThread:10354 [sender.py:send():336] send: stats
+2026-01-10 20:02:39,781 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:02:41,427 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:02:41,624 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:02:41,783 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:02:42,783 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:02:44,787 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:02:45,628 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:02:46,581 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:02:46,789 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:02:48,790 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:02:50,635 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:02:51,883 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:02:52,792 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:02:54,794 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:02:55,646 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:02:56,799 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:02:57,043 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:02:58,803 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:03:00,667 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:03:00,810 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:03:02,239 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:03:02,812 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:03:04,813 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:03:05,691 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:03:08,139 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:03:08,822 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:03:09,369 DEBUG   SenderThread:10354 [sender.py:send():336] send: stats
+2026-01-10 20:03:10,696 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:03:10,825 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:03:11,826 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:03:13,831 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:03:14,118 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:03:14,717 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:03:15,833 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:03:17,835 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:03:19,226 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:03:19,732 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:03:19,837 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:03:21,842 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:03:23,844 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:03:24,284 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:03:24,746 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:03:25,845 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:03:27,847 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:03:29,524 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:03:29,765 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: keepalive
+2026-01-10 20:03:29,848 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:03:31,853 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:03:33,530 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: partial_history
+2026-01-10 20:03:33,543 DEBUG   SenderThread:10354 [sender.py:send():336] send: metric
+2026-01-10 20:03:33,544 DEBUG   SenderThread:10354 [sender.py:send():336] send: metric
+2026-01-10 20:03:33,545 DEBUG   SenderThread:10354 [sender.py:send():336] send: metric
+2026-01-10 20:03:33,545 DEBUG   SenderThread:10354 [sender.py:send():336] send: metric
+2026-01-10 20:03:33,545 DEBUG   SenderThread:10354 [sender.py:send():336] send: metric
+2026-01-10 20:03:33,545 DEBUG   SenderThread:10354 [sender.py:send():336] send: metric
+2026-01-10 20:03:33,546 DEBUG   SenderThread:10354 [sender.py:send():336] send: metric
+2026-01-10 20:03:33,546 DEBUG   SenderThread:10354 [sender.py:send():336] send: metric
+2026-01-10 20:03:33,546 DEBUG   SenderThread:10354 [sender.py:send():336] send: metric
+2026-01-10 20:03:33,546 DEBUG   SenderThread:10354 [sender.py:send():336] send: metric
+2026-01-10 20:03:33,547 DEBUG   SenderThread:10354 [sender.py:send():336] send: metric
+2026-01-10 20:03:33,548 DEBUG   SenderThread:10354 [sender.py:send():336] send: metric
+2026-01-10 20:03:33,548 DEBUG   SenderThread:10354 [sender.py:send():336] send: metric
+2026-01-10 20:03:33,548 DEBUG   SenderThread:10354 [sender.py:send():336] send: metric
+2026-01-10 20:03:33,549 DEBUG   SenderThread:10354 [sender.py:send():336] send: metric
+2026-01-10 20:03:33,549 DEBUG   SenderThread:10354 [sender.py:send():336] send: metric
+2026-01-10 20:03:33,549 DEBUG   SenderThread:10354 [sender.py:send():336] send: metric
+2026-01-10 20:03:33,549 DEBUG   SenderThread:10354 [sender.py:send():336] send: metric
+2026-01-10 20:03:33,549 DEBUG   SenderThread:10354 [sender.py:send():336] send: metric
+2026-01-10 20:03:33,549 DEBUG   SenderThread:10354 [sender.py:send():336] send: metric
+2026-01-10 20:03:33,550 DEBUG   SenderThread:10354 [sender.py:send():336] send: history
+2026-01-10 20:03:33,550 DEBUG   SenderThread:10354 [sender.py:send_request():363] send_request: summary_record
+2026-01-10 20:03:33,554 INFO    SenderThread:10354 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2026-01-10 20:03:33,657 DEBUG   SenderThread:10354 [sender.py:send():336] send: exit
+2026-01-10 20:03:33,657 INFO    SenderThread:10354 [sender.py:send_exit():559] handling exit code: 0
+2026-01-10 20:03:33,663 INFO    SenderThread:10354 [sender.py:send_exit():561] handling runtime: 774
+2026-01-10 20:03:33,663 INFO    SenderThread:10354 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2026-01-10 20:03:33,664 INFO    SenderThread:10354 [sender.py:send_exit():567] send defer
+2026-01-10 20:03:33,664 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: defer
+2026-01-10 20:03:33,665 INFO    HandlerThread:10354 [handler.py:handle_request_defer():170] handle defer: 0
+2026-01-10 20:03:33,665 DEBUG   SenderThread:10354 [sender.py:send_request():363] send_request: defer
+2026-01-10 20:03:33,666 INFO    SenderThread:10354 [sender.py:send_request_defer():583] handle sender defer: 0
+2026-01-10 20:03:33,666 INFO    SenderThread:10354 [sender.py:transition_state():587] send defer: 1
+2026-01-10 20:03:33,666 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: defer
+2026-01-10 20:03:33,666 INFO    HandlerThread:10354 [handler.py:handle_request_defer():170] handle defer: 1
+2026-01-10 20:03:33,666 DEBUG   SenderThread:10354 [sender.py:send_request():363] send_request: defer
+2026-01-10 20:03:33,667 INFO    SenderThread:10354 [sender.py:send_request_defer():583] handle sender defer: 1
+2026-01-10 20:03:33,667 INFO    SenderThread:10354 [sender.py:transition_state():587] send defer: 2
+2026-01-10 20:03:33,667 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: defer
+2026-01-10 20:03:33,667 INFO    HandlerThread:10354 [handler.py:handle_request_defer():170] handle defer: 2
+2026-01-10 20:03:33,667 INFO    HandlerThread:10354 [system_monitor.py:finish():161] Stopping system monitor
+2026-01-10 20:03:33,669 DEBUG   SystemMonitor:10354 [system_monitor.py:_start():137] Finished system metrics aggregation loop
+2026-01-10 20:03:33,669 DEBUG   SystemMonitor:10354 [system_monitor.py:_start():141] Publishing last batch of metrics
+2026-01-10 20:03:33,671 INFO    HandlerThread:10354 [interfaces.py:finish():175] Joined cpu
+2026-01-10 20:03:33,672 INFO    HandlerThread:10354 [interfaces.py:finish():175] Joined disk
+2026-01-10 20:03:33,692 INFO    HandlerThread:10354 [interfaces.py:finish():175] Joined gpu
+2026-01-10 20:03:33,693 INFO    HandlerThread:10354 [interfaces.py:finish():175] Joined memory
+2026-01-10 20:03:33,693 INFO    HandlerThread:10354 [interfaces.py:finish():175] Joined network
+2026-01-10 20:03:33,693 DEBUG   SenderThread:10354 [sender.py:send_request():363] send_request: defer
+2026-01-10 20:03:33,693 INFO    SenderThread:10354 [sender.py:send_request_defer():583] handle sender defer: 2
+2026-01-10 20:03:33,693 INFO    SenderThread:10354 [sender.py:transition_state():587] send defer: 3
+2026-01-10 20:03:33,694 DEBUG   SenderThread:10354 [sender.py:send():336] send: stats
+2026-01-10 20:03:33,694 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: defer
+2026-01-10 20:03:33,694 INFO    HandlerThread:10354 [handler.py:handle_request_defer():170] handle defer: 3
+2026-01-10 20:03:33,695 DEBUG   SenderThread:10354 [sender.py:send_request():363] send_request: defer
+2026-01-10 20:03:33,695 INFO    SenderThread:10354 [sender.py:send_request_defer():583] handle sender defer: 3
+2026-01-10 20:03:33,695 INFO    SenderThread:10354 [sender.py:transition_state():587] send defer: 4
+2026-01-10 20:03:33,695 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: defer
+2026-01-10 20:03:33,695 INFO    HandlerThread:10354 [handler.py:handle_request_defer():170] handle defer: 4
+2026-01-10 20:03:33,696 DEBUG   SenderThread:10354 [sender.py:send_request():363] send_request: defer
+2026-01-10 20:03:33,696 INFO    SenderThread:10354 [sender.py:send_request_defer():583] handle sender defer: 4
+2026-01-10 20:03:33,696 INFO    SenderThread:10354 [sender.py:transition_state():587] send defer: 5
+2026-01-10 20:03:33,696 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: defer
+2026-01-10 20:03:33,696 INFO    HandlerThread:10354 [handler.py:handle_request_defer():170] handle defer: 5
+2026-01-10 20:03:33,697 DEBUG   SenderThread:10354 [sender.py:send():336] send: summary
+2026-01-10 20:03:33,697 INFO    SenderThread:10354 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2026-01-10 20:03:33,697 DEBUG   SenderThread:10354 [sender.py:send_request():363] send_request: defer
+2026-01-10 20:03:33,697 INFO    SenderThread:10354 [sender.py:send_request_defer():583] handle sender defer: 5
+2026-01-10 20:03:33,697 INFO    SenderThread:10354 [sender.py:transition_state():587] send defer: 6
+2026-01-10 20:03:33,697 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: defer
+2026-01-10 20:03:33,698 INFO    HandlerThread:10354 [handler.py:handle_request_defer():170] handle defer: 6
+2026-01-10 20:03:33,698 DEBUG   SenderThread:10354 [sender.py:send_request():363] send_request: defer
+2026-01-10 20:03:33,698 INFO    SenderThread:10354 [sender.py:send_request_defer():583] handle sender defer: 6
+2026-01-10 20:03:33,704 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: status_report
+2026-01-10 20:03:33,856 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:03:33,856 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/wandb-summary.json
+2026-01-10 20:03:34,206 INFO    SenderThread:10354 [sender.py:transition_state():587] send defer: 7
+2026-01-10 20:03:34,207 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: defer
+2026-01-10 20:03:34,207 INFO    HandlerThread:10354 [handler.py:handle_request_defer():170] handle defer: 7
+2026-01-10 20:03:34,209 DEBUG   SenderThread:10354 [sender.py:send_request():363] send_request: defer
+2026-01-10 20:03:34,209 INFO    SenderThread:10354 [sender.py:send_request_defer():583] handle sender defer: 7
+2026-01-10 20:03:34,666 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: poll_exit
+2026-01-10 20:03:34,857 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/config.yaml
+2026-01-10 20:03:35,270 INFO    SenderThread:10354 [sender.py:transition_state():587] send defer: 8
+2026-01-10 20:03:35,271 DEBUG   SenderThread:10354 [sender.py:send_request():363] send_request: poll_exit
+2026-01-10 20:03:35,276 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: defer
+2026-01-10 20:03:35,277 INFO    HandlerThread:10354 [handler.py:handle_request_defer():170] handle defer: 8
+2026-01-10 20:03:35,283 DEBUG   SenderThread:10354 [sender.py:send_request():363] send_request: defer
+2026-01-10 20:03:35,285 INFO    SenderThread:10354 [sender.py:send_request_defer():583] handle sender defer: 8
+2026-01-10 20:03:35,288 INFO    SenderThread:10354 [sender.py:transition_state():587] send defer: 9
+2026-01-10 20:03:35,289 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: defer
+2026-01-10 20:03:35,289 INFO    HandlerThread:10354 [handler.py:handle_request_defer():170] handle defer: 9
+2026-01-10 20:03:35,290 DEBUG   SenderThread:10354 [sender.py:send_request():363] send_request: defer
+2026-01-10 20:03:35,290 INFO    SenderThread:10354 [sender.py:send_request_defer():583] handle sender defer: 9
+2026-01-10 20:03:35,291 INFO    SenderThread:10354 [dir_watcher.py:finish():362] shutting down directory watcher
+2026-01-10 20:03:35,669 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: poll_exit
+2026-01-10 20:03:35,863 INFO    Thread-13 :10354 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:03:35,865 INFO    SenderThread:10354 [dir_watcher.py:finish():392] scan: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files
+2026-01-10 20:03:35,867 INFO    SenderThread:10354 [dir_watcher.py:finish():406] scan save: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/config.yaml config.yaml
+2026-01-10 20:03:35,869 INFO    SenderThread:10354 [dir_watcher.py:finish():406] scan save: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log output.log
+2026-01-10 20:03:35,869 INFO    SenderThread:10354 [dir_watcher.py:finish():406] scan save: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/requirements.txt requirements.txt
+2026-01-10 20:03:35,870 INFO    SenderThread:10354 [dir_watcher.py:finish():406] scan save: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/conda-environment.yaml conda-environment.yaml
+2026-01-10 20:03:35,870 INFO    SenderThread:10354 [dir_watcher.py:finish():406] scan save: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/wandb-summary.json wandb-summary.json
+2026-01-10 20:03:35,873 INFO    SenderThread:10354 [dir_watcher.py:finish():406] scan save: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/wandb-metadata.json wandb-metadata.json
+2026-01-10 20:03:35,873 INFO    SenderThread:10354 [sender.py:transition_state():587] send defer: 10
+2026-01-10 20:03:35,874 DEBUG   SenderThread:10354 [sender.py:send_request():363] send_request: poll_exit
+2026-01-10 20:03:35,880 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: defer
+2026-01-10 20:03:35,880 INFO    HandlerThread:10354 [handler.py:handle_request_defer():170] handle defer: 10
+2026-01-10 20:03:35,909 DEBUG   SenderThread:10354 [sender.py:send_request():363] send_request: defer
+2026-01-10 20:03:35,915 INFO    SenderThread:10354 [sender.py:send_request_defer():583] handle sender defer: 10
+2026-01-10 20:03:35,916 INFO    SenderThread:10354 [file_pusher.py:finish():162] shutting down file pusher
+2026-01-10 20:03:36,655 INFO    wandb-upload_3:10354 [upload_job.py:push():138] Uploaded file results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/conda-environment.yaml
+2026-01-10 20:03:36,656 INFO    wandb-upload_2:10354 [upload_job.py:push():138] Uploaded file results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/requirements.txt
+2026-01-10 20:03:36,658 INFO    wandb-upload_0:10354 [upload_job.py:push():138] Uploaded file results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/config.yaml
+2026-01-10 20:03:36,673 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: poll_exit
+2026-01-10 20:03:36,675 DEBUG   SenderThread:10354 [sender.py:send_request():363] send_request: poll_exit
+2026-01-10 20:03:36,704 INFO    wandb-upload_1:10354 [upload_job.py:push():138] Uploaded file results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/output.log
+2026-01-10 20:03:36,711 INFO    wandb-upload_4:10354 [upload_job.py:push():138] Uploaded file results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/files/wandb-summary.json
+2026-01-10 20:03:36,920 INFO    Thread-12 :10354 [sender.py:transition_state():587] send defer: 11
+2026-01-10 20:03:36,921 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: defer
+2026-01-10 20:03:36,921 INFO    HandlerThread:10354 [handler.py:handle_request_defer():170] handle defer: 11
+2026-01-10 20:03:36,922 DEBUG   SenderThread:10354 [sender.py:send_request():363] send_request: defer
+2026-01-10 20:03:36,922 INFO    SenderThread:10354 [sender.py:send_request_defer():583] handle sender defer: 11
+2026-01-10 20:03:36,922 INFO    SenderThread:10354 [file_pusher.py:join():167] waiting for file pusher
+2026-01-10 20:03:36,922 INFO    SenderThread:10354 [sender.py:transition_state():587] send defer: 12
+2026-01-10 20:03:36,923 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: defer
+2026-01-10 20:03:36,923 INFO    HandlerThread:10354 [handler.py:handle_request_defer():170] handle defer: 12
+2026-01-10 20:03:36,923 DEBUG   SenderThread:10354 [sender.py:send_request():363] send_request: defer
+2026-01-10 20:03:36,923 INFO    SenderThread:10354 [sender.py:send_request_defer():583] handle sender defer: 12
+2026-01-10 20:03:37,593 INFO    SenderThread:10354 [sender.py:transition_state():587] send defer: 13
+2026-01-10 20:03:37,594 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: defer
+2026-01-10 20:03:37,594 INFO    HandlerThread:10354 [handler.py:handle_request_defer():170] handle defer: 13
+2026-01-10 20:03:37,594 DEBUG   SenderThread:10354 [sender.py:send_request():363] send_request: defer
+2026-01-10 20:03:37,594 INFO    SenderThread:10354 [sender.py:send_request_defer():583] handle sender defer: 13
+2026-01-10 20:03:37,595 INFO    SenderThread:10354 [sender.py:transition_state():587] send defer: 14
+2026-01-10 20:03:37,595 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: defer
+2026-01-10 20:03:37,596 INFO    HandlerThread:10354 [handler.py:handle_request_defer():170] handle defer: 14
+2026-01-10 20:03:37,596 DEBUG   SenderThread:10354 [sender.py:send():336] send: final
+2026-01-10 20:03:37,596 DEBUG   SenderThread:10354 [sender.py:send():336] send: footer
+2026-01-10 20:03:37,596 DEBUG   SenderThread:10354 [sender.py:send_request():363] send_request: defer
+2026-01-10 20:03:37,596 INFO    SenderThread:10354 [sender.py:send_request_defer():583] handle sender defer: 14
+2026-01-10 20:03:37,597 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: poll_exit
+2026-01-10 20:03:37,600 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: poll_exit
+2026-01-10 20:03:37,600 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: server_info
+2026-01-10 20:03:37,601 DEBUG   SenderThread:10354 [sender.py:send_request():363] send_request: poll_exit
+2026-01-10 20:03:37,604 DEBUG   SenderThread:10354 [sender.py:send_request():363] send_request: poll_exit
+2026-01-10 20:03:37,604 DEBUG   SenderThread:10354 [sender.py:send_request():363] send_request: server_info
+2026-01-10 20:03:37,609 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: get_summary
+2026-01-10 20:03:37,611 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: sampled_history
+2026-01-10 20:03:38,078 INFO    MainThread:10354 [wandb_run.py:_footer_history_summary_info():3442] rendering history
+2026-01-10 20:03:38,087 INFO    MainThread:10354 [wandb_run.py:_footer_history_summary_info():3474] rendering summary
+2026-01-10 20:03:38,089 INFO    MainThread:10354 [wandb_run.py:_footer_sync_info():3398] logging synced files
+2026-01-10 20:03:38,097 DEBUG   HandlerThread:10354 [handler.py:handle_request():144] handle_request: shutdown
+2026-01-10 20:03:38,100 INFO    HandlerThread:10354 [handler.py:finish():841] shutting down handler
+2026-01-10 20:03:38,604 INFO    WriterThread:10354 [datastore.py:close():299] close: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260110_195037-0qe0mxbu/run-0qe0mxbu.wandb
+2026-01-10 20:03:39,074 INFO    SenderThread:10354 [sender.py:finish():1493] shutting down sender
+2026-01-10 20:03:39,075 INFO    SenderThread:10354 [file_pusher.py:finish():162] shutting down file pusher
+2026-01-10 20:03:39,075 INFO    SenderThread:10354 [file_pusher.py:join():167] waiting for file pusher
