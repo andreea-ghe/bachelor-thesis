@@ -315,25 +315,14 @@ class FractureAssemblyDataset(Dataset):
             mesh_path = os.path.join(data_folder, mesh_file)
             mesh = trimesh.load(mesh_path, force='mesh')
             
-            # DEBUG: Print type info for problematic meshes
-            if not isinstance(mesh, trimesh.Trimesh):
-                print(f"\n=== DEBUG: Non-Trimesh returned ===")
-                print(f"File: {mesh_path}")
-                print(f"Type: {type(mesh)}")
-                if isinstance(mesh, list):
-                    print(f"List length: {len(mesh)}")
-                    for i, item in enumerate(mesh):
-                        print(f"  [{i}] type={type(item)}, repr={repr(item)[:100]}")
-                elif isinstance(mesh, trimesh.Scene):
-                    print(f"Scene geometries: {list(mesh.geometry.keys())}")
-                else:
-                    print(f"Repr: {repr(mesh)[:200]}")
-                print("="*40)
-            
+            # Handle Scene objects
             if isinstance(mesh, trimesh.Scene):
-                mesh = trimesh.util.concatenate(list(mesh.geometry.values()))
-            elif isinstance(mesh, list):
+                mesh = trimesh.util.concatenate(list(mesh.geometry.values()))            
+            if isinstance(mesh, list):
+                if len(mesh) == 0: # empty for corrupted files
+                    raise ValueError(f"Corrupted mesh file (empty): {mesh_path}")
                 mesh = trimesh.util.concatenate(mesh)
+            
             meshes.append(mesh)
 
         point_clouds = [] 
@@ -373,7 +362,12 @@ class FractureAssemblyDataset(Dataset):
         Output:
 
         """
-        point_clouds, piece_ids, nr_points_per_piece, areas = self._load_point_clouds(self.data_list[index])
+        # Handle corrupted mesh files by skipping to next valid sample
+        try:
+            point_clouds, piece_ids, nr_points_per_piece, areas = self._load_point_clouds(self.data_list[index])
+        except ValueError as e:
+            print(f"Skipping corrupted sample {index}: {e}")
+            return self.__getitem__((index + 1) % len(self.data_list))
         num_parts = len(point_clouds)
 
         assembled_pcs = [] # list of transformed point clouds for each piece
