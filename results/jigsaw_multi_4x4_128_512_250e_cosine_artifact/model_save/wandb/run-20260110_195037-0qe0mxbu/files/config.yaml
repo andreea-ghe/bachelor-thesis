@@ -11,8 +11,88 @@ _wandb:
     - 1: trainer/global_step
       6:
       - 3
+    - 1: test/cls_loss
+      5: 1
+      6:
+      - 1
+    - 1: test/cls_acc
+      5: 1
+      6:
+      - 1
+    - 1: test/cls_precision
+      5: 1
+      6:
+      - 1
+    - 1: test/cls_recall
+      5: 1
+      6:
+      - 1
+    - 1: test/cls_f1
+      5: 1
+      6:
+      - 1
+    - 1: test/mat_loss
+      5: 1
+      6:
+      - 1
+    - 1: test/n_critical_max
+      5: 1
+      6:
+      - 1
+    - 1: test/loss
+      5: 1
+      6:
+      - 1
+    - 1: test/mat_precision
+      5: 1
+      6:
+      - 1
+    - 1: test/mat_recall
+      5: 1
+      6:
+      - 1
+    - 1: test/mat_f1
+      5: 1
+      6:
+      - 1
+    - 1: test/part_acc
+      5: 1
+      6:
+      - 1
+    - 1: test/chamfer_distance
+      5: 1
+      6:
+      - 1
+    - 1: test/trans_mse
+      5: 1
+      6:
+      - 1
+    - 1: test/rot_mse
+      5: 1
+      6:
+      - 1
+    - 1: test/trans_rmse
+      5: 1
+      6:
+      - 1
+    - 1: test/rot_rmse
+      5: 1
+      6:
+      - 1
+    - 1: test/trans_mae
+      5: 1
+      6:
+      - 1
+    - 1: test/rot_mae
+      5: 1
+      6:
+      - 1
+    - 1: epoch
+      5: 1
+      6:
+      - 1
     python_version: 3.8.16
-    start_time: 1768062299.510604
+    start_time: 1768067437.659811
     t:
       1:
       - 1

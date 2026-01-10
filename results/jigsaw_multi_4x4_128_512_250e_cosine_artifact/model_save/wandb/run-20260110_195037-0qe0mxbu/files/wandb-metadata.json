@@ -1,8 +1,8 @@
 {
     "os": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.17",
     "python": "3.8.16",
-    "heartbeatAt": "2026-01-10T16:25:01.052453",
-    "startedAt": "2026-01-10T16:24:59.467618",
+    "heartbeatAt": "2026-01-10T17:50:39.284627",
+    "startedAt": "2026-01-10T17:50:37.648323",
     "docker": null,
     "cuda": null,
     "args": [
@@ -13,7 +13,7 @@
     "program": "-m experiments.eval_model",
     "git": {
         "remote": "https://github.com/andreea-ghe/bachelor-thesis.git",
-        "commit": "e1a8523283d234f8a84bfa101d9d40bef366a41c"
+        "commit": "2db311b0e8ff2a70be669c666699ba3aa346967a"
     },
     "email": "gheorghe.andreea.ioana26@gmail.com",
     "root": "/home/jigsaw",
@@ -111,7 +111,7 @@
     ],
     "disk": {
         "total": 1006.853931427002,
-        "used": 60.48960494995117
+        "used": 60.49143600463867
     },
     "gpu": "NVIDIA GeForce GTX 1650 Ti",
     "gpu_count": 1,

@@ -1,0 +1,252 @@
+MODEL_NAME: jigsaw_multi_4x4_128_512_250e_cosine_artifact
+MODULE: experiments
+BATCH_SIZE: 1
+NUM_WORKERS: 0
+LOG_FILE_NAME: 
+MODEL_SAVE_PATH: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/model_save
+DATASET: breaking_bad.all_piece_matching
+PROJECT: jigsaw
+TRAIN:
+  NUM_EPOCHS: 250
+  OPTIMIZER: SGD
+  LR: 0.001
+  LR_SCHEDULER: cosine
+  LR_DECAY: 100.0
+  LR_STEP: [10, 20]
+  WARMUP_RATIO: 0.0
+  CLIP_GRAD: None
+  beta1: 0
+  beta2: 0.9
+  WEIGHT_DECAY: 0.0
+  MOMENTUM: 0.9
+  VAL_EVERY: 5
+  VIS: True
+  VAL_SAMPLE_VIS: 5
+  LOSS: 
+CALLBACK:
+  MATCHING_TASK: ['trans']
+  CHECKPOINT_MONITOR: val/mat_f1
+  CHECKPOINT_MODE: max
+LOSS:
+EVAL:
+GPUS: [0]
+PARALLEL_STRATEGY: ddp
+FP16: False
+CUDNN: False
+WEIGHT_FILE: checkpoint/jigsaw_multi_4x4_128_512_250e_cosine_everyday.ckpt
+OUTPUT_PATH: results/jigsaw_multi_4x4_128_512_250e_cosine_artifact
+STATISTIC_STEP: 100
+RANDOM_SEED: 42
+STATS: ./results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/stats/eval
+MODEL:
+  ROT_TYPE: rmat
+  PC_FEAT_DIM: 128
+  AFF_FEAT_DIM: 512
+  AFFINITY: aff_dual
+  ENCODER: pointnet2_pt.msg.dynamic
+  TEST_S_MASK: True
+  PC_CLS_METHOD: multi
+  PC_NUM_CLS: 2
+  SINKHORN_MAXITER: 20
+  SINKHORN_TAU: 0.05
+  TF_NUM_HEADS: 8
+  TF_NUM_SAMPLE: 16
+  LOSS:
+    w_cls_loss: 1.0
+    w_mat_loss: 0.0
+    mat_epoch: 9
+    w_rig_loss: 0.0
+    rig_epoch: 199
+DATA:
+  DATA_DIR: /home/dataset
+  DATA_FN: artifact.{}.txt
+  DATA_KEYS: ['part_ids']
+  SUBSET: artifact
+  CATEGORY: 
+  ALL_CATEGORY: ['BeerBottle', 'Bowl', 'Cup', 'DrinkingUtensil', 'Mug', 'Plate', 'Spoon', 'Teacup', 'ToyFigure', 'WineBottle', 'Bottle', 'Cookie', 'DrinkBottle', 'Mirror', 'PillBottle', 'Ring', 'Statue', 'Teapot', 'Vase', 'WineGlass']
+  ROT_RANGE: -1.0
+  NUM_PC_POINTS: 5000
+  MIN_PART_POINT: 30
+  MIN_NUM_PART: 2
+  MAX_NUM_PART: 20
+  SHUFFLE_PARTS: False
+  SAMPLE_BY: area
+  LENGTH: -1
+  TEST_LENGTH: -1
+  OVERFIT: -1
+  FRACTURE_LABEL_THRESHOLD: 0.025
+  COLORS: [[0, 204, 0], [204, 0, 0], [0, 0, 204], [127, 127, 0], [127, 0, 127], [0, 127, 127], [76, 153, 0], [153, 0, 76], [76, 0, 153], [153, 76, 0], [76, 0, 153], [153, 0, 76], [204, 51, 127], [204, 51, 127], [51, 204, 127], [51, 127, 204], [127, 51, 204], [127, 204, 51], [76, 76, 178], [76, 178, 76], [178, 76, 76]]
+Dataset length: 2829
+Dataset length: 663
+All checkpoint keys match model keys!
+Finish Setting -----
+Testing: 0it [00:00, ?it/s]Testing:   0%|          | 0/332 [00:00<?, ?it/s]Testing DataLoader 0:   0%|          | 0/332 [00:00<?, ?it/s]Shonan Averaging didn't converge.
+Testing DataLoader 0:   0%|          | 1/332 [00:07<39:44,  7.20s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:   1%|          | 2/332 [00:09<26:54,  4.89s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:   1%|          | 3/332 [00:13<23:46,  4.34s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:   1%|1         | 4/332 [00:15<21:03,  3.85s/it]Shonan Averaging didn't converge.
+Shonan Averaging didn't converge.
+Testing DataLoader 0:   2%|1         | 5/332 [00:17<19:33,  3.59s/it]Testing DataLoader 0:   2%|1         | 6/332 [00:18<17:08,  3.16s/it]Testing DataLoader 0:   2%|2         | 7/332 [00:21<16:42,  3.09s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:   2%|2         | 8/332 [00:24<16:39,  3.08s/it]Testing DataLoader 0:   3%|2         | 9/332 [00:27<16:30,  3.07s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:   3%|3         | 10/332 [00:30<16:35,  3.09s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:   3%|3         | 11/332 [00:34<16:45,  3.13s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:   4%|3         | 12/332 [00:36<16:20,  3.07s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:   4%|3         | 13/332 [00:39<16:01,  3.02s/it]Testing DataLoader 0:   4%|4         | 14/332 [00:41<15:42,  2.96s/it]Testing DataLoader 0:   5%|4         | 15/332 [00:43<15:19,  2.90s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:   5%|4         | 16/332 [00:45<14:59,  2.85s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:   5%|5         | 17/332 [00:47<14:43,  2.80s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:   5%|5         | 18/332 [00:50<14:40,  2.80s/it]Testing DataLoader 0:   6%|5         | 19/332 [00:52<14:23,  2.76s/it]Testing DataLoader 0:   6%|6         | 20/332 [00:54<14:07,  2.72s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:   6%|6         | 21/332 [00:57<14:10,  2.73s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:   7%|6         | 22/332 [01:01<14:26,  2.80s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:   7%|6         | 23/332 [01:05<14:38,  2.84s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:   7%|7         | 24/332 [01:08<14:41,  2.86s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:   8%|7         | 25/332 [01:11<14:36,  2.86s/it]Testing DataLoader 0:   8%|7         | 26/332 [01:13<14:26,  2.83s/it]Testing DataLoader 0:   8%|8         | 27/332 [01:15<14:16,  2.81s/it]Shonan Averaging didn't converge.
+Shonan Averaging didn't converge.
+Testing DataLoader 0:   8%|8         | 28/332 [01:18<14:16,  2.82s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:   9%|8         | 29/332 [01:22<14:24,  2.85s/it]Testing DataLoader 0:   9%|9         | 30/332 [01:24<14:12,  2.82s/it]Testing DataLoader 0:   9%|9         | 31/332 [01:26<14:00,  2.79s/it]Testing DataLoader 0:  10%|9         | 32/332 [01:28<13:48,  2.76s/it]Testing DataLoader 0:  10%|9         | 33/332 [01:30<13:38,  2.74s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  10%|#         | 34/332 [01:31<13:26,  2.71s/it]Testing DataLoader 0:  11%|#         | 35/332 [01:33<13:15,  2.68s/it]Testing DataLoader 0:  11%|#         | 36/332 [01:35<13:07,  2.66s/it]Testing DataLoader 0:  11%|#1        | 37/332 [01:37<12:56,  2.63s/it]Testing DataLoader 0:  11%|#1        | 38/332 [01:39<12:47,  2.61s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  12%|#1        | 39/332 [01:41<12:39,  2.59s/it]Testing DataLoader 0:  12%|#2        | 40/332 [01:42<12:30,  2.57s/it]Testing DataLoader 0:  12%|#2        | 41/332 [01:44<12:22,  2.55s/it]Testing DataLoader 0:  13%|#2        | 42/332 [01:45<12:07,  2.51s/it]Testing DataLoader 0:  13%|#2        | 43/332 [01:47<12:00,  2.49s/it]Testing DataLoader 0:  13%|#3        | 44/332 [01:49<11:54,  2.48s/it]Testing DataLoader 0:  14%|#3        | 45/332 [01:50<11:47,  2.46s/it]Testing DataLoader 0:  14%|#3        | 46/332 [01:52<11:39,  2.45s/it]Testing DataLoader 0:  14%|#4        | 47/332 [01:54<11:32,  2.43s/it]Testing DataLoader 0:  14%|#4        | 48/332 [01:56<11:27,  2.42s/it]Testing DataLoader 0:  15%|#4        | 49/332 [01:58<11:22,  2.41s/it]Testing DataLoader 0:  15%|#5        | 50/332 [01:59<11:16,  2.40s/it]Testing DataLoader 0:  15%|#5        | 51/332 [02:01<11:10,  2.39s/it]Testing DataLoader 0:  16%|#5        | 52/332 [02:03<11:05,  2.38s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  16%|#5        | 53/332 [02:05<11:00,  2.37s/it]Testing DataLoader 0:  16%|#6        | 54/332 [02:07<10:54,  2.35s/it]Testing DataLoader 0:  17%|#6        | 55/332 [02:08<10:49,  2.34s/it]Testing DataLoader 0:  17%|#6        | 56/332 [02:10<10:44,  2.33s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  17%|#7        | 57/332 [02:12<10:40,  2.33s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  17%|#7        | 58/332 [02:14<10:35,  2.32s/it]Testing DataLoader 0:  18%|#7        | 59/332 [02:14<10:24,  2.29s/it]Testing DataLoader 0:  18%|#8        | 60/332 [02:16<10:20,  2.28s/it]Testing DataLoader 0:  18%|#8        | 61/332 [02:18<10:15,  2.27s/it]Testing DataLoader 0:  19%|#8        | 62/332 [02:20<10:10,  2.26s/it]Testing DataLoader 0:  19%|#8        | 63/332 [02:22<10:06,  2.25s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  19%|#9        | 64/332 [02:23<10:02,  2.25s/it]Testing DataLoader 0:  20%|#9        | 65/332 [02:25<09:59,  2.24s/it]Testing DataLoader 0:  20%|#9        | 66/332 [02:27<09:54,  2.24s/it]Testing DataLoader 0:  20%|##        | 67/332 [02:29<09:51,  2.23s/it]Testing DataLoader 0:  20%|##        | 68/332 [02:31<09:47,  2.22s/it]Testing DataLoader 0:  21%|##        | 69/332 [02:33<09:44,  2.22s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  21%|##1       | 70/332 [02:35<09:40,  2.22s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  21%|##1       | 71/332 [02:37<09:39,  2.22s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  22%|##1       | 72/332 [02:39<09:36,  2.22s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  22%|##1       | 73/332 [02:42<09:37,  2.23s/it]Testing DataLoader 0:  22%|##2       | 74/332 [02:43<09:30,  2.21s/it]Testing DataLoader 0:  23%|##2       | 75/332 [02:45<09:27,  2.21s/it]Testing DataLoader 0:  23%|##2       | 76/332 [02:47<09:24,  2.20s/it]Testing DataLoader 0:  23%|##3       | 77/332 [02:49<09:20,  2.20s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  23%|##3       | 78/332 [02:52<09:21,  2.21s/it]Testing DataLoader 0:  24%|##3       | 79/332 [02:54<09:19,  2.21s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  24%|##4       | 80/332 [02:57<09:19,  2.22s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  24%|##4       | 81/332 [02:59<09:17,  2.22s/it]Testing DataLoader 0:  25%|##4       | 82/332 [03:01<09:14,  2.22s/it]Testing DataLoader 0:  25%|##5       | 83/332 [03:03<09:11,  2.21s/it]Testing DataLoader 0:  25%|##5       | 84/332 [03:05<09:08,  2.21s/it]Shonan Averaging didn't converge.
+Shonan Averaging didn't converge.
+Testing DataLoader 0:  26%|##5       | 85/332 [03:08<09:07,  2.22s/it]Testing DataLoader 0:  26%|##5       | 86/332 [03:10<09:04,  2.22s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  26%|##6       | 87/332 [03:12<09:01,  2.21s/it]Testing DataLoader 0:  27%|##6       | 88/332 [03:14<09:00,  2.21s/it]Testing DataLoader 0:  27%|##6       | 89/332 [03:16<08:57,  2.21s/it]Testing DataLoader 0:  27%|##7       | 90/332 [03:18<08:53,  2.20s/it]Testing DataLoader 0:  27%|##7       | 91/332 [03:20<08:50,  2.20s/it]Testing DataLoader 0:  28%|##7       | 92/332 [03:22<08:47,  2.20s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  28%|##8       | 93/332 [03:24<08:44,  2.20s/it]Testing DataLoader 0:  28%|##8       | 94/332 [03:26<08:42,  2.19s/it]Testing DataLoader 0:  29%|##8       | 95/332 [03:28<08:39,  2.19s/it]Testing DataLoader 0:  29%|##8       | 96/332 [03:30<08:37,  2.19s/it]Testing DataLoader 0:  29%|##9       | 97/332 [03:32<08:34,  2.19s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  30%|##9       | 98/332 [03:34<08:33,  2.19s/it]Testing DataLoader 0:  30%|##9       | 99/332 [03:36<08:29,  2.19s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  30%|###       | 100/332 [03:39<08:28,  2.19s/it]Testing DataLoader 0:  30%|###       | 101/332 [03:41<08:26,  2.19s/it]Testing DataLoader 0:  31%|###       | 102/332 [03:41<08:20,  2.18s/it]Testing DataLoader 0:  31%|###1      | 103/332 [03:43<08:17,  2.17s/it]Testing DataLoader 0:  31%|###1      | 104/332 [03:45<08:14,  2.17s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  32%|###1      | 105/332 [03:48<08:14,  2.18s/it]Testing DataLoader 0:  32%|###1      | 106/332 [03:50<08:12,  2.18s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  32%|###2      | 107/332 [03:53<08:10,  2.18s/it]Testing DataLoader 0:  33%|###2      | 108/332 [03:55<08:07,  2.18s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  33%|###2      | 109/332 [03:57<08:05,  2.18s/it]Testing DataLoader 0:  33%|###3      | 110/332 [03:59<08:02,  2.17s/it]Testing DataLoader 0:  33%|###3      | 111/332 [04:01<08:00,  2.17s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  34%|###3      | 112/332 [04:03<07:58,  2.18s/it]Testing DataLoader 0:  34%|###4      | 113/332 [04:05<07:56,  2.17s/it]Testing DataLoader 0:  34%|###4      | 114/332 [04:07<07:53,  2.17s/it]Testing DataLoader 0:  35%|###4      | 115/332 [04:09<07:50,  2.17s/it]Testing DataLoader 0:  35%|###4      | 116/332 [04:10<07:45,  2.16s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  35%|###5      | 117/332 [04:12<07:44,  2.16s/it]Testing DataLoader 0:  36%|###5      | 118/332 [04:14<07:42,  2.16s/it]Testing DataLoader 0:  36%|###5      | 119/332 [04:16<07:39,  2.16s/it]Testing DataLoader 0:  36%|###6      | 120/332 [04:18<07:36,  2.15s/it]Testing DataLoader 0:  36%|###6      | 121/332 [04:20<07:34,  2.15s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  37%|###6      | 122/332 [04:25<07:37,  2.18s/it]Shonan Averaging didn't converge.
+Shonan Averaging didn't converge.
+Testing DataLoader 0:  37%|###7      | 123/332 [04:31<07:40,  2.21s/it]Testing DataLoader 0:  37%|###7      | 124/332 [04:33<07:39,  2.21s/it]Testing DataLoader 0:  38%|###7      | 125/332 [04:35<07:36,  2.21s/it]Testing DataLoader 0:  38%|###7      | 126/332 [04:38<07:34,  2.21s/it]Testing DataLoader 0:  38%|###8      | 127/332 [04:38<07:30,  2.20s/it]Testing DataLoader 0:  39%|###8      | 128/332 [04:41<07:27,  2.20s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  39%|###8      | 129/332 [04:45<07:29,  2.22s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  39%|###9      | 130/332 [04:50<07:30,  2.23s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  39%|###9      | 131/332 [04:53<07:31,  2.24s/it]Testing DataLoader 0:  40%|###9      | 132/332 [04:56<07:28,  2.24s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  40%|####      | 133/332 [05:00<07:30,  2.26s/it]Testing DataLoader 0:  40%|####      | 134/332 [05:03<07:27,  2.26s/it]Testing DataLoader 0:  41%|####      | 135/332 [05:05<07:25,  2.26s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  41%|####      | 136/332 [05:08<07:24,  2.27s/it]Testing DataLoader 0:  41%|####1     | 137/332 [05:10<07:22,  2.27s/it]Testing DataLoader 0:  42%|####1     | 138/332 [05:12<07:19,  2.27s/it]Testing DataLoader 0:  42%|####1     | 139/332 [05:15<07:17,  2.27s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  42%|####2     | 140/332 [05:17<07:15,  2.27s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  42%|####2     | 141/332 [05:20<07:14,  2.28s/it]Testing DataLoader 0:  43%|####2     | 142/332 [05:22<07:12,  2.27s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  43%|####3     | 143/332 [05:25<07:10,  2.28s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  43%|####3     | 144/332 [05:28<07:09,  2.28s/it]Testing DataLoader 0:  44%|####3     | 145/332 [05:31<07:07,  2.28s/it]Testing DataLoader 0:  44%|####3     | 146/332 [05:33<07:04,  2.28s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  44%|####4     | 147/332 [05:35<07:02,  2.28s/it]Testing DataLoader 0:  45%|####4     | 148/332 [05:36<06:58,  2.27s/it]Shonan Averaging didn't converge.
+Shonan Averaging didn't converge.
+Testing DataLoader 0:  45%|####4     | 149/332 [05:38<06:56,  2.28s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  45%|####5     | 150/332 [05:42<06:55,  2.28s/it]Testing DataLoader 0:  45%|####5     | 151/332 [05:44<06:52,  2.28s/it]Testing DataLoader 0:  46%|####5     | 152/332 [05:46<06:50,  2.28s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  46%|####6     | 153/332 [05:48<06:48,  2.28s/it]Testing DataLoader 0:  46%|####6     | 154/332 [05:50<06:45,  2.28s/it]Testing DataLoader 0:  47%|####6     | 155/332 [05:53<06:43,  2.28s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  47%|####6     | 156/332 [05:55<06:40,  2.28s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  47%|####7     | 157/332 [05:57<06:38,  2.28s/it]Testing DataLoader 0:  48%|####7     | 158/332 [05:59<06:36,  2.28s/it]Testing DataLoader 0:  48%|####7     | 159/332 [06:01<06:33,  2.28s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  48%|####8     | 160/332 [06:04<06:31,  2.28s/it]Testing DataLoader 0:  48%|####8     | 161/332 [06:05<06:27,  2.27s/it]Shonan Averaging didn't converge.
+Shonan Averaging didn't converge.
+Testing DataLoader 0:  49%|####8     | 162/332 [06:08<06:26,  2.27s/it]Testing DataLoader 0:  49%|####9     | 163/332 [06:10<06:23,  2.27s/it]Shonan Averaging didn't converge.
+Shonan Averaging didn't converge.
+Testing DataLoader 0:  49%|####9     | 164/332 [06:12<06:21,  2.27s/it]Testing DataLoader 0:  50%|####9     | 165/332 [06:14<06:18,  2.27s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  50%|#####     | 166/332 [06:17<06:17,  2.27s/it]Shonan Averaging didn't converge.
+Shonan Averaging didn't converge.
+Testing DataLoader 0:  50%|#####     | 167/332 [06:20<06:15,  2.28s/it]Testing DataLoader 0:  51%|#####     | 168/332 [06:22<06:13,  2.28s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  51%|#####     | 169/332 [06:25<06:11,  2.28s/it]Testing DataLoader 0:  51%|#####1    | 170/332 [06:27<06:09,  2.28s/it]Testing DataLoader 0:  52%|#####1    | 171/332 [06:29<06:06,  2.28s/it]Testing DataLoader 0:  52%|#####1    | 172/332 [06:31<06:04,  2.28s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  52%|#####2    | 173/332 [06:33<06:01,  2.28s/it]Testing DataLoader 0:  52%|#####2    | 174/332 [06:34<05:58,  2.27s/it]Testing DataLoader 0:  53%|#####2    | 175/332 [06:37<05:56,  2.27s/it]Testing DataLoader 0:  53%|#####3    | 176/332 [06:39<05:53,  2.27s/it]Testing DataLoader 0:  53%|#####3    | 177/332 [06:41<05:51,  2.27s/it]Testing DataLoader 0:  54%|#####3    | 178/332 [06:43<05:49,  2.27s/it]Testing DataLoader 0:  54%|#####3    | 179/332 [06:45<05:46,  2.27s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  54%|#####4    | 180/332 [06:48<05:44,  2.27s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  55%|#####4    | 181/332 [06:51<05:42,  2.27s/it]Testing DataLoader 0:  55%|#####4    | 182/332 [06:53<05:40,  2.27s/it]Testing DataLoader 0:  55%|#####5    | 183/332 [06:55<05:38,  2.27s/it]Testing DataLoader 0:  55%|#####5    | 184/332 [06:57<05:35,  2.27s/it]Testing DataLoader 0:  56%|#####5    | 185/332 [06:59<05:33,  2.27s/it]Testing DataLoader 0:  56%|#####6    | 186/332 [07:01<05:30,  2.26s/it]Testing DataLoader 0:  56%|#####6    | 187/332 [07:02<05:27,  2.26s/it]Testing DataLoader 0:  57%|#####6    | 188/332 [07:04<05:25,  2.26s/it]Testing DataLoader 0:  57%|#####6    | 189/332 [07:06<05:22,  2.26s/it]Testing DataLoader 0:  57%|#####7    | 190/332 [07:08<05:20,  2.26s/it]Testing DataLoader 0:  58%|#####7    | 191/332 [07:10<05:17,  2.25s/it]Testing DataLoader 0:  58%|#####7    | 192/332 [07:12<05:15,  2.25s/it]Testing DataLoader 0:  58%|#####8    | 193/332 [07:14<05:12,  2.25s/it]Testing DataLoader 0:  58%|#####8    | 194/332 [07:16<05:10,  2.25s/it]Testing DataLoader 0:  59%|#####8    | 195/332 [07:18<05:07,  2.25s/it]Testing DataLoader 0:  59%|#####9    | 196/332 [07:20<05:05,  2.25s/it]Testing DataLoader 0:  59%|#####9    | 197/332 [07:22<05:03,  2.24s/it]Testing DataLoader 0:  60%|#####9    | 198/332 [07:24<05:00,  2.24s/it]Testing DataLoader 0:  60%|#####9    | 199/332 [07:26<04:58,  2.24s/it]Testing DataLoader 0:  60%|######    | 200/332 [07:28<04:55,  2.24s/it]Testing DataLoader 0:  61%|######    | 201/332 [07:30<04:53,  2.24s/it]Testing DataLoader 0:  61%|######    | 202/332 [07:30<04:50,  2.23s/it]Testing DataLoader 0:  61%|######1   | 203/332 [07:32<04:47,  2.23s/it]Shonan Averaging didn't converge.
+Shonan Averaging didn't converge.
+Testing DataLoader 0:  61%|######1   | 204/332 [07:36<04:46,  2.24s/it]Testing DataLoader 0:  62%|######1   | 205/332 [07:38<04:44,  2.24s/it]Testing DataLoader 0:  62%|######2   | 206/332 [07:40<04:41,  2.24s/it]Testing DataLoader 0:  62%|######2   | 207/332 [07:42<04:39,  2.24s/it]Testing DataLoader 0:  63%|######2   | 208/332 [07:44<04:36,  2.23s/it]Testing DataLoader 0:  63%|######2   | 209/332 [07:46<04:34,  2.23s/it]Testing DataLoader 0:  63%|######3   | 210/332 [07:48<04:31,  2.23s/it]Testing DataLoader 0:  64%|######3   | 211/332 [07:50<04:29,  2.23s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  64%|######3   | 212/332 [07:52<04:27,  2.23s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  64%|######4   | 213/332 [07:54<04:25,  2.23s/it]Testing DataLoader 0:  64%|######4   | 214/332 [07:56<04:22,  2.23s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  65%|######4   | 215/332 [07:59<04:20,  2.23s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  65%|######5   | 216/332 [08:00<04:18,  2.23s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  65%|######5   | 217/332 [08:02<04:15,  2.23s/it]Testing DataLoader 0:  66%|######5   | 218/332 [08:05<04:13,  2.22s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  66%|######5   | 219/332 [08:07<04:11,  2.23s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  66%|######6   | 220/332 [08:09<04:09,  2.23s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  67%|######6   | 221/332 [08:11<04:06,  2.22s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  67%|######6   | 222/332 [08:14<04:04,  2.23s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  67%|######7   | 223/332 [08:16<04:02,  2.23s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  67%|######7   | 224/332 [08:18<04:00,  2.22s/it]Testing DataLoader 0:  68%|######7   | 225/332 [08:20<03:57,  2.22s/it]Testing DataLoader 0:  68%|######8   | 226/332 [08:22<03:55,  2.22s/it]Skipping corrupted sample 453: Corrupted mesh file (empty): /home/dataset/artifact/1356107_sf/fractured_46/piece_0.obj
+Shonan Averaging didn't converge.
+Shonan Averaging didn't converge.
+Testing DataLoader 0:  68%|######8   | 227/332 [08:24<03:53,  2.22s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  69%|######8   | 228/332 [08:26<03:51,  2.22s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  69%|######8   | 229/332 [08:28<03:48,  2.22s/it]Testing DataLoader 0:  69%|######9   | 230/332 [08:30<03:46,  2.22s/it]Testing DataLoader 0:  70%|######9   | 231/332 [08:32<03:44,  2.22s/it]Testing DataLoader 0:  70%|######9   | 232/332 [08:35<03:41,  2.22s/it]Testing DataLoader 0:  70%|#######   | 233/332 [08:37<03:39,  2.22s/it]Testing DataLoader 0:  70%|#######   | 234/332 [08:39<03:37,  2.22s/it]Testing DataLoader 0:  71%|#######   | 235/332 [08:42<03:35,  2.22s/it]Testing DataLoader 0:  71%|#######1  | 236/332 [08:45<03:33,  2.23s/it]Shonan Averaging didn't converge.
+Shonan Averaging didn't converge.
+Testing DataLoader 0:  71%|#######1  | 237/332 [08:51<03:33,  2.24s/it]Testing DataLoader 0:  72%|#######1  | 238/332 [08:53<03:30,  2.24s/it]Testing DataLoader 0:  72%|#######1  | 239/332 [08:56<03:28,  2.24s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  72%|#######2  | 240/332 [09:00<03:27,  2.25s/it]Testing DataLoader 0:  73%|#######2  | 241/332 [09:02<03:24,  2.25s/it]Testing DataLoader 0:  73%|#######2  | 242/332 [09:04<03:22,  2.25s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  73%|#######3  | 243/332 [09:08<03:20,  2.26s/it]Testing DataLoader 0:  73%|#######3  | 244/332 [09:10<03:18,  2.26s/it]Testing DataLoader 0:  74%|#######3  | 245/332 [09:13<03:16,  2.26s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  74%|#######4  | 246/332 [09:15<03:14,  2.26s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  74%|#######4  | 247/332 [09:19<03:12,  2.27s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  75%|#######4  | 248/332 [09:23<03:10,  2.27s/it]Testing DataLoader 0:  75%|#######5  | 249/332 [09:25<03:08,  2.27s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  75%|#######5  | 250/332 [09:27<03:06,  2.27s/it]Testing DataLoader 0:  76%|#######5  | 251/332 [09:29<03:03,  2.27s/it]Testing DataLoader 0:  76%|#######5  | 252/332 [09:34<03:02,  2.28s/it]Testing DataLoader 0:  76%|#######6  | 253/332 [09:36<03:00,  2.28s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  77%|#######6  | 254/332 [09:41<02:58,  2.29s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  77%|#######6  | 255/332 [09:44<02:56,  2.29s/it]Testing DataLoader 0:  77%|#######7  | 256/332 [09:46<02:53,  2.29s/it]Testing DataLoader 0:  77%|#######7  | 257/332 [09:48<02:51,  2.29s/it]Testing DataLoader 0:  78%|#######7  | 258/332 [09:50<02:49,  2.29s/it]Shonan Averaging didn't converge.
+Shonan Averaging didn't converge.
+Testing DataLoader 0:  78%|#######8  | 259/332 [09:54<02:47,  2.29s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  78%|#######8  | 260/332 [09:55<02:44,  2.29s/it]Testing DataLoader 0:  79%|#######8  | 261/332 [09:56<02:42,  2.29s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  79%|#######8  | 262/332 [09:58<02:40,  2.29s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  79%|#######9  | 263/332 [10:04<02:38,  2.30s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  80%|#######9  | 264/332 [10:06<02:36,  2.30s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  80%|#######9  | 265/332 [10:09<02:34,  2.30s/it]Shonan Averaging didn't converge.
+Shonan Averaging didn't converge.
+Testing DataLoader 0:  80%|########  | 266/332 [10:12<02:31,  2.30s/it]Shonan Averaging didn't converge.
+Shonan Averaging didn't converge.
+Testing DataLoader 0:  80%|########  | 267/332 [10:15<02:29,  2.31s/it]Testing DataLoader 0:  81%|########  | 268/332 [10:18<02:27,  2.31s/it]Testing DataLoader 0:  81%|########1 | 269/332 [10:19<02:25,  2.30s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  81%|########1 | 270/332 [10:22<02:23,  2.31s/it]Shonan Averaging didn't converge.
+Shonan Averaging didn't converge.
+Testing DataLoader 0:  82%|########1 | 271/332 [10:26<02:20,  2.31s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  82%|########1 | 272/332 [10:29<02:18,  2.32s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  82%|########2 | 273/332 [10:33<02:16,  2.32s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  83%|########2 | 274/332 [10:35<02:14,  2.32s/it]Shonan Averaging didn't converge.
+Shonan Averaging didn't converge.
+Testing DataLoader 0:  83%|########2 | 275/332 [10:41<02:12,  2.33s/it]Testing DataLoader 0:  83%|########3 | 276/332 [10:43<02:10,  2.33s/it]Testing DataLoader 0:  83%|########3 | 277/332 [10:45<02:08,  2.33s/it]Testing DataLoader 0:  84%|########3 | 278/332 [10:47<02:05,  2.33s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  84%|########4 | 279/332 [10:50<02:03,  2.33s/it]Testing DataLoader 0:  84%|########4 | 280/332 [10:52<02:01,  2.33s/it]Testing DataLoader 0:  85%|########4 | 281/332 [10:53<01:58,  2.33s/it]Testing DataLoader 0:  85%|########4 | 282/332 [10:55<01:56,  2.32s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  85%|########5 | 283/332 [10:57<01:53,  2.32s/it]Testing DataLoader 0:  86%|########5 | 284/332 [10:59<01:51,  2.32s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  86%|########5 | 285/332 [11:02<01:49,  2.32s/it]Testing DataLoader 0:  86%|########6 | 286/332 [11:04<01:46,  2.32s/it]Testing DataLoader 0:  86%|########6 | 287/332 [11:06<01:44,  2.32s/it]Testing DataLoader 0:  87%|########6 | 288/332 [11:08<01:42,  2.32s/it]Testing DataLoader 0:  87%|########7 | 289/332 [11:10<01:39,  2.32s/it]Testing DataLoader 0:  87%|########7 | 290/332 [11:12<01:37,  2.32s/it]Testing DataLoader 0:  88%|########7 | 291/332 [11:14<01:35,  2.32s/it]Testing DataLoader 0:  88%|########7 | 292/332 [11:16<01:32,  2.32s/it]Testing DataLoader 0:  88%|########8 | 293/332 [11:18<01:30,  2.32s/it]Testing DataLoader 0:  89%|########8 | 294/332 [11:20<01:28,  2.32s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  89%|########8 | 295/332 [11:22<01:25,  2.31s/it]Testing DataLoader 0:  89%|########9 | 296/332 [11:24<01:23,  2.31s/it]Testing DataLoader 0:  89%|########9 | 297/332 [11:26<01:20,  2.31s/it]Testing DataLoader 0:  90%|########9 | 298/332 [11:28<01:18,  2.31s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  90%|######### | 299/332 [11:30<01:16,  2.31s/it]Shonan Averaging didn't converge.
+Shonan Averaging didn't converge.
+Testing DataLoader 0:  90%|######### | 300/332 [11:33<01:13,  2.31s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  91%|######### | 301/332 [11:35<01:11,  2.31s/it]Testing DataLoader 0:  91%|######### | 302/332 [11:37<01:09,  2.31s/it]Testing DataLoader 0:  91%|#########1| 303/332 [11:39<01:06,  2.31s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  92%|#########1| 304/332 [11:42<01:04,  2.31s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  92%|#########1| 305/332 [11:44<01:02,  2.31s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  92%|#########2| 306/332 [11:46<01:00,  2.31s/it]Testing DataLoader 0:  92%|#########2| 307/332 [11:48<00:57,  2.31s/it]Testing DataLoader 0:  93%|#########2| 308/332 [11:49<00:55,  2.30s/it]Testing DataLoader 0:  93%|#########3| 309/332 [11:52<00:52,  2.30s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  93%|#########3| 310/332 [11:54<00:50,  2.30s/it]Testing DataLoader 0:  94%|#########3| 311/332 [11:56<00:48,  2.30s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  94%|#########3| 312/332 [11:58<00:46,  2.30s/it]Testing DataLoader 0:  94%|#########4| 313/332 [12:00<00:43,  2.30s/it]Testing DataLoader 0:  95%|#########4| 314/332 [12:02<00:41,  2.30s/it]Testing DataLoader 0:  95%|#########4| 315/332 [12:04<00:39,  2.30s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  95%|#########5| 316/332 [12:06<00:36,  2.30s/it]Testing DataLoader 0:  95%|#########5| 317/332 [12:08<00:34,  2.30s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  96%|#########5| 318/332 [12:12<00:32,  2.30s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  96%|#########6| 319/332 [12:14<00:29,  2.30s/it]Testing DataLoader 0:  96%|#########6| 320/332 [12:16<00:27,  2.30s/it]Testing DataLoader 0:  97%|#########6| 321/332 [12:18<00:25,  2.30s/it]Testing DataLoader 0:  97%|#########6| 322/332 [12:19<00:22,  2.30s/it]Testing DataLoader 0:  97%|#########7| 323/332 [12:21<00:20,  2.30s/it]Testing DataLoader 0:  98%|#########7| 324/332 [12:23<00:18,  2.30s/it]Testing DataLoader 0:  98%|#########7| 325/332 [12:25<00:16,  2.29s/it]Testing DataLoader 0:  98%|#########8| 326/332 [12:27<00:13,  2.29s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  98%|#########8| 327/332 [12:29<00:11,  2.29s/it]Testing DataLoader 0:  99%|#########8| 328/332 [12:31<00:09,  2.29s/it]Testing DataLoader 0:  99%|#########9| 329/332 [12:33<00:06,  2.29s/it]Testing DataLoader 0:  99%|#########9| 330/332 [12:36<00:04,  2.29s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0: 100%|#########9| 331/332 [12:38<00:02,  2.29s/it]Testing DataLoader 0: 100%|##########| 332/332 [12:39<00:00,  2.29s/it]
+[Checkpoint] Saved final 332 results to results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/test_checkpoint_final.pt
+test/cls_loss: 0.066698; test/cls_acc: 1.000000; test/cls_precision: 1.000000; test/cls_recall: 1.000000; test/cls_f1: 1.000000; test/mat_loss: 6.807528; test/n_critical_max: 1024.882324; test/loss: 6.874226; test/mat_precision: 0.047174; test/mat_recall: 0.048022; test/mat_f1: 0.047292; test/part_acc: 0.544450; test/chamfer_distance: 0.417052; test/trans_mse: 0.031362; test/rot_mse: 4280.363770; test/trans_rmse: 0.109734; test/rot_rmse: 45.164436; test/trans_mae: 0.090602; test/rot_mae: 39.075390
+Testing DataLoader 0: 100%|##########| 332/332 [12:42<00:00,  2.30s/it]
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+       Test metric             DataLoader 0
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  test/chamfer_distance     0.41705164313316345
+      test/cls_acc                  1.0
+       test/cls_f1                  1.0
+      test/cls_loss         0.06669802963733673
+   test/cls_precision               1.0
+     test/cls_recall                1.0
+        test/loss            6.874226093292236
+       test/mat_f1          0.04729172959923744
+      test/mat_loss          6.807528018951416
+   test/mat_precision       0.04717426374554634
+     test/mat_recall        0.04802236333489418
+   test/n_critical_max       1024.88232421875
+      test/part_acc         0.5444496870040894
+      test/rot_mae           39.07538986206055
+      test/rot_mse           4280.36376953125
+      test/rot_rmse          45.16443634033203
+     test/trans_mae          0.090601846575737
+     test/trans_mse        0.031361863017082214
+     test/trans_rmse        0.10973423719406128
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+Done evaluation
