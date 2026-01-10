@@ -312,13 +312,28 @@ class FractureAssemblyDataset(Dataset):
         # load all mesh pieces
         meshes = []
         for mesh_file in mesh_files:
-            mesh = trimesh.load(os.path.join(data_folder, mesh_file), force='mesh')
-            if isinstance(mesh, trimesh.Scene): # handle case where trimesh returns a Scene instead of a Trimesh
-                mesh = trimesh.util.concatenate(list(mesh.geometry.values())) # concatenate all geometries in the scene into one mesh
-            if isinstance(mesh, list):
-                mesh = trimesh.util.concatenate(mesh) # If still a list after concatenation, take first valid mesh
-            if isinstance(mesh, list):
-                mesh = mesh[0] if len(mesh) > 0 else trimesh.Trimesh()
+            mesh_path = os.path.join(data_folder, mesh_file)
+            mesh = trimesh.load(mesh_path, force='mesh')
+            
+            # DEBUG: Print type info for problematic meshes
+            if not isinstance(mesh, trimesh.Trimesh):
+                print(f"\n=== DEBUG: Non-Trimesh returned ===")
+                print(f"File: {mesh_path}")
+                print(f"Type: {type(mesh)}")
+                if isinstance(mesh, list):
+                    print(f"List length: {len(mesh)}")
+                    for i, item in enumerate(mesh):
+                        print(f"  [{i}] type={type(item)}, repr={repr(item)[:100]}")
+                elif isinstance(mesh, trimesh.Scene):
+                    print(f"Scene geometries: {list(mesh.geometry.keys())}")
+                else:
+                    print(f"Repr: {repr(mesh)[:200]}")
+                print("="*40)
+            
+            if isinstance(mesh, trimesh.Scene):
+                mesh = trimesh.util.concatenate(list(mesh.geometry.values()))
+            elif isinstance(mesh, list):
+                mesh = trimesh.util.concatenate(mesh)
             meshes.append(mesh)
 
         point_clouds = [] 
