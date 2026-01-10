@@ -1,0 +1,292 @@
+All checkpoint keys match model keys!
+Finish Setting -----
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+Testing DataLoader 0:   0%|          | 0/332 [00:00<?, ?it/s]
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:224: PossibleUserWarning: The dataloader, test_dataloader 0, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 16 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+Testing DataLoader 0:   0%|          | 0/332 [00:00<?, ?it/s]Shonan Averaging didn't converge.
+Testing DataLoader 0:   0%|          | 1/332 [00:05<30:30,  5.53s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:   1%|          | 2/332 [00:07<20:34,  3.74s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:   1%|          | 3/332 [00:09<18:09,  3.31s/it]Shonan Averaging didn't converge.
+Shonan Averaging didn't converge.
+Testing DataLoader 0:   1%|1         | 4/332 [00:11<16:22,  2.99s/it]Shonan Averaging didn't converge.
+Shonan Averaging didn't converge.
+
+
+Testing DataLoader 0:   2%|2         | 7/332 [00:18<14:18,  2.64s/it]Shonan Averaging didn't converge.
+Shonan Averaging didn't converge.
+
+Testing DataLoader 0:   2%|2         | 8/332 [00:21<14:11,  2.63s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:   3%|2         | 9/332 [00:23<13:56,  2.59s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:   3%|3         | 10/332 [00:26<14:09,  2.64s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:   3%|3         | 11/332 [00:29<14:14,  2.66s/it]Shonan Averaging didn't converge.
+
+
+
+Testing DataLoader 0:   4%|4         | 14/332 [00:36<13:44,  2.59s/it]Shonan Averaging didn't converge.
+
+Testing DataLoader 0:   5%|4         | 16/332 [00:40<13:19,  2.53s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:   5%|5         | 17/332 [00:43<13:29,  2.57s/it]Shonan Averaging didn't converge.
+
+
+Testing DataLoader 0:   6%|6         | 20/332 [00:49<12:56,  2.49s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:   6%|6         | 21/332 [00:52<12:59,  2.51s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:   7%|6         | 22/332 [00:56<13:14,  2.56s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:   7%|6         | 23/332 [00:59<13:14,  2.57s/it]Shonan Averaging didn't converge.
+
+Testing DataLoader 0:   7%|7         | 24/332 [01:02<13:22,  2.60s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:   8%|7         | 25/332 [01:05<13:26,  2.63s/it]Shonan Averaging didn't converge.
+
+Testing DataLoader 0:   8%|8         | 27/332 [01:09<13:08,  2.59s/it]Shonan Averaging didn't converge.
+Shonan Averaging didn't converge.
+Testing DataLoader 0:   8%|8         | 28/332 [01:14<13:26,  2.65s/it]Shonan Averaging didn't converge.
+
+
+
+Testing DataLoader 0:  10%|9         | 33/332 [01:25<12:53,  2.59s/it]Shonan Averaging didn't converge.
+
+
+
+
+Testing DataLoader 0:  11%|#1        | 38/332 [01:33<12:00,  2.45s/it]Shonan Averaging didn't converge.
+
+
+
+
+Testing DataLoader 0:  13%|#3        | 44/332 [01:44<11:21,  2.37s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  14%|#3        | 45/332 [01:45<11:14,  2.35s/it]Shonan Averaging didn't converge.
+
+
+
+
+
+Testing DataLoader 0:  16%|#5        | 52/332 [01:57<10:31,  2.26s/it]Shonan Averaging didn't converge.
+
+
+Testing DataLoader 0:  17%|#6        | 55/332 [02:02<10:18,  2.23s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  17%|#6        | 56/332 [02:04<10:14,  2.23s/it]Shonan Averaging didn't converge.
+
+
+Testing DataLoader 0:  18%|#8        | 60/332 [02:11<09:56,  2.19s/it]Shonan Averaging didn't converge.
+
+
+
+
+
+
+
+
+Testing DataLoader 0:  21%|##1       | 70/332 [02:28<09:16,  2.12s/it]Shonan Averaging didn't converge.
+
+Testing DataLoader 0:  22%|##1       | 72/332 [02:33<09:12,  2.13s/it]Shonan Averaging didn't converge.
+
+
+
+Testing DataLoader 0:  23%|##3       | 77/332 [02:43<09:00,  2.12s/it]Shonan Averaging didn't converge.
+
+Testing DataLoader 0:  24%|##3       | 79/332 [02:48<08:58,  2.13s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  24%|##4       | 80/332 [02:51<08:59,  2.14s/it]Shonan Averaging didn't converge.
+
+
+Testing DataLoader 0:  25%|##5       | 84/332 [02:58<08:46,  2.12s/it]Shonan Averaging didn't converge.
+
+Testing DataLoader 0:  26%|##5       | 86/332 [03:02<08:41,  2.12s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  26%|##6       | 87/332 [03:05<08:42,  2.13s/it]Shonan Averaging didn't converge.
+
+
+Testing DataLoader 0:  27%|##7       | 90/332 [03:11<08:33,  2.12s/it]Shonan Averaging didn't converge.
+
+
+Testing DataLoader 0:  28%|##8       | 93/332 [03:16<08:25,  2.12s/it]Shonan Averaging didn't converge.
+Shonan Averaging didn't converge.
+
+
+Testing DataLoader 0:  29%|##8       | 96/332 [03:22<08:18,  2.11s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  29%|##9       | 97/332 [03:23<08:13,  2.10s/it]Shonan Averaging didn't converge.
+Shonan Averaging didn't converge.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Testing DataLoader 0:  33%|###3      | 111/332 [03:53<07:44,  2.10s/it]Shonan Averaging didn't converge.
+
+
+
+
+
+
+
+
+
+Testing DataLoader 0:  36%|###6      | 121/332 [04:12<07:21,  2.09s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  37%|###6      | 122/332 [04:18<07:25,  2.12s/it]Shonan Averaging didn't converge.
+Shonan Averaging didn't converge.
+
+
+
+
+
+Testing DataLoader 0:  39%|###8      | 128/332 [04:33<07:15,  2.14s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  39%|###8      | 129/332 [04:39<07:19,  2.16s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  39%|###9      | 130/332 [04:43<07:20,  2.18s/it]Shonan Averaging didn't converge.
+
+Testing DataLoader 0:  40%|###9      | 132/332 [04:49<07:18,  2.19s/it]Shonan Averaging didn't converge.
+
+
+Testing DataLoader 0:  41%|####      | 135/332 [04:56<07:13,  2.20s/it]Shonan Averaging didn't converge.
+
+
+Testing DataLoader 0:  42%|####1     | 138/332 [05:05<07:09,  2.21s/it]Shonan Averaging didn't converge.
+
+
+Testing DataLoader 0:  42%|####2     | 141/332 [05:13<07:04,  2.22s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  43%|####2     | 142/332 [05:15<07:01,  2.22s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  43%|####3     | 143/332 [05:17<07:00,  2.22s/it]Shonan Averaging didn't converge.
+Shonan Averaging didn't converge.
+
+
+Testing DataLoader 0:  44%|####3     | 146/332 [05:24<06:53,  2.22s/it]Shonan Averaging didn't converge.
+
+Testing DataLoader 0:  45%|####4     | 148/332 [05:28<06:48,  2.22s/it]Shonan Averaging didn't converge.
+Shonan Averaging didn't converge.
+Testing DataLoader 0:  45%|####4     | 149/332 [05:31<06:46,  2.22s/it]Shonan Averaging didn't converge.
+
+
+Testing DataLoader 0:  46%|####5     | 152/332 [05:38<06:41,  2.23s/it]Shonan Averaging didn't converge.
+
+
+
+
+
+
+Testing DataLoader 0:  48%|####7     | 159/332 [05:52<06:23,  2.22s/it]Shonan Averaging didn't converge.
+
+Testing DataLoader 0:  48%|####8     | 161/332 [05:57<06:19,  2.22s/it]Shonan Averaging didn't converge.
+
+Testing DataLoader 0:  49%|####9     | 163/332 [06:01<06:14,  2.22s/it]Shonan Averaging didn't converge.
+
+
+Testing DataLoader 0:  50%|#####     | 166/332 [06:07<06:07,  2.22s/it]Shonan Averaging didn't converge.
+Shonan Averaging didn't converge.
+
+Testing DataLoader 0:  51%|#####     | 168/332 [06:12<06:03,  2.22s/it]Shonan Averaging didn't converge.
+
+
+
+
+
+
+
+
+
+
+Testing DataLoader 0:  54%|#####3    | 179/332 [06:35<05:37,  2.21s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  54%|#####4    | 180/332 [06:37<05:35,  2.21s/it]Shonan Averaging didn't converge.
+
+
+
+Testing DataLoader 0:  55%|#####5    | 184/332 [06:46<05:27,  2.21s/it]Shonan Averaging didn't converge.
+
+Testing DataLoader 0:  56%|#####6    | 186/332 [06:49<05:21,  2.20s/it]Shonan Averaging didn't converge.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Testing DataLoader 0:  61%|######1   | 203/332 [07:22<04:41,  2.18s/it]Shonan Averaging didn't converge.
+Shonan Averaging didn't converge.
+
+Testing DataLoader 0:  62%|######1   | 205/332 [07:29<04:38,  2.19s/it]Shonan Averaging didn't converge.
+
+
+
+
+Testing DataLoader 0:  64%|######3   | 211/332 [07:40<04:24,  2.18s/it]Shonan Averaging didn't converge.
+
+
+Testing DataLoader 0:  64%|######4   | 214/332 [07:46<04:16,  2.18s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  65%|######4   | 215/332 [07:49<04:15,  2.18s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  65%|######5   | 216/332 [07:51<04:13,  2.18s/it]Shonan Averaging didn't converge.
+
+Testing DataLoader 0:  66%|######5   | 218/332 [07:55<04:08,  2.18s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  66%|######5   | 219/332 [07:57<04:06,  2.18s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  66%|######6   | 220/332 [07:59<04:04,  2.18s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  67%|######6   | 221/332 [08:02<04:02,  2.18s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  67%|######6   | 222/332 [08:04<04:00,  2.18s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  67%|######7   | 223/332 [08:07<03:58,  2.18s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  67%|######7   | 224/332 [08:08<03:55,  2.18s/it]Shonan Averaging didn't converge.
+Testing DataLoader 0:  68%|######7   | 225/332 [08:10<03:53,  2.18s/it]
+Traceback (most recent call last):
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/runpy.py", line 194, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/jigsaw/experiments/eval_model.py", line 160, in <module>
+    test_model(CONFIG)
+  File "/home/jigsaw/experiments/eval_model.py", line 123, in test_model
+    trainer.test(model, val_loader)
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/site-packages/pytorch_lightning/trainer/trainer.py", line 794, in test
+    return call._call_and_handle_interrupt(
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/site-packages/pytorch_lightning/trainer/call.py", line 38, in _call_and_handle_interrupt
+    return trainer_fn(*args, **kwargs)
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/site-packages/pytorch_lightning/trainer/trainer.py", line 842, in _test_impl
+    results = self._run(model, ckpt_path=self.ckpt_path)
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/site-packages/pytorch_lightning/trainer/trainer.py", line 1112, in _run
+    results = self._run_stage()
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/site-packages/pytorch_lightning/trainer/trainer.py", line 1188, in _run_stage
+    return self._run_evaluate()
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/site-packages/pytorch_lightning/trainer/trainer.py", line 1228, in _run_evaluate
+    eval_loop_results = self._evaluation_loop.run()
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/site-packages/pytorch_lightning/loops/loop.py", line 199, in run
+    self.advance(*args, **kwargs)
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/site-packages/pytorch_lightning/loops/dataloader/evaluation_loop.py", line 152, in advance
+    dl_outputs = self.epoch_loop.run(self._data_fetcher, dl_max_batches, kwargs)
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/site-packages/pytorch_lightning/loops/loop.py", line 199, in run
+    self.advance(*args, **kwargs)
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/site-packages/pytorch_lightning/loops/epoch/evaluation_epoch_loop.py", line 121, in advance
+    batch = next(data_fetcher)
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/site-packages/pytorch_lightning/utilities/fetching.py", line 184, in __next__
+    return self.fetching_function()
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/site-packages/pytorch_lightning/utilities/fetching.py", line 265, in fetching_function
+    self._fetch_next_batch(self.dataloader_iter)
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/site-packages/pytorch_lightning/utilities/fetching.py", line 280, in _fetch_next_batch
+    batch = next(iterator)
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/site-packages/torch/utils/data/dataloader.py", line 521, in __next__
+    data = self._next_data()
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/site-packages/torch/utils/data/dataloader.py", line 561, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/site-packages/torch/utils/data/_utils/fetch.py", line 49, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/site-packages/torch/utils/data/_utils/fetch.py", line 49, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/home/jigsaw/dataset_preprocessing/fracture_assembly_dataset.py", line 354, in __getitem__
+    point_clouds, piece_ids, nr_points_per_piece, areas = self._load_point_clouds(self.data_list[index])
+  File "/home/jigsaw/dataset_preprocessing/fracture_assembly_dataset.py", line 322, in _load_point_clouds
+    areas = [mesh.area for mesh in meshes]
+  File "/home/jigsaw/dataset_preprocessing/fracture_assembly_dataset.py", line 322, in <listcomp>
+    areas = [mesh.area for mesh in meshes]
+
+Testing DataLoader 0:  68%|######8   | 226/332 [08:12<03:51,  2.18s/it]
