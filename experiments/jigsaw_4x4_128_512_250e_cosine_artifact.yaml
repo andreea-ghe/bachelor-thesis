@@ -1,4 +1,4 @@
-MODEL_NAME: jigsaw_4x4_128_512_250e_cosine_everyday
+MODEL_NAME: jigsaw_4x4_128_512_250e_cosine_artifact
 MODULE: experiments # loads model config
 
 PROJECT: jigsaw
