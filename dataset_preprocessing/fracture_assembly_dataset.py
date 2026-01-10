@@ -315,8 +315,10 @@ class FractureAssemblyDataset(Dataset):
             mesh = trimesh.load(os.path.join(data_folder, mesh_file), force='mesh')
             if isinstance(mesh, trimesh.Scene): # handle case where trimesh returns a Scene instead of a Trimesh
                 mesh = trimesh.util.concatenate(list(mesh.geometry.values())) # concatenate all geometries in the scene into one mesh
-            elif isinstance(mesh, list):
-                mesh = trimesh.util.concatenate(mesh)
+            if isinstance(mesh, list):
+                mesh = trimesh.util.concatenate(mesh) # If still a list after concatenation, take first valid mesh
+            if isinstance(mesh, list):
+                mesh = mesh[0] if len(mesh) > 0 else trimesh.Trimesh()
             meshes.append(mesh)
 
         point_clouds = [] 
