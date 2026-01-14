@@ -9,7 +9,6 @@ class PointNetPTMSG(nn.Module):
         self.in_channels = in_channels
         self.out_channels = out_channels
 
-        # Layer names must match checkpoint: sa1-4 for set abstraction, fp1-4 for feature propagation
         self.sa1 = PointNetEncoder(0.15, [0.05, 0.1], [16, 32], self.in_channels,
                                    [[16, 16, 32], [32, 32, 64]])
         self.sa2 = PointNetEncoder(0.25, [0.1, 0.2], [16, 32], 32 + 64,
@@ -21,7 +20,7 @@ class PointNetPTMSG(nn.Module):
         self.fp4 = PointNetDecoder(512 + 512 + 256 + 256, [256, 256])
         self.fp3 = PointNetDecoder(128 + 128 + 256, [256, 256])
         self.fp2 = PointNetDecoder(32 + 64 + 256, [256, 128])
-        self.fp1 = PointNetDecoder(128, [128, 128, 128])  # Original uses 128, not 128+3
+        self.fp1 = PointNetDecoder(128, [128, 128, 128])
         self.conv1 = nn.Conv1d(128, self.out_channels, 1)
 
     def forward(self, x, batch_length):
