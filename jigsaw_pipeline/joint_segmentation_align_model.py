@@ -6,7 +6,6 @@ from base_pipeline.base_model import MatchingBaseModel
 from feature_extractor.attention_mechanisms import CrossAttention
 from feature_extractor.attention_mechanisms import PointTransformer
 from feature_extractor import build_feature_extractor
-from surface_segmentation.segmentation_classifier import SegmentationClassifier
 from multipart_matching.affinity import AffinityDual
 from multipart_matching.utils_sinkhorn import Sinkhorn
 from multipart_matching.utils_hungarian import hungarian

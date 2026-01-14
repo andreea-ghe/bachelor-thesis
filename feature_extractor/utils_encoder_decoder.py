@@ -168,7 +168,6 @@ class PointNetDecoder(nn.Module):
             interpolated_points = torch.sum(select_points(coarse_features, idx) * weight.view(B, N, 3, 1), dim=2)
 
         if fine_features is not None: # refine already existing features with skip connections
-            # IMPORTANT: Order must match original - fine_features FIRST, then interpolated
             interpolated_points = torch.cat([fine_features, interpolated_points], dim=-1) # [B, N, D + D']
 
         interpolated_points = interpolated_points.permute(0, 2, 1) # [B, D'', N]

@@ -3,21 +3,6 @@ import torch.nn as nn
 from surface_segmentation.utils import square_distance, diagonal_square_matrix
 
 
-class SegmentationClassifier(nn.Module):
-    def __init__(self, model_point: str, pc_feat_dim: int, num_classes: int):
-        super().__init__()
-        self.model_point = model_point
-
-        output_dim = 1 if model_point == "binary" else num_classes
-        self.classifier = nn.Sequential(
-            nn.BatchNorm1d(pc_feat_dim),
-            nn.ReLU(inplace=True),
-            nn.Conv1d(pc_feat_dim, output_dim, 1)
-        )
-
-    def forward(self, feat_bfn):
-        return self.classifier(feat_bfn)
-
 @torch.no_grad()
 def compute_label(points, nr_points_piece, nr_valid_pieces, dist_thresholds):
     """

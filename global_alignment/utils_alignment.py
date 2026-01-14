@@ -1,19 +1,3 @@
-"""
-Global Alignment Module - Recovers absolute poses from relative pose estimates.
-
-This module takes pairwise relative transformations between pieces (estimated
-via RANSAC on fracture surface correspondences) and computes globally consistent
-absolute poses for all pieces.
-
-Pipeline:
-1. Connect disconnected components via a virtual hub node
-2. Try Shonan Averaging for optimal rotation synchronization
-3. If Shonan fails, fall back to Spanning Tree alignment
-4. Canonicalize poses relative to piece 0
-
-The virtual hub node (index = n_valid) connects all components with high-uncertainty
-edges, ensuring the pose graph is connected while minimizing influence on the solution.
-"""
 import numpy as np
 from scipy.spatial.transform import Rotation as R
 
@@ -25,6 +9,16 @@ from .spanning_tree_alignment import spanning_tree_alignment
 def global_alignment(edges, transformations, uncertainties, n_valid):
     """
     Perform global alignment using Shonan Averaging with spanning tree fallback.
+    This module takes pairwise relative transformations between pieces (estimated
+    via RANSAC on fracture surface correspondences) and computes globally consistent
+    absolute poses for all pieces.
+
+    Steps:
+    1. Connect disconnected components via a virtual hub node
+    2. Try Shonan Averaging for optimal rotation synchronization
+    3. If Shonan fails, fall back to Spanning Tree alignment
+    4. Canonicalize poses relative to piece 0
+
 
     Input:
         edges: [E, 2] - edges between pieces (from RANSAC matches)

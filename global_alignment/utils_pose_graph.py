@@ -1,10 +1,3 @@
-"""
-Pose Graph Utilities - Graph operations for global alignment.
-
-The pose graph represents pieces as nodes and relative pose estimates as edges.
-These utilities help ensure the graph is connected (required for global alignment)
-and find minimum spanning trees for the fallback alignment method.
-"""
 import numpy as np
 import networkx as nx
 
@@ -53,30 +46,28 @@ def connect_graph(n_valid, edges):
 def minimum_spanning_tree(n_nodes, edges, weights):
     """
     Compute minimum spanning tree and return DFS traversal order.
-    
     The MST uses edge weights (uncertainties) to select the most reliable
     edges for the tree. Lower weight = lower uncertainty = more reliable.
     
     Input:
-        n_nodes: int - number of nodes in the graph
-        edges: [E, 2] - edge list
-        weights: [E] - edge weights (uncertainties)
+        n_nodes: number of nodes in the graph
+        edges: edge list: [E, 2]
+        weights: edge weights (uncertainties): [E]
     
     Output:
-        dfs_order: list - nodes in DFS preorder starting from node 0
-        predecessors: dict - maps each node to its parent in the DFS tree
+        dfs_order: list of nodes in DFS preorder starting from node 0
+        predecessors: dict that maps each node to its parent in the DFS tree
     """
-    # Build weighted graph
+    # build weighted graph
     G = nx.Graph()
     G.add_nodes_from(np.arange(n_nodes))
     for i in range(edges.shape[0]):
         G.add_edge(edges[i, 0], edges[i, 1], weight=weights[i])
     
-    # Compute MST
+    # compute MST
     T = nx.minimum_spanning_tree(G)
     
-    # Return DFS traversal from node 0
-    dfs_order = list(nx.dfs_preorder_nodes(T, source=0))
+    dfs_order = list(nx.dfs_preorder_nodes(T, source=0)) # DFS traversal from node 0
     predecessors = nx.dfs_predecessors(T, source=0)
     
     return dfs_order, predecessors
