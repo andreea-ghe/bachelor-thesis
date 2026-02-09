@@ -133,13 +133,15 @@ def merge_configs(src, dest):
         if key not in dest:
             raise KeyError(f'Key {key} not a valid config key.')
 
-        if type(dest[key]) is not type(value):
-            if type(dest[key]) is float and type(value) is int:
+        if not isinstance(value, type(dest[key])) and not (isinstance(value, dict) and isinstance(dest[key], dict)):
+            if isinstance(dest[key], float) and isinstance(value, int):
                 value = float(value)
             else:
                 if key not in ['CLASS']:
                     raise ValueError(f'Type mismatch ({type(dest[key])} vs. {type(value)}) for config key: {key}')
-        if type(value) is edict:
+        
+        # Recursively merge dicts (handles both dict and edict)
+        if isinstance(value, dict):
             try:
                 merge_configs(src[key], dest[key])
             except:
