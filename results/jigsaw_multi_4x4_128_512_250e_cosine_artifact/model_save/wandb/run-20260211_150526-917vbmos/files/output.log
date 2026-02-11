@@ -1,0 +1,25 @@
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+Traceback (most recent call last):
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/runpy.py", line 194, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/jigsaw/experiments/eval_model.py", line 161, in <module>
+    test_model(CONFIG)
+  File "/home/jigsaw/experiments/eval_model.py", line 114, in test_model
+    model = model.load_from_checkpoint(checkpoint_path=ckp_path, strict=False, config=config)
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/site-packages/pytorch_lightning/core/saving.py", line 139, in load_from_checkpoint
+    return _load_from_checkpoint(
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/site-packages/pytorch_lightning/core/saving.py", line 188, in _load_from_checkpoint
+    return _load_state(cls, checkpoint, strict=strict, **kwargs)
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/site-packages/pytorch_lightning/core/saving.py", line 247, in _load_state
+    keys = obj.load_state_dict(checkpoint["state_dict"], strict=strict)
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1482, in load_state_dict
+    raise RuntimeError('Error(s) in loading state_dict for {}:\n\t{}'.format(
+RuntimeError: Error(s) in loading state_dict for JointSegmentationAlignmentModel:
+	size mismatch for pc_classifier.2.weight: copying a param with shape torch.Size([2, 128, 1]) from checkpoint, the shape in current model is torch.Size([1, 128, 1]).
+	size mismatch for pc_classifier.2.bias: copying a param with shape torch.Size([2]) from checkpoint, the shape in current model is torch.Size([1]).
+All checkpoint keys match model keys!

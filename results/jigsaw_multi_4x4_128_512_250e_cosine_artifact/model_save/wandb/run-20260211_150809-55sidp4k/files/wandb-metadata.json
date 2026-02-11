@@ -1,0 +1,127 @@
+{
+    "os": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.17",
+    "python": "3.8.16",
+    "heartbeatAt": "2026-02-11T13:08:11.700904",
+    "startedAt": "2026-02-11T13:08:09.326610",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "--cfg",
+        "experiments/jigsaw_multi_4x4_128_512_250e_cosine_artifact.yaml"
+    ],
+    "state": "running",
+    "program": "-m experiments.eval_model",
+    "git": {
+        "remote": "https://github.com/andreea-ghe/bachelor-thesis.git",
+        "commit": "a8fde92e12d64130412db93853617cd9e3e99b86"
+    },
+    "email": "gheorghe.andreea.ioana26@gmail.com",
+    "root": "/home/jigsaw",
+    "host": "ghe-desktop",
+    "username": "ndreeaheorghe",
+    "executable": "/home/ndreeaheorghe/miniconda3/envs/assembly/bin/python",
+    "cpu_count": 8,
+    "cpu_count_logical": 16,
+    "cpu_freq": {
+        "current": 2894.472000000001,
+        "min": 0.0,
+        "max": 0.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2894.472,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2894.472,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2894.472,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2894.472,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2894.472,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2894.472,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2894.472,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2894.472,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2894.472,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2894.472,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2894.472,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2894.472,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2894.472,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2894.472,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2894.472,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2894.472,
+            "min": 0.0,
+            "max": 0.0
+        }
+    ],
+    "disk": {
+        "total": 1006.853931427002,
+        "used": 78.70254135131836
+    },
+    "gpu": "NVIDIA GeForce GTX 1650 Ti",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce GTX 1650 Ti",
+            "memory_total": 4294967296
+        }
+    ],
+    "memory": {
+        "total": 7.443538665771484
+    }
+}

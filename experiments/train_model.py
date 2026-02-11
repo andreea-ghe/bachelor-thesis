@@ -4,7 +4,7 @@ import pytorch_lightning as pl
 from pytorch_lightning.callbacks import ModelCheckpoint, LearningRateMonitor
 from pytorch_lightning.loggers import WandbLogger
 from jigsaw_pipeline import build_jigsaw_model
-from dataset_preprocessing import build_data_loaders
+from dataset_preprocessing import build_data_loaders, build_pairs_data_loaders
 from datetime import datetime
 from utilities.utils_stdout import DuplicateStdoutFileManager
 from utilities.utils_parse_args import parse_args
@@ -35,7 +35,8 @@ def train_model(config):
     """
     # Step 1: Initialize data loaders
     # build dataloaders for Breaking Bad dataset with area based sampling
-    train_loader, val_loader = build_data_loaders(config)
+    # train_loader, val_loader = build_data_loaders(config)
+    train_loader, val_loader = build_pairs_data_loaders(config)
 
     # Step 2: Build the jigsaw model
     model = build_jigsaw_model(config)
