@@ -1,0 +1,18 @@
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+Traceback (most recent call last):
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/runpy.py", line 194, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/jigsaw/experiments/eval_model.py", line 161, in <module>
+    test_model(CONFIG)
+  File "/home/jigsaw/experiments/eval_model.py", line 80, in test_model
+    ckp = torch.load(config.WEIGHT_FILE, map_location='cpu')
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/site-packages/torch/serialization.py", line 608, in load
+    return _legacy_load(opened_file, map_location, pickle_module, **pickle_load_args)
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/site-packages/torch/serialization.py", line 779, in _legacy_load
+    raise RuntimeError("Invalid magic number; corrupt file?")
+RuntimeError: Invalid magic number; corrupt file?
