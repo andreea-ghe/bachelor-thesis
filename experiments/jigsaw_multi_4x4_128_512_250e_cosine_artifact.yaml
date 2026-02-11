@@ -19,12 +19,13 @@ TRAIN:
   VAL_EVERY: 5
 
 CALLBACK:
+  MATCHING_TASK: []
   CHECKPOINT_MONITOR: val/mat_f1
   CHECKPOINT_MODE: max
 
 DATA:
-  SUBSET: everyday
-  DATA_FN: 'everyday.{}.txt'
+  SUBSET: artifact
+  DATA_FN: 'artifact.{}.txt'
   MAX_NUM_PART: 20
   NUM_PC_POINTS: 5000
   SAMPLE_BY: area
@@ -32,7 +33,7 @@ DATA:
   FRACTURE_LABEL_THRESHOLD: 0.025
 
 MODEL:
-  PC_CLS_METHOD: binary
+  PC_CLS_METHOD: multi
 
 # STATS is for eval only
 STATS: "./results/jigsaw_multi_4x4_128_512_250e_cosine_artifact/stats/eval"
