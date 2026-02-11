@@ -2,7 +2,7 @@ import os
 import torch
 import pytorch_lightning as pl
 from datetime import datetime
-from dataset_preprocessing import build_data_loaders
+from dataset_preprocessing import build_data_loaders, build_pairs_data_loaders
 from utilities.utils_stdout import DuplicateStdoutFileManager
 from utilities.utils_parse_args import parse_args
 from utilities.utils_config import CONFIG
@@ -35,7 +35,8 @@ def test_model(config):
         os.makedirs(config.STATS, exist_ok=True) # create stats directory if needed
 
     # Step 1: initialize data loaders
-    train_loader, val_loader = build_data_loaders(config)
+    # train_loader, val_loader = build_data_loaders(config)
+    train_loader, val_loader = build_pairs_data_loaders(config)
 
     # Step 2: initialize model architecture
     # model will be populated with trained weights from checkpoint
