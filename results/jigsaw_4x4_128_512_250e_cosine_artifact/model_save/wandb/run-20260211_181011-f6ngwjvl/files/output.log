@@ -1,0 +1,20 @@
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+Traceback (most recent call last):
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/runpy.py", line 194, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/jigsaw/experiments/eval_model.py", line 161, in <module>
+    test_model(CONFIG)
+  File "/home/jigsaw/experiments/eval_model.py", line 101, in test_model
+    model.load_state_dict(ckp, strict=False)
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1468, in load_state_dict
+    load(self)
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1462, in load
+    module._load_from_state_dict(
+  File "/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1418, in _load_from_state_dict
+    for key in state_dict.keys():
+AttributeError: 'list' object has no attribute 'keys'

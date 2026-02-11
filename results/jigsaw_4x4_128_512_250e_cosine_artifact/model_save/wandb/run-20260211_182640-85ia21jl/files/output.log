@@ -1,0 +1,337 @@
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+All checkpoint keys match model keys!
+Finish Setting -----
+Testing: 0it [00:00, ?it/s]
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/ndreeaheorghe/miniconda3/envs/assembly/lib/python3.8/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:224: PossibleUserWarning: The dataloader, test_dataloader 0, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 16 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Testing DataLoader 0: 100%|##########| 308/308 [09:55<00:00,  1.93s/it]
+[Checkpoint] Saved final 308 results to results/jigsaw_4x4_128_512_250e_cosine_artifact/test_checkpoint_final.pt
+test/cls_loss: 0.032218; test/cls_acc: 1.000000; test/cls_precision: 1.000000; test/cls_recall: 1.000000; test/cls_f1: 1.000000; test/mat_loss: 6.216015; test/n_critical_max: 430.117065; test/loss: 6.248233; test/mat_precision: 0.055550; test/mat_recall: 0.056679; test/mat_f1: 0.055928; test/part_acc: 0.765041; test/chamfer_distance: 0.089887; test/trans_mse: 0.021515; test/rot_mse: 2602.193115; test/trans_rmse: 0.066231; test/rot_rmse: 27.295790; test/trans_mae: 0.054675; test/rot_mae: 23.845879
+Testing DataLoader 0: 100%|##########| 308/308 [09:56<00:00,  1.94s/it]
+──────────────────────────────────────────────────────────────────────────────────────────────────────
+       Test metric             DataLoader 0
+──────────────────────────────────────────────────────────────────────────────────────────────────────
+  test/chamfer_distance     0.08988728374242783
+      test/cls_acc                  1.0
+       test/cls_f1                  1.0
+      test/cls_loss         0.03221812844276428
+   test/cls_precision               1.0
+     test/cls_recall                1.0
+        test/loss            6.248232841491699
+       test/mat_f1          0.05592804402112961
+      test/mat_loss          6.216014862060547
+   test/mat_precision       0.05555007979273796
+     test/mat_recall        0.0566786490380764
+   test/n_critical_max       430.1170654296875
+      test/part_acc         0.7650406360626221
+      test/rot_mae           23.84587860107422
+      test/rot_mse           2602.193115234375
+      test/rot_rmse          27.29578971862793
+     test/trans_mae        0.054674696177244186
+     test/trans_mse        0.021515289321541786
+     test/trans_rmse        0.06623072922229767
+──────────────────────────────────────────────────────────────────────────────────────────────────────
+Done evaluation

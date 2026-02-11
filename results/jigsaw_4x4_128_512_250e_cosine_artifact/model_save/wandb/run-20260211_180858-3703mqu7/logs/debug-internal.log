@@ -1,0 +1,184 @@
+2026-02-11 18:08:58,230 INFO    StreamThr :45958 [internal.py:wandb_internal():87] W&B internal server running at pid: 45958, started at: 2026-02-11 18:08:58.230034
+2026-02-11 18:08:58,233 DEBUG   HandlerThread:45958 [handler.py:handle_request():144] handle_request: status
+2026-02-11 18:08:58,236 INFO    WriterThread:45958 [datastore.py:open_for_write():85] open: results/jigsaw_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260211_180858-3703mqu7/run-3703mqu7.wandb
+2026-02-11 18:08:58,237 DEBUG   SenderThread:45958 [sender.py:send():336] send: header
+2026-02-11 18:08:58,266 DEBUG   SenderThread:45958 [sender.py:send():336] send: run
+2026-02-11 18:08:58,269 INFO    SenderThread:45958 [sender.py:_maybe_setup_resume():723] checking resume status for None/jigsaw/3703mqu7
+2026-02-11 18:08:59,400 DEBUG   HandlerThread:45958 [handler.py:handle_request():144] handle_request: check_version
+2026-02-11 18:08:59,400 INFO    SenderThread:45958 [dir_watcher.py:__init__():216] watching files in: results/jigsaw_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260211_180858-3703mqu7/files
+2026-02-11 18:08:59,401 INFO    SenderThread:45958 [sender.py:_start_run_threads():1067] run started: 3703mqu7 with start time 1770826138.230939
+2026-02-11 18:08:59,401 DEBUG   SenderThread:45958 [sender.py:send_request():363] send_request: summary_record
+2026-02-11 18:08:59,401 INFO    SenderThread:45958 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2026-02-11 18:08:59,401 DEBUG   SenderThread:45958 [sender.py:send_request():363] send_request: check_version
+2026-02-11 18:08:59,636 DEBUG   HandlerThread:45958 [handler.py:handle_request():144] handle_request: run_start
+2026-02-11 18:08:59,673 DEBUG   HandlerThread:45958 [system_info.py:__init__():31] System info init
+2026-02-11 18:08:59,673 DEBUG   HandlerThread:45958 [system_info.py:__init__():46] System info init done
+2026-02-11 18:08:59,673 INFO    HandlerThread:45958 [system_monitor.py:start():151] Starting system monitor
+2026-02-11 18:08:59,673 INFO    SystemMonitor:45958 [system_monitor.py:_start():116] Starting system asset monitoring threads
+2026-02-11 18:08:59,673 INFO    HandlerThread:45958 [system_monitor.py:probe():172] Collecting system info
+2026-02-11 18:08:59,674 INFO    SystemMonitor:45958 [interfaces.py:start():168] Started cpu
+2026-02-11 18:08:59,676 INFO    SystemMonitor:45958 [interfaces.py:start():168] Started disk
+2026-02-11 18:08:59,678 INFO    SystemMonitor:45958 [interfaces.py:start():168] Started gpu
+2026-02-11 18:08:59,680 INFO    SystemMonitor:45958 [interfaces.py:start():168] Started memory
+2026-02-11 18:08:59,681 INFO    SystemMonitor:45958 [interfaces.py:start():168] Started network
+2026-02-11 18:08:59,692 DEBUG   HandlerThread:45958 [system_info.py:probe():195] Probing system
+2026-02-11 18:08:59,814 DEBUG   HandlerThread:45958 [system_info.py:_probe_git():180] Probing git
+2026-02-11 18:08:59,839 DEBUG   HandlerThread:45958 [system_info.py:_probe_git():188] Probing git done
+2026-02-11 18:08:59,839 DEBUG   HandlerThread:45958 [system_info.py:probe():241] Probing system done
+2026-02-11 18:08:59,839 DEBUG   HandlerThread:45958 [system_monitor.py:probe():181] {'os': 'Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.17', 'python': '3.8.16', 'heartbeatAt': '2026-02-11T16:08:59.692702', 'startedAt': '2026-02-11T16:08:58.218996', 'docker': None, 'cuda': None, 'args': ('--cfg', 'experiments/jigsaw_4x4_128_512_250e_cosine_artifact.yaml'), 'state': 'running', 'program': '-m experiments.eval_model', 'git': {'remote': 'https://github.com/andreea-ghe/bachelor-thesis.git', 'commit': '3665528f618e6dc89728d323c6a994e67980ecfd'}, 'email': 'gheorghe.andreea.ioana26@gmail.com', 'root': '/home/jigsaw', 'host': 'ghe-desktop', 'username': 'ndreeaheorghe', 'executable': '/home/ndreeaheorghe/miniconda3/envs/assembly/bin/python', 'cpu_count': 8, 'cpu_count_logical': 16, 'cpu_freq': {'current': 2894.472000000001, 'min': 0.0, 'max': 0.0}, 'cpu_freq_per_core': [{'current': 2894.472, 'min': 0.0, 'max': 0.0}, {'current': 2894.472, 'min': 0.0, 'max': 0.0}, {'current': 2894.472, 'min': 0.0, 'max': 0.0}, {'current': 2894.472, 'min': 0.0, 'max': 0.0}, {'current': 2894.472, 'min': 0.0, 'max': 0.0}, {'current': 2894.472, 'min': 0.0, 'max': 0.0}, {'current': 2894.472, 'min': 0.0, 'max': 0.0}, {'current': 2894.472, 'min': 0.0, 'max': 0.0}, {'current': 2894.472, 'min': 0.0, 'max': 0.0}, {'current': 2894.472, 'min': 0.0, 'max': 0.0}, {'current': 2894.472, 'min': 0.0, 'max': 0.0}, {'current': 2894.472, 'min': 0.0, 'max': 0.0}, {'current': 2894.472, 'min': 0.0, 'max': 0.0}, {'current': 2894.472, 'min': 0.0, 'max': 0.0}, {'current': 2894.472, 'min': 0.0, 'max': 0.0}, {'current': 2894.472, 'min': 0.0, 'max': 0.0}], 'disk': {'total': 1006.853931427002, 'used': 78.6884880065918}, 'gpu': 'NVIDIA GeForce GTX 1650 Ti', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce GTX 1650 Ti', 'memory_total': 4294967296}], 'memory': {'total': 7.443538665771484}}
+2026-02-11 18:08:59,839 INFO    HandlerThread:45958 [system_monitor.py:probe():182] Finished collecting system info
+2026-02-11 18:08:59,839 INFO    HandlerThread:45958 [system_monitor.py:probe():185] Publishing system info
+2026-02-11 18:08:59,839 DEBUG   HandlerThread:45958 [system_info.py:_save_pip():51] Saving list of pip packages installed into the current environment
+2026-02-11 18:08:59,840 DEBUG   HandlerThread:45958 [system_info.py:_save_pip():67] Saving pip packages done
+2026-02-11 18:08:59,840 DEBUG   HandlerThread:45958 [system_info.py:_save_conda():74] Saving list of conda packages installed into the current environment
+2026-02-11 18:09:00,403 INFO    Thread-13 :45958 [dir_watcher.py:_on_file_created():275] file/dir created: results/jigsaw_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260211_180858-3703mqu7/files/wandb-summary.json
+2026-02-11 18:09:00,404 INFO    Thread-13 :45958 [dir_watcher.py:_on_file_created():275] file/dir created: results/jigsaw_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260211_180858-3703mqu7/files/requirements.txt
+2026-02-11 18:09:00,404 INFO    Thread-13 :45958 [dir_watcher.py:_on_file_created():275] file/dir created: results/jigsaw_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260211_180858-3703mqu7/files/conda-environment.yaml
+2026-02-11 18:09:02,204 DEBUG   HandlerThread:45958 [system_info.py:_save_conda():86] Saving conda packages done
+2026-02-11 18:09:02,205 INFO    HandlerThread:45958 [system_monitor.py:probe():187] Finished publishing system info
+2026-02-11 18:09:02,209 DEBUG   SenderThread:45958 [sender.py:send():336] send: files
+2026-02-11 18:09:02,210 INFO    SenderThread:45958 [sender.py:_save_file():1321] saving file wandb-metadata.json with policy now
+2026-02-11 18:09:02,214 DEBUG   HandlerThread:45958 [handler.py:handle_request():144] handle_request: stop_status
+2026-02-11 18:09:02,215 DEBUG   SenderThread:45958 [sender.py:send_request():363] send_request: stop_status
+2026-02-11 18:09:02,402 INFO    Thread-13 :45958 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260211_180858-3703mqu7/files/conda-environment.yaml
+2026-02-11 18:09:02,403 INFO    Thread-13 :45958 [dir_watcher.py:_on_file_created():275] file/dir created: results/jigsaw_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260211_180858-3703mqu7/files/wandb-metadata.json
+2026-02-11 18:09:02,545 DEBUG   SenderThread:45958 [sender.py:send():336] send: telemetry
+2026-02-11 18:09:02,545 DEBUG   SenderThread:45958 [sender.py:send():336] send: metric
+2026-02-11 18:09:02,546 DEBUG   SenderThread:45958 [sender.py:send():336] send: telemetry
+2026-02-11 18:09:02,546 DEBUG   SenderThread:45958 [sender.py:send():336] send: metric
+2026-02-11 18:09:02,546 WARNING SenderThread:45958 [sender.py:send_metric():1272] Seen metric with glob (shouldn't happen)
+2026-02-11 18:09:03,032 INFO    wandb-upload_0:45958 [upload_job.py:push():138] Uploaded file /tmp/tmp73twa6f0wandb/jlsytyxb-wandb-metadata.json
+2026-02-11 18:09:03,403 INFO    Thread-13 :45958 [dir_watcher.py:_on_file_created():275] file/dir created: results/jigsaw_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260211_180858-3703mqu7/files/output.log
+2026-02-11 18:09:03,548 DEBUG   HandlerThread:45958 [handler.py:handle_request():144] handle_request: status_report
+2026-02-11 18:09:05,406 INFO    Thread-13 :45958 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260211_180858-3703mqu7/files/output.log
+2026-02-11 18:09:08,553 DEBUG   HandlerThread:45958 [handler.py:handle_request():144] handle_request: status_report
+2026-02-11 18:09:10,671 DEBUG   HandlerThread:45958 [handler.py:handle_request():144] handle_request: keepalive
+2026-02-11 18:09:10,803 DEBUG   SenderThread:45958 [sender.py:send():336] send: exit
+2026-02-11 18:09:10,803 INFO    SenderThread:45958 [sender.py:send_exit():559] handling exit code: 1
+2026-02-11 18:09:10,804 INFO    SenderThread:45958 [sender.py:send_exit():561] handling runtime: 11
+2026-02-11 18:09:10,806 INFO    SenderThread:45958 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2026-02-11 18:09:10,806 INFO    SenderThread:45958 [sender.py:send_exit():567] send defer
+2026-02-11 18:09:10,806 DEBUG   HandlerThread:45958 [handler.py:handle_request():144] handle_request: defer
+2026-02-11 18:09:10,806 INFO    HandlerThread:45958 [handler.py:handle_request_defer():170] handle defer: 0
+2026-02-11 18:09:10,807 DEBUG   SenderThread:45958 [sender.py:send_request():363] send_request: defer
+2026-02-11 18:09:10,807 INFO    SenderThread:45958 [sender.py:send_request_defer():583] handle sender defer: 0
+2026-02-11 18:09:10,807 INFO    SenderThread:45958 [sender.py:transition_state():587] send defer: 1
+2026-02-11 18:09:10,807 DEBUG   HandlerThread:45958 [handler.py:handle_request():144] handle_request: defer
+2026-02-11 18:09:10,807 INFO    HandlerThread:45958 [handler.py:handle_request_defer():170] handle defer: 1
+2026-02-11 18:09:10,808 DEBUG   SenderThread:45958 [sender.py:send_request():363] send_request: defer
+2026-02-11 18:09:10,808 INFO    SenderThread:45958 [sender.py:send_request_defer():583] handle sender defer: 1
+2026-02-11 18:09:10,808 INFO    SenderThread:45958 [sender.py:transition_state():587] send defer: 2
+2026-02-11 18:09:10,808 DEBUG   HandlerThread:45958 [handler.py:handle_request():144] handle_request: defer
+2026-02-11 18:09:10,808 INFO    HandlerThread:45958 [handler.py:handle_request_defer():170] handle defer: 2
+2026-02-11 18:09:10,808 INFO    HandlerThread:45958 [system_monitor.py:finish():161] Stopping system monitor
+2026-02-11 18:09:10,810 DEBUG   SystemMonitor:45958 [system_monitor.py:_start():130] Starting system metrics aggregation loop
+2026-02-11 18:09:10,811 DEBUG   SystemMonitor:45958 [system_monitor.py:_start():137] Finished system metrics aggregation loop
+2026-02-11 18:09:10,811 INFO    HandlerThread:45958 [interfaces.py:finish():175] Joined cpu
+2026-02-11 18:09:10,811 DEBUG   SystemMonitor:45958 [system_monitor.py:_start():141] Publishing last batch of metrics
+2026-02-11 18:09:10,812 INFO    HandlerThread:45958 [interfaces.py:finish():175] Joined disk
+2026-02-11 18:09:10,836 INFO    HandlerThread:45958 [interfaces.py:finish():175] Joined gpu
+2026-02-11 18:09:10,836 INFO    HandlerThread:45958 [interfaces.py:finish():175] Joined memory
+2026-02-11 18:09:10,836 INFO    HandlerThread:45958 [interfaces.py:finish():175] Joined network
+2026-02-11 18:09:10,837 DEBUG   SenderThread:45958 [sender.py:send_request():363] send_request: defer
+2026-02-11 18:09:10,837 INFO    SenderThread:45958 [sender.py:send_request_defer():583] handle sender defer: 2
+2026-02-11 18:09:10,837 INFO    SenderThread:45958 [sender.py:transition_state():587] send defer: 3
+2026-02-11 18:09:10,838 DEBUG   SenderThread:45958 [sender.py:send():336] send: stats
+2026-02-11 18:09:10,838 DEBUG   HandlerThread:45958 [handler.py:handle_request():144] handle_request: defer
+2026-02-11 18:09:10,838 INFO    HandlerThread:45958 [handler.py:handle_request_defer():170] handle defer: 3
+2026-02-11 18:09:10,839 DEBUG   SenderThread:45958 [sender.py:send_request():363] send_request: defer
+2026-02-11 18:09:10,839 INFO    SenderThread:45958 [sender.py:send_request_defer():583] handle sender defer: 3
+2026-02-11 18:09:10,839 INFO    SenderThread:45958 [sender.py:transition_state():587] send defer: 4
+2026-02-11 18:09:10,839 DEBUG   HandlerThread:45958 [handler.py:handle_request():144] handle_request: defer
+2026-02-11 18:09:10,839 INFO    HandlerThread:45958 [handler.py:handle_request_defer():170] handle defer: 4
+2026-02-11 18:09:10,840 DEBUG   SenderThread:45958 [sender.py:send_request():363] send_request: defer
+2026-02-11 18:09:10,840 INFO    SenderThread:45958 [sender.py:send_request_defer():583] handle sender defer: 4
+2026-02-11 18:09:10,840 INFO    SenderThread:45958 [sender.py:transition_state():587] send defer: 5
+2026-02-11 18:09:10,840 DEBUG   HandlerThread:45958 [handler.py:handle_request():144] handle_request: defer
+2026-02-11 18:09:10,840 INFO    HandlerThread:45958 [handler.py:handle_request_defer():170] handle defer: 5
+2026-02-11 18:09:10,840 DEBUG   SenderThread:45958 [sender.py:send():336] send: summary
+2026-02-11 18:09:10,841 INFO    SenderThread:45958 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2026-02-11 18:09:10,841 DEBUG   SenderThread:45958 [sender.py:send_request():363] send_request: defer
+2026-02-11 18:09:10,841 INFO    SenderThread:45958 [sender.py:send_request_defer():583] handle sender defer: 5
+2026-02-11 18:09:10,841 INFO    SenderThread:45958 [sender.py:transition_state():587] send defer: 6
+2026-02-11 18:09:10,841 DEBUG   HandlerThread:45958 [handler.py:handle_request():144] handle_request: defer
+2026-02-11 18:09:10,841 INFO    HandlerThread:45958 [handler.py:handle_request_defer():170] handle defer: 6
+2026-02-11 18:09:10,842 DEBUG   SenderThread:45958 [sender.py:send_request():363] send_request: defer
+2026-02-11 18:09:10,842 INFO    SenderThread:45958 [sender.py:send_request_defer():583] handle sender defer: 6
+2026-02-11 18:09:10,845 DEBUG   HandlerThread:45958 [handler.py:handle_request():144] handle_request: status_report
+2026-02-11 18:09:11,201 INFO    SenderThread:45958 [sender.py:transition_state():587] send defer: 7
+2026-02-11 18:09:11,201 DEBUG   HandlerThread:45958 [handler.py:handle_request():144] handle_request: defer
+2026-02-11 18:09:11,201 INFO    HandlerThread:45958 [handler.py:handle_request_defer():170] handle defer: 7
+2026-02-11 18:09:11,202 DEBUG   SenderThread:45958 [sender.py:send_request():363] send_request: defer
+2026-02-11 18:09:11,202 INFO    SenderThread:45958 [sender.py:send_request_defer():583] handle sender defer: 7
+2026-02-11 18:09:11,411 INFO    Thread-13 :45958 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260211_180858-3703mqu7/files/wandb-summary.json
+2026-02-11 18:09:11,412 INFO    Thread-13 :45958 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260211_180858-3703mqu7/files/config.yaml
+2026-02-11 18:09:11,803 DEBUG   HandlerThread:45958 [handler.py:handle_request():144] handle_request: poll_exit
+2026-02-11 18:09:12,882 INFO    SenderThread:45958 [sender.py:transition_state():587] send defer: 8
+2026-02-11 18:09:12,882 DEBUG   SenderThread:45958 [sender.py:send_request():363] send_request: poll_exit
+2026-02-11 18:09:12,883 DEBUG   HandlerThread:45958 [handler.py:handle_request():144] handle_request: defer
+2026-02-11 18:09:12,883 INFO    HandlerThread:45958 [handler.py:handle_request_defer():170] handle defer: 8
+2026-02-11 18:09:12,883 DEBUG   SenderThread:45958 [sender.py:send_request():363] send_request: defer
+2026-02-11 18:09:12,883 INFO    SenderThread:45958 [sender.py:send_request_defer():583] handle sender defer: 8
+2026-02-11 18:09:12,883 INFO    SenderThread:45958 [sender.py:transition_state():587] send defer: 9
+2026-02-11 18:09:12,884 DEBUG   HandlerThread:45958 [handler.py:handle_request():144] handle_request: defer
+2026-02-11 18:09:12,884 INFO    HandlerThread:45958 [handler.py:handle_request_defer():170] handle defer: 9
+2026-02-11 18:09:12,884 DEBUG   SenderThread:45958 [sender.py:send_request():363] send_request: defer
+2026-02-11 18:09:12,884 INFO    SenderThread:45958 [sender.py:send_request_defer():583] handle sender defer: 9
+2026-02-11 18:09:12,884 INFO    SenderThread:45958 [dir_watcher.py:finish():362] shutting down directory watcher
+2026-02-11 18:09:13,413 INFO    SenderThread:45958 [dir_watcher.py:_on_file_modified():292] file/dir modified: results/jigsaw_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260211_180858-3703mqu7/files/output.log
+2026-02-11 18:09:13,413 INFO    SenderThread:45958 [dir_watcher.py:finish():392] scan: results/jigsaw_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260211_180858-3703mqu7/files
+2026-02-11 18:09:13,414 INFO    SenderThread:45958 [dir_watcher.py:finish():406] scan save: results/jigsaw_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260211_180858-3703mqu7/files/config.yaml config.yaml
+2026-02-11 18:09:13,414 INFO    SenderThread:45958 [dir_watcher.py:finish():406] scan save: results/jigsaw_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260211_180858-3703mqu7/files/output.log output.log
+2026-02-11 18:09:13,417 INFO    SenderThread:45958 [dir_watcher.py:finish():406] scan save: results/jigsaw_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260211_180858-3703mqu7/files/requirements.txt requirements.txt
+2026-02-11 18:09:13,420 INFO    SenderThread:45958 [dir_watcher.py:finish():406] scan save: results/jigsaw_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260211_180858-3703mqu7/files/conda-environment.yaml conda-environment.yaml
+2026-02-11 18:09:13,424 INFO    SenderThread:45958 [dir_watcher.py:finish():406] scan save: results/jigsaw_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260211_180858-3703mqu7/files/wandb-summary.json wandb-summary.json
+2026-02-11 18:09:13,427 INFO    SenderThread:45958 [dir_watcher.py:finish():406] scan save: results/jigsaw_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260211_180858-3703mqu7/files/wandb-metadata.json wandb-metadata.json
+2026-02-11 18:09:13,427 INFO    SenderThread:45958 [sender.py:transition_state():587] send defer: 10
+2026-02-11 18:09:13,431 DEBUG   HandlerThread:45958 [handler.py:handle_request():144] handle_request: defer
+2026-02-11 18:09:13,431 INFO    HandlerThread:45958 [handler.py:handle_request_defer():170] handle defer: 10
+2026-02-11 18:09:13,432 DEBUG   SenderThread:45958 [sender.py:send_request():363] send_request: defer
+2026-02-11 18:09:13,432 INFO    SenderThread:45958 [sender.py:send_request_defer():583] handle sender defer: 10
+2026-02-11 18:09:13,432 INFO    SenderThread:45958 [file_pusher.py:finish():162] shutting down file pusher
+2026-02-11 18:09:14,052 INFO    wandb-upload_1:45958 [upload_job.py:push():138] Uploaded file results/jigsaw_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260211_180858-3703mqu7/files/output.log
+2026-02-11 18:09:14,057 INFO    wandb-upload_0:45958 [upload_job.py:push():138] Uploaded file results/jigsaw_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260211_180858-3703mqu7/files/config.yaml
+2026-02-11 18:09:14,115 INFO    wandb-upload_3:45958 [upload_job.py:push():138] Uploaded file results/jigsaw_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260211_180858-3703mqu7/files/conda-environment.yaml
+2026-02-11 18:09:14,116 INFO    wandb-upload_2:45958 [upload_job.py:push():138] Uploaded file results/jigsaw_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260211_180858-3703mqu7/files/requirements.txt
+2026-02-11 18:09:14,140 INFO    wandb-upload_4:45958 [upload_job.py:push():138] Uploaded file results/jigsaw_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260211_180858-3703mqu7/files/wandb-summary.json
+2026-02-11 18:09:14,346 INFO    Thread-12 :45958 [sender.py:transition_state():587] send defer: 11
+2026-02-11 18:09:14,346 DEBUG   HandlerThread:45958 [handler.py:handle_request():144] handle_request: defer
+2026-02-11 18:09:14,346 INFO    HandlerThread:45958 [handler.py:handle_request_defer():170] handle defer: 11
+2026-02-11 18:09:14,347 DEBUG   SenderThread:45958 [sender.py:send_request():363] send_request: defer
+2026-02-11 18:09:14,347 INFO    SenderThread:45958 [sender.py:send_request_defer():583] handle sender defer: 11
+2026-02-11 18:09:14,347 INFO    SenderThread:45958 [file_pusher.py:join():167] waiting for file pusher
+2026-02-11 18:09:14,347 INFO    SenderThread:45958 [sender.py:transition_state():587] send defer: 12
+2026-02-11 18:09:14,347 DEBUG   HandlerThread:45958 [handler.py:handle_request():144] handle_request: defer
+2026-02-11 18:09:14,347 INFO    HandlerThread:45958 [handler.py:handle_request_defer():170] handle defer: 12
+2026-02-11 18:09:14,347 DEBUG   SenderThread:45958 [sender.py:send_request():363] send_request: defer
+2026-02-11 18:09:14,348 INFO    SenderThread:45958 [sender.py:send_request_defer():583] handle sender defer: 12
+2026-02-11 18:09:14,588 INFO    SenderThread:45958 [sender.py:transition_state():587] send defer: 13
+2026-02-11 18:09:14,588 DEBUG   HandlerThread:45958 [handler.py:handle_request():144] handle_request: defer
+2026-02-11 18:09:14,588 INFO    HandlerThread:45958 [handler.py:handle_request_defer():170] handle defer: 13
+2026-02-11 18:09:14,588 DEBUG   SenderThread:45958 [sender.py:send_request():363] send_request: defer
+2026-02-11 18:09:14,589 INFO    SenderThread:45958 [sender.py:send_request_defer():583] handle sender defer: 13
+2026-02-11 18:09:14,589 INFO    SenderThread:45958 [sender.py:transition_state():587] send defer: 14
+2026-02-11 18:09:14,589 DEBUG   HandlerThread:45958 [handler.py:handle_request():144] handle_request: defer
+2026-02-11 18:09:14,589 INFO    HandlerThread:45958 [handler.py:handle_request_defer():170] handle defer: 14
+2026-02-11 18:09:14,590 DEBUG   SenderThread:45958 [sender.py:send():336] send: final
+2026-02-11 18:09:14,590 DEBUG   SenderThread:45958 [sender.py:send():336] send: footer
+2026-02-11 18:09:14,590 DEBUG   SenderThread:45958 [sender.py:send_request():363] send_request: defer
+2026-02-11 18:09:14,590 INFO    SenderThread:45958 [sender.py:send_request_defer():583] handle sender defer: 14
+2026-02-11 18:09:14,590 DEBUG   HandlerThread:45958 [handler.py:handle_request():144] handle_request: poll_exit
+2026-02-11 18:09:14,591 DEBUG   SenderThread:45958 [sender.py:send_request():363] send_request: poll_exit
+2026-02-11 18:09:14,592 DEBUG   HandlerThread:45958 [handler.py:handle_request():144] handle_request: server_info
+2026-02-11 18:09:14,593 DEBUG   HandlerThread:45958 [handler.py:handle_request():144] handle_request: get_summary
+2026-02-11 18:09:14,593 DEBUG   HandlerThread:45958 [handler.py:handle_request():144] handle_request: sampled_history
+2026-02-11 18:09:14,593 DEBUG   SenderThread:45958 [sender.py:send_request():363] send_request: server_info
+2026-02-11 18:09:15,067 INFO    MainThread:45958 [wandb_run.py:_footer_history_summary_info():3442] rendering history
+2026-02-11 18:09:15,067 INFO    MainThread:45958 [wandb_run.py:_footer_history_summary_info():3474] rendering summary
+2026-02-11 18:09:15,067 INFO    MainThread:45958 [wandb_run.py:_footer_sync_info():3398] logging synced files
+2026-02-11 18:09:15,067 DEBUG   HandlerThread:45958 [handler.py:handle_request():144] handle_request: shutdown
+2026-02-11 18:09:15,068 INFO    HandlerThread:45958 [handler.py:finish():841] shutting down handler
+2026-02-11 18:09:15,607 INFO    WriterThread:45958 [datastore.py:close():299] close: results/jigsaw_4x4_128_512_250e_cosine_artifact/model_save/wandb/run-20260211_180858-3703mqu7/run-3703mqu7.wandb
+2026-02-11 18:09:16,067 INFO    SenderThread:45958 [sender.py:finish():1493] shutting down sender
+2026-02-11 18:09:16,068 INFO    SenderThread:45958 [file_pusher.py:finish():162] shutting down file pusher
+2026-02-11 18:09:16,068 INFO    SenderThread:45958 [file_pusher.py:join():167] waiting for file pusher
