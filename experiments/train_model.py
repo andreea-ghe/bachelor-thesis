@@ -2,7 +2,7 @@ import os
 import torch
 import pytorch_lightning as pl
 from pytorch_lightning.callbacks import ModelCheckpoint, LearningRateMonitor
-from pytorch_lightning.loggers import WandbLogger
+from pytorch_lightning.loggers import CSVLogger
 from jigsaw_pipeline import build_jigsaw_model
 from dataset_preprocessing import build_data_loaders, build_pairs_data_loaders
 from datetime import datetime
@@ -49,11 +49,9 @@ def train_model(config):
         logger_name = f"{config.MODEL_NAME}_{config.LOG_FILE_NAME}"
     else:
         logger_name = f"{config.MODEL_NAME}_{NOW_TIME}"
-    logger = WandbLogger(
-        project=config.PROJECT,
+    logger = CSVLogger(
+        save_dir=results_save_path,
         name=logger_name,
-        id=None,
-        save_dir = results_save_path,
     )
 
     # Step 3: Configure PyTorch Lightning trainer with callbacks
