@@ -35,8 +35,8 @@ def train_model(config):
     """
     # Step 1: Initialize data loaders
     # build dataloaders for Breaking Bad dataset with area based sampling
-    # train_loader, val_loader = build_data_loaders(config)
-    train_loader, val_loader = build_pairs_data_loaders(config)
+    train_loader, val_loader = build_data_loaders(config)
+    # train_loader, val_loader = build_pairs_data_loaders(config)
 
     # Step 2: Build the jigsaw model
     model = build_jigsaw_model(config)

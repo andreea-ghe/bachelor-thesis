@@ -35,8 +35,8 @@ def test_model(config):
         os.makedirs(config.STATS, exist_ok=True) # create stats directory if needed
 
     # Step 1: initialize data loaders
-    # train_loader, val_loader = build_data_loaders(config)
-    train_loader, val_loader = build_pairs_data_loaders(config)
+    train_loader, val_loader = build_data_loaders(config)
+    # train_loader, val_loader = build_pairs_data_loaders(config)
 
     # Step 2: initialize model architecture
     # model will be populated with trained weights from checkpoint
