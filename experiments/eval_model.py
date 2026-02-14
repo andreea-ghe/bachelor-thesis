@@ -8,7 +8,7 @@ from utilities.utils_parse_args import parse_args
 from utilities.utils_config import CONFIG
 from utilities.utils_edict import print_edict
 from jigsaw_pipeline import build_jigsaw_model
-from pytorch_lightning.loggers import WandbLogger
+from pytorch_lightning.loggers import CSVLogger
 
 
 NOW_TIME = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
@@ -50,11 +50,9 @@ def test_model(config):
         logger_name = f"{config.MODEL_NAME}_{config.LOG_FILE_NAME}"
     else:
         logger_name = f"{config.MODEL_NAME}_{NOW_TIME}"
-    logger = WandbLogger(
-        project=config.PROJECT,
+    logger = CSVLogger(
+        save_dir=model_save_path,
         name=logger_name,
-        id=None,
-        save_dir = model_save_path,
     )
 
     callbacks = []
