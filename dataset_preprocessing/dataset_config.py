@@ -10,7 +10,7 @@ dataset_cfg = __C
 __C.BREAKING_BAD = edict()
 
 # Directory containing the Breaking Bad dataset files
-__C.BREAKING_BAD.DATA_DIR = "/home/dataset/artifact_all_2"
+__C.BREAKING_BAD.DATA_DIR = "/workspace"
 
 # File naming pattern for train/val/test splits
 # Will be formatted as "everyday.train.txt", "everyday.val.txt", etc.
