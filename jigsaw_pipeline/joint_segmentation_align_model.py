@@ -5,6 +5,7 @@ import torch.nn.functional as fun
 from base_pipeline.base_model import MatchingBaseModel
 from feature_extractor.attention_mechanisms import CrossAttention
 from feature_extractor.attention_mechanisms import PointTransformer
+from feature_extractor.pair_geometric_encoder import PairGeometricEncoder
 from feature_extractor import build_feature_extractor
 from surface_segmentation.segmentation_classifier import SegmentationClassifier
 from multipart_matching.affinity import AffinityDual
@@ -60,6 +61,12 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
         self.cross_attention = CrossAttention(
             n_head=self.config.MODEL.TF_NUM_HEADS,
             d_input=self.part_comp_feat_dim,
+        )
+        # Pair geometric encoder: computes geometric bias for cross-attention (Pair Attention)
+        self.pair_geometric_encoder = PairGeometricEncoder(
+            num_bases=16,
+            distance_range=(0.0, 10.0),
+            angle_range=(-1.0, 1.0),
         )
         self.attention_layers = [("self", self.self_attention), ("cross", self.cross_attention)]
 
@@ -221,6 +228,9 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
         if part_features is None:
             part_features = self._extract_part_features(part_pcs, batch_length)  # [B, N_SUM, F]
             
+            # compute pair geometric bias for cross-attention (Pair Attention)
+            pair_bias = self.pair_geometric_encoder(part_pcs, n_pcs)  # [B, 1, N_SUM, N_SUM]
+
             # apply self-attention and cross-attention layers
             for name, layer in self.attention_layers:
                 if name == "self":
@@ -231,8 +241,8 @@ class JointSegmentationAlignmentModel(MatchingBaseModel):
                             batch_length
                         ).view(B, N_SUM, -1).contiguous() # reshape back to (B, N_SUM, F)
                 elif name == "cross":
-                    # cross attention: propagate info between pieces
-                    part_features = layer(part_features)  # [B, N_SUM, F]
+                    # cross attention with pair geometric bias: propagate info between pieces
+                    part_features = layer(part_features, pair_bias=pair_bias)  # [B, N_SUM, F]
             
             data_dict.update({'part_feats': part_features}) # cache extracted features for later reuse
         

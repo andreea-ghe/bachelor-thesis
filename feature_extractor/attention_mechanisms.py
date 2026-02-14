@@ -17,13 +17,14 @@ class DotProductAttention(nn.Module):
         self.temperature = temperature
         self.attn_dropout = nn.Dropout(attn_dropout)
 
-    def forward(self, q: Tensor, k: Tensor, v: Tensor, mask: Tensor = None) -> Tuple[Tensor, Tensor]:
+    def forward(self, q: Tensor, k: Tensor, v: Tensor, mask: Tensor = None, pair_bias: Tensor = None) -> Tuple[Tensor, Tensor]:
         """
         Input:
             q: queries tensor [B, n_head, len_q, d_k]
             k: keys tensor [B, n_head, len_k, d_k]
             v: values tensor [B, n_head, len_v, d_v]
             mask: attention mask tensor [B, 1, len_k] or [B, len_q, len_k]
+            pair_bias: geometric pair attention bias [B, 1, len_q, len_k] (optional)
         
         Output:
             head_output: attended values [B, n_head, len_q, d_v]
@@ -32,6 +33,10 @@ class DotProductAttention(nn.Module):
         # Compute attention scores: Q * K^T / sqrt(d_k)
         # we multiply by transpose of K because we want to compute dot product between each query and all keys
         attn = torch.matmul(q / self.temperature, k.transpose(2, 3))
+
+        # Add pair attention bias: α_ij = n_ij + b_ij (Pair Attention)
+        if pair_bias is not None:
+            attn = attn + pair_bias
 
         # Apply mask if provided
         if mask is not None:
@@ -70,13 +75,14 @@ class MultiHeadAttention(nn.Module):
         self.dropout = nn.Dropout(dropout)
         self.layer_norm = nn.LayerNorm(d_model, eps=1e-6)
 
-    def forward(self, q: Tensor, k: Tensor, v: Tensor, mask: Tensor = None) -> Tuple[Tensor, Tensor]:
+    def forward(self, q: Tensor, k: Tensor, v: Tensor, mask: Tensor = None, pair_bias: Tensor = None) -> Tuple[Tensor, Tensor]:
         """
         Input:
             q: queries tensor [B, len_q, d_model]
             k: keys tensor [B, len_k, d_model]
             v: values tensor [B, len_v, d_model]
             mask: attention mask tensor [B, len_q, len_k]
+            pair_bias: geometric pair attention bias [B, 1, len_q, len_k] (optional)
         
         Output:
             attended_features: attended values [B, len_q, d_model]
@@ -97,7 +103,7 @@ class MultiHeadAttention(nn.Module):
             mask = mask.unsqueeze(1)  # [B, 1, len_q, len_k]
         
         # apply scaled dot-product attention
-        head_output, attn = self.attention(q, k, v, mask=mask) # head_output: [B, n_head, len_q, d_head]
+        head_output, attn = self.attention(q, k, v, mask=mask, pair_bias=pair_bias) # head_output: [B, n_head, len_q, d_head]
         head_output = head_output.transpose(1, 2).contiguous().view(sz_b, len_q, -1)  # [B, len_q, n_head * d_head]
         attended_features = self.out_proj(head_output) # [B, len_q, d_model]
         
@@ -153,15 +159,16 @@ class CrossAttention(nn.Module):
         self.multi_head_attn = MultiHeadAttention(n_head=n_head, d_model=d_input, dropout=0.0)
         self.ffn = PositionalFeedForwardNetwork(d_input=d_input, d_hidden=d_input * 2, dropout=0.0)
 
-    def forward(self, x: Tensor) -> Tensor:
+    def forward(self, x: Tensor, pair_bias: Tensor = None) -> Tensor:
         """
         Input:
             x: input tensor [B, len_seq, d_input]
+            pair_bias: geometric pair attention bias [B, 1, len_seq, len_seq] (optional)
         
         Output:
             cross_features: transformed tensor [B, len_seq, d_input]
         """
-        attn_output, attn_weights = self.multi_head_attn(x, x, x)  # self-attention
+        attn_output, attn_weights = self.multi_head_attn(x, x, x, pair_bias=pair_bias)  # self-attention + pair bias
         cross_features = self.ffn(attn_output)
 
         return cross_features
@@ -292,7 +299,7 @@ class PointTransformer(nn.Module):
 
 if __name__ == "__main__":
     # Minimum test example to verify the attention layers work correctly
-    # Tests both PointTransformer and CrossAttention
+    # Tests PointTransformer, CrossAttention without bias, and CrossAttention with pair bias
     
     pos = torch.randn(12, 3)
     x = torch.randn(12, 6)
@@ -302,9 +309,16 @@ if __name__ == "__main__":
         in_features=6, out_features=6, n_heads=2, k_neighbors=4
     )
     x_pnf = pnf_layer(pos=pos, x=x, offset=b)
-    print(x_pnf.shape)
+    print(f"PointTransformer: {x_pnf.shape}")
 
     cross_attention_layer = CrossAttention(d_input=6, n_head=2)
     x = torch.randn(3, 4, 6)
+
+    # Without pair bias (original behavior)
     x_ca = cross_attention_layer(x)
-    print(x_ca.shape)
+    print(f"CrossAttention (no bias): {x_ca.shape}")
+
+    # With pair bias (pair attention)
+    pair_bias = torch.randn(3, 1, 4, 4)  # [B, 1, N_SUM, N_SUM]
+    x_ca_biased = cross_attention_layer(x, pair_bias=pair_bias)
+    print(f"CrossAttention (with pair bias): {x_ca_biased.shape}")
