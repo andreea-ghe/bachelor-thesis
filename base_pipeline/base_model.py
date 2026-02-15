@@ -434,11 +434,11 @@ class MatchingBaseModel(pytorch_lightning.LightningModule):
                 for key, value in loss_dict.items()
             }
 
-            # log data loading time
-            time_data = [
-                key for key in self.trainer.profiler.recorded_durations.keys() if 'prepare_data' in key
-            ][0]
-            log_dict[f'{mode}/data_time'] = self.trainer.profiler.recorded_durations[time_data][-1]
+            # log data loading time (only available with 'simple' profiler)
+            if hasattr(self.trainer.profiler, 'recorded_durations'):
+                time_keys = [key for key in self.trainer.profiler.recorded_durations.keys() if 'prepare_data' in key]
+                if time_keys:
+                    log_dict[f'{mode}/data_time'] = self.trainer.profiler.recorded_durations[time_keys[0]][-1]
 
             self.log_dict(log_dict, logger=True, sync_dist=False, rank_zero_only=True)
 

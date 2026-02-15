@@ -80,6 +80,8 @@ def train_model(config):
         'gradient_clip_val': config.TRAIN.CLIP_GRAD, # gradient clipping
         'check_val_every_n_epoch': config.TRAIN.VAL_EVERY, # validation frequency
         'log_every_n_steps': 10,
+        # 'profiler': 'simple',
+        # 'detect_anomaly': True,
         'benchmark': True,  # enable cuDNN benchmark for speed
     }
 
