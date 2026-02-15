@@ -1,5 +1,5 @@
 MODEL_NAME: jigsaw_finetune_everyday
-MODULE: jigsaw
+MODULE: experiments
 
 PROJECT: jigsaw
 
@@ -36,7 +36,6 @@ DATA:
 
 MODEL:
   PC_CLS_METHOD: multi
-  ENCODER: pointnet2_pt.msg.dynamic
   LOSS:
     w_cls_loss: 1.0
     w_mat_loss: 1.0       # matching loss ON from epoch 0 (pre-trained model is ready)
