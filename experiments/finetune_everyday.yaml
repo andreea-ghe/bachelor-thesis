@@ -26,6 +26,7 @@ CALLBACK:
   CHECKPOINT_MODE: max
 
 DATA:
+  DATA_DIR: /workspace/everyday_all_2
   SUBSET: everyday
   DATA_FN: 'everyday.{}.txt'
   MAX_NUM_PART: 20
