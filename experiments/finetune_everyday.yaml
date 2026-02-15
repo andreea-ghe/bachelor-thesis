@@ -35,6 +35,7 @@ DATA:
   FRACTURE_LABEL_THRESHOLD: 0.025
 
 MODEL:
+  PC_CLS_METHOD: multi
   ENCODER: pointnet2_pt.msg.dynamic
   LOSS:
     w_cls_loss: 1.0

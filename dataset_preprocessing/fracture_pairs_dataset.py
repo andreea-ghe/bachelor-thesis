@@ -15,13 +15,15 @@ class FracturePairsDataset(Dataset):
         - All .obj files in a flat directory
         - CSV file with pairs: pc1,pc2 columns matching piece_0 and piece_1
         - Always exactly 2 pieces per pair
+    
+    Requires a pre-split CSV file (e.g. everyday.train.txt created by
+    create_pair_splits.py) with pc1,pc2 headers. All pairs are loaded directly.
     """
     def __init__(
         self,
         dataset_dir,
-        pairs_csv,
+        split_file,
         split='train',
-        split_ratio=(0.8, 0.1, 0.1),
         num_points=5000,
         rot_range=-1,
         overfit=-1,
@@ -32,18 +34,17 @@ class FracturePairsDataset(Dataset):
         """
         Input:
             dataset_dir: path to directory containing .obj files
-            pairs_csv: path to CSV file with pc1,pc2 columns
-            split: 'train', 'val', or 'test'
-            split_ratio: tuple of (train, val, test) ratios, must sum to 1.0
+            split_file: path to a pre-split CSV file (e.g. everyday.train.txt)
+                        with pc1,pc2 headers (created by create_pair_splits.py)
+            split: 'train', 'val', or 'test' (used for logging only)
             num_points: total number of points to sample per pair
             rot_range: rotation augmentation range (-1 for full SO(3))
             overfit: if >0, limits dataset size for overfitting tests
             length: if >0, sets fixed dataset length
             fracture_label_threshold: threshold for fracture labeling
-            seed: random seed for reproducible splits
+            seed: random seed
         """
         self.dataset_dir = dataset_dir
-        self.pairs_csv = pairs_csv
         self.split = split
         self.num_points = num_points
         self.rot_range = rot_range
@@ -54,16 +55,15 @@ class FracturePairsDataset(Dataset):
         self.max_parts = 2
         self.min_num_points = 30  # minimum points per piece
         
-        # Load and split pairs
-        self.pairs = self._load_pairs(split, split_ratio, seed)
-        print(f"[{split}] Loaded {len(self.pairs)} pairs from {pairs_csv}")
+        # Load pairs from the split file
+        self.pairs = self._load_from_split_file(split_file)
+        print(f"[{split}] Loaded {len(self.pairs)} pairs from {split_file}")
         
         if self.overfit > 0:
             self.pairs = self.pairs[:self.overfit]
         
         if 0 < length < len(self.pairs):
             self.length = length
-            # Random sampling for contracted dataset
             random.seed(seed)
             indices = list(range(len(self.pairs)))
             random.shuffle(indices)
@@ -71,34 +71,18 @@ class FracturePairsDataset(Dataset):
         else:
             self.length = len(self.pairs)
     
-    def _load_pairs(self, split, split_ratio, seed):
+    @staticmethod
+    def _load_from_split_file(split_file):
         """
-        Load pairs from CSV and split into train/val/test.
+        Load all pairs directly from a pre-split CSV file.
+        The file should have pc1,pc2 headers (created by create_pair_splits.py).
         """
         pairs = []
-        with open(self.pairs_csv, 'r') as f:
+        with open(split_file, 'r') as f:
             reader = csv.DictReader(f)
             for row in reader:
-                pairs.append((row['pc1'], row['pc2']))
-        
-        # Shuffle with seed for reproducible splits
-        random.seed(seed)
-        shuffled_pairs = pairs.copy()
-        random.shuffle(shuffled_pairs)
-        
-        # Compute split indices
-        n = len(shuffled_pairs)
-        train_end = int(n * split_ratio[0])
-        val_end = train_end + int(n * split_ratio[1])
-        
-        if split == 'train':
-            return shuffled_pairs[:train_end]
-        elif split == 'val':
-            return shuffled_pairs[train_end:val_end]
-        elif split == 'test':
-            return shuffled_pairs[val_end:]
-        else:
-            raise ValueError(f"Unknown split: {split}")
+                pairs.append((row['pc1'].strip(), row['pc2'].strip()))
+        return pairs
     
     def __len__(self):
         return self.length
@@ -264,28 +248,37 @@ class FracturePairsDataset(Dataset):
         return data_dict
 
 
-def _find_pairs_csv(data_dir):
+def _resolve_split_file(data_dir, data_fn, split_name):
     """
-    Auto-detect pairs CSV file in the data directory.
-    Looks for files matching pattern *_pairs_*.csv
+    Build the path to a split file (e.g. everyday.train.txt) in data_dir.
+    Raises FileNotFoundError if the file doesn't exist.
+    
+    Input:
+        data_dir: base data directory
+        data_fn: filename pattern like 'everyday.{}.txt'
+        split_name: 'train', 'val', or 'test'
     """
-    import glob
-    csv_files = glob.glob(os.path.join(data_dir, '*_pairs_*.csv'))
-    if not csv_files:
-        raise FileNotFoundError(f"No pairs CSV file found in {data_dir}")
-    if len(csv_files) > 1:
-        print(f"Warning: Multiple CSV files found, using {csv_files[0]}")
-    return csv_files[0]
+    split_filename = data_fn.format(split_name)
+    split_path = os.path.join(data_dir, split_filename)
+    if not os.path.exists(split_path):
+        raise FileNotFoundError(
+            f"Split file not found: {split_path}\n"
+            f"Run create_pair_splits.py first to generate train/val/test splits."
+        )
+    return split_path
 
 
 def build_pairs_data_loaders(config):
     """
     Build train and validation dataloaders for FracturePairsDataset.
     
+    Expects pre-split files (e.g. everyday.train.txt, everyday.val.txt)
+    in DATA.DATA_DIR, named according to DATA.DATA_FN pattern.
+    
     Input:
         config: EasyDict configuration with:
-            - DATA.DATA_DIR: directory containing .obj files
-            - DATA.PAIRS_CSV: (optional) path to pairs CSV file, auto-detected if not provided
+            - DATA.DATA_DIR: directory containing .obj files and split files
+            - DATA.DATA_FN: filename pattern (e.g. 'everyday.{}.txt')
             - DATA.NUM_PC_POINTS: total points per sample
             - DATA.ROT_RANGE: rotation augmentation range
             - DATA.OVERFIT: overfit sample count (-1 for all)
@@ -296,14 +289,15 @@ def build_pairs_data_loaders(config):
             - NUM_WORKERS: dataloader workers
     """
     data_dir = config.DATA.DATA_DIR
-    pairs_csv = config.DATA.get('PAIRS_CSV', None) or _find_pairs_csv(data_dir)
-    split_ratio = config.DATA.get('SPLIT_RATIO', (0.8, 0.1, 0.1))
-    
+    data_fn = config.DATA.DATA_FN
+
+    train_split_file = _resolve_split_file(data_dir, data_fn, 'train')
+    val_split_file = _resolve_split_file(data_dir, data_fn, 'val')
+
     train_dataset = FracturePairsDataset(
         dataset_dir=data_dir,
-        pairs_csv=pairs_csv,
+        split_file=train_split_file,
         split='train',
-        split_ratio=split_ratio,
         num_points=config.DATA.NUM_PC_POINTS,
         rot_range=config.DATA.ROT_RANGE,
         overfit=config.DATA.OVERFIT,
@@ -323,9 +317,8 @@ def build_pairs_data_loaders(config):
     
     val_dataset = FracturePairsDataset(
         dataset_dir=data_dir,
-        pairs_csv=pairs_csv,
+        split_file=val_split_file,
         split='val',
-        split_ratio=split_ratio,
         num_points=config.DATA.NUM_PC_POINTS,
         rot_range=config.DATA.ROT_RANGE,
         overfit=-1,
@@ -346,17 +339,22 @@ def build_pairs_data_loaders(config):
     return train_loader, val_loader
 
 
-def build_test_data_loader(config):
-    """Build test dataloader for FracturePairsDataset."""
-    data_dir = config.DATA.DATA_DIR
-    pairs_csv = config.DATA.get('PAIRS_CSV', None) or _find_pairs_csv(data_dir)
-    split_ratio = config.DATA.get('SPLIT_RATIO', (0.8, 0.1, 0.1))
+def build_pairs_test_loader(config):
+    """
+    Build test dataloader for FracturePairsDataset.
     
+    Expects a pre-split test file (e.g. everyday.test.txt)
+    in DATA.DATA_DIR, named according to DATA.DATA_FN pattern.
+    """
+    data_dir = config.DATA.DATA_DIR
+    data_fn = config.DATA.DATA_FN
+
+    test_split_file = _resolve_split_file(data_dir, data_fn, 'test')
+
     test_dataset = FracturePairsDataset(
         dataset_dir=data_dir,
-        pairs_csv=pairs_csv,
+        split_file=test_split_file,
         split='test',
-        split_ratio=split_ratio,
         num_points=config.DATA.NUM_PC_POINTS,
         rot_range=config.DATA.ROT_RANGE,
         overfit=-1,
@@ -375,5 +373,3 @@ def build_test_data_loader(config):
     )
     
     return test_loader
-
-

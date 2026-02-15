@@ -2,7 +2,7 @@ import os
 import torch
 import pytorch_lightning as pl
 from datetime import datetime
-from dataset_preprocessing import build_data_loaders, build_pairs_data_loaders
+from dataset_preprocessing import build_data_loaders, build_pairs_data_loaders, build_pairs_test_loader
 from utilities.utils_stdout import DuplicateStdoutFileManager
 from utilities.utils_parse_args import parse_args
 from utilities.utils_config import CONFIG
@@ -34,9 +34,9 @@ def test_model(config):
     if len(config.STATS):
         os.makedirs(config.STATS, exist_ok=True) # create stats directory if needed
 
-    # Step 1: initialize data loaders
-    train_loader, val_loader = build_data_loaders(config)
-    # train_loader, val_loader = build_pairs_data_loaders(config)
+    # Step 1: initialize test data loader
+    # Uses the test split file (e.g. everyday.test.txt)
+    test_loader = build_pairs_test_loader(config)
 
     # Step 2: initialize model architecture
     # model will be populated with trained weights from checkpoint
@@ -74,6 +74,8 @@ def test_model(config):
         ckp for ckp in ckp_files if "model_" in ckp
     ]
 
+    weights_already_loaded = False
+
     if config.WEIGHT_FILE: # load specified weight file
         ckp = torch.load(config.WEIGHT_FILE, map_location='cpu')
 
@@ -95,10 +97,18 @@ def test_model(config):
             if not missing_in_ckp and not missing_in_model:
                 print("All checkpoint keys match model keys!")
         else:
-            ckp_path = None # only weights provided, not full checkpoint
-            model.load_state_dict(ckp, strict=False)
+            # weights-only file (.pt): load directly into model
+            result = model.load_state_dict(ckp, strict=False)
+            if result.missing_keys:
+                print(f"WARNING: {len(result.missing_keys)} missing keys when loading weights")
+            if result.unexpected_keys:
+                print(f"WARNING: {len(result.unexpected_keys)} unexpected keys when loading weights")
+            if not result.missing_keys and not result.unexpected_keys:
+                print("All weights loaded successfully!")
+            weights_already_loaded = True
+            ckp_path = None
 
-    elif ckp_files: # auto detect latest checkponint
+    elif ckp_files: # auto detect latest checkpoint
         ckp_files = sorted(
             ckp_files,
             key=lambda x: os.path.getmtime(os.path.join(model_save_path, x)),
@@ -108,8 +118,11 @@ def test_model(config):
     else: # no checkpoint found
         ckp_path = None
 
-    # load model with trained weights
-    model = model.load_from_checkpoint(checkpoint_path=ckp_path, strict=False, config=config)
+    # load model with trained weights (skip if already loaded from weights-only file)
+    if not weights_already_loaded and ckp_path is not None:
+        model = model.load_from_checkpoint(checkpoint_path=ckp_path, strict=False, config=config)
+    elif not weights_already_loaded:
+        print("WARNING: No checkpoint found — evaluating with random weights!")
     
     # STEP 5: Run evaluation
     # This will:
@@ -119,7 +132,7 @@ def test_model(config):
     # 4. Calculate all metrics (PA, RE, TE, CD)
     # Reports these metrics for comparison
     print("Finish Setting -----")
-    trainer.test(model, val_loader)
+    trainer.test(model, test_loader)
 
     print("Done evaluation")
 
