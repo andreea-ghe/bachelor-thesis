@@ -44,7 +44,7 @@ MODEL:
     rig_epoch: 30          # rigidity loss from epoch 30
 
 # Point to extracted weights
-WEIGHT_FILE: checkpoint/jigsaw_4x4_128_512_250e_cosine_everyday_weights.pt
+WEIGHT_FILE: checkpoint/jigsaw_multi_4x4_128_512_250e_cosine_everyday_weights.pt
 
 # STATS is for eval
 STATS: "./results/jigsaw_finetune_everyday/stats/eval"
