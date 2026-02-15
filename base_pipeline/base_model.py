@@ -186,7 +186,7 @@ class MatchingBaseModel(pytorch_lightning.LightningModule):
                 pickle.dump(self.stats, f)
 
     @torch.no_grad()
-    def calc_metric(self, data_dict, trans_dict):
+    def calc_metric(self, data_dict, trans_dict, valid_obj_mask=None):
         """
         Compute evaluation metrics for fracture assembly.
         - Part Accuracy (PA): Percentage of correctly matched parts
@@ -203,6 +203,7 @@ class MatchingBaseModel(pytorch_lightning.LightningModule):
             trans_dict: dictionary containing:
                 - pred_rot: predicted rotations [B, P, 3, 3]
                 - trans: predicted translations [B, P, 3]
+            valid_obj_mask: mask of objects with at least one fracture point [B]
         Output:
             metrics_dict: dictionary with all evaluation metrics
         """
@@ -251,15 +252,22 @@ class MatchingBaseModel(pytorch_lightning.LightningModule):
 
         # part accuracy and chamfer distance
         part_acc, cd = part_acc_and_cd(part_pcs_resampled, predicted_trans, gt_trans, predicted_rot, gt_rot, part_valids)
+        
+        if valid_obj_mask is not None:
+            part_acc = part_acc[valid_obj_mask]
+            cd = cd[valid_obj_mask]
         metric_dict['part_acc'] = part_acc.mean()
         metric_dict['chamfer_distance'] = cd.mean()
 
         # rotation and translation errors: mse, rmse, mae
         for metric in ['mse', 'rmse', 'mae']:
             trans_met = trans_metrics(predicted_trans, gt_trans, part_valids, metric)
-            metric_dict[f'trans_{metric}'] = trans_met.mean()
-
             rot_met = rot_metrics(predicted_rot, gt_rot, part_valids, metric)
+
+            if valid_obj_mask is not None:
+                trans_met = trans_met[valid_obj_mask]
+                rot_met = rot_met[valid_obj_mask]
+            metric_dict[f'trans_{metric}'] = trans_met.mean()
             metric_dict[f'rot_{metric}'] = rot_met.mean()
 
         if self.stats is not None:
@@ -367,9 +375,40 @@ class MatchingBaseModel(pytorch_lightning.LightningModule):
 
         # during testing, perform global alignment and compute metrics
         if mode == 'test':
-            pred_transforms = self.global_alignment(data_dict, out_dict)
-            metrics_dict = self.calc_metric(data_dict, pred_transforms)
-            loss_dict.update(metrics_dict)
+            skip_matching = out_dict.get('skip_matching', False)
+            if skip_matching:
+                # entire batch has no fracture points -> add zero metrics, skip from avg
+                print("WARNING: Skipping metric computation for batch (no fracture points).")
+                zero = torch.tensor(0.0, device=data_dict['part_pcs'].device)
+                loss_dict.update({
+                    'part_acc': zero,
+                    'chamfer_distance': zero,
+                    'trans_mse': zero,
+                    'trans_rmse': zero,
+                    'trans_mae': zero,
+                    'rot_mse': zero,
+                    'rot_rmse': zero,
+                    'rot_mae': zero,
+                })
+                loss_dict['batch_size'] = 0
+            else:
+                # some objects lack fracture points -> compute metrics for valid objects only
+                n_critical_pcs = data_dict.get('n_critical_pcs', None)
+                valid_obj_mask = None
+
+                if n_critical_pcs is not None:
+                    n_critical_pcs_sum = torch.sum(n_critical_pcs, dim=-1)  # [B] number of fracture points per object
+                    valid_obj_mask = n_critical_pcs_sum > 0 # mask of objects with at least one fracture point
+                    n_skipped = (~valid_obj_mask).sum().item() # number of objects with no fracture points
+                    if n_skipped > 0:
+                        print(f"WARNING: Skipping metric computation for {n_skipped} objects (no fracture points).")
+
+                pred_transforms = self.global_alignment(data_dict, out_dict)
+                metrics_dict = self.calc_metric(data_dict, pred_transforms, valid_obj_mask)
+                loss_dict.update(metrics_dict)
+
+                if valid_obj_mask is not None:
+                    loss_dict['batch_size'] = int(valid_obj_mask.sum().item()) # number of objects with at least one fracture point
 
         return loss_dict
 
