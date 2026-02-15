@@ -100,7 +100,14 @@ def train_model(config):
         else:
             # only model weights: start training from scratch with these weights
             ckp_path = None
-            model.load_state_dict(ckp)
+            result = model.load_state_dict(ckp, strict=False)
+
+            if result.missing_keys:
+                print(f"WARNING: {len(result.missing_keys)} missing keys when loading weights")
+            if result.unexpected_keys:
+                print(f"WARNING: {len(result.unexpected_keys)} unexpected keys when loading weights")
+            if not result.missing_keys and not result.unexpected_keys:
+                print("INFO: All weights loaded successfully for fine-tuning")
     elif ckp_files: # load from last checkpoint in model save path
         ckp_files = sorted(
             ckp_files,
